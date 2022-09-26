@@ -1,7 +1,9 @@
 <?php
+require 'utils/connect_bdd.php';
+require 'model/article/Article.php';
 
 class Master_article_controller{
-
+ 
     public function show_master_article(){
         $content_title = "Gestion des";
         $title = "Articles";

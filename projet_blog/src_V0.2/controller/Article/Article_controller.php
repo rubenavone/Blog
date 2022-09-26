@@ -25,6 +25,7 @@ class Article_controller
         $this->type = new Manager_type(null, null, null);
         $this->bdd = BDD::getBDD();
     }
+
     public function addArticle()
     {
         $content_title = "Ajouter un";
@@ -111,12 +112,12 @@ class Article_controller
        }
        return $lines[0];
     }
+
     public function show_all_articles(){
         $content_title = "Tous les";
         $title = "Articles";
 
         include "./vue/Article/view_all_articles.php";
-
     }
 
 }
