@@ -41,7 +41,11 @@ class Manager_article extends Article
     public function get_all_articles($bdd)
     {
         try {
-            $req = $bdd->prepare("SELECT * FROM article");
+            $req = $bdd->prepare("SELECT * FROM `article`
+            INNER JOIN
+            `type` ON type.id_type = article.id_type
+            INNER JOIN 
+            `utilisateur` ON utilisateur.id_util = article.id_util");
             $req->execute();
             $data = $req->fetchAll(PDO::FETCH_OBJ);
             return $data;

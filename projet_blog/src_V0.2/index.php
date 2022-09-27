@@ -2,16 +2,19 @@
 
 session_start();
 
-# Analyse de l'url avec parse_url et retourne ses composants
+if (!isset($_SESSION["role"])) {
+  $_SESSION["role"] = 0;
+}
+
 
 
 # Test soit l'url a une route sinon on renvoi à la racine
 
 
 $LOGIN_MANDATORY_URL = [
-  "/disconnect",
-  "/addArticle",
-  "/admin",
+  "deconnexion",
+  "addArticle",
+  "admin",
 ];
 
 
@@ -19,15 +22,14 @@ $LOGIN_MANDATORY_URL = [
 try {
   if (!isset($_GET["page"])) $_GET["page"] = "/";
   $request_uri = explode('/', $_GET["page"]);
-  // var_dump($request_uri, $_GET["page"]);
-
-  if (!isset($_SESSION['connected']) && in_array($request_uri, $LOGIN_MANDATORY_URL)) $request_uri[0] = '/connexion';
+  if (!isset($_SESSION['connected']) && in_array($request_uri[0], $LOGIN_MANDATORY_URL)) {
+    throw new Exception("Erreur exceptionelle");
+  }
 
   switch ($request_uri[0]) {
     case "":
       require 'controller/ctrl_show_home.php';
       break;
-
     case "articles":
       require 'controller/Article/Article_controller.php';
       $article = new Article_controller();
@@ -53,7 +55,7 @@ try {
       $user = new User_controller;
       $user->connexion();
       break;
-    case   "deconnexion";
+    case "deconnexion";
       require "controller/User/User_controller.php";
       $user = new User_controller;
       $user->deconnexion();
@@ -74,16 +76,17 @@ try {
         require "controller/Admin/Master_article_controller.php";
         $admin = new Master_article_controller;
         $admin->show_master_article();
-      }else if ($request_uri[1] === "addArticle"){
-          require 'controller/Article/Article_controller.php';
-          $article = new Article_controller();
-          $article->addArticle();
-      }else{
+      } else if ($request_uri[1] === "addArticle") {
+        require 'controller/Article/Article_controller.php';
+        $article = new Article_controller();
+        $article->addArticle();
+      } else {
       throw new Exception("Erreur exceptionelle");
-        
+
       }
     default:
-      // echo "in case default";
+      throw new Exception("Erreur exceptionelle");
+
       break;
   }
 } catch (Exception $ex) {

@@ -1,34 +1,70 @@
-/**
- * MODAL
- */
-//Get the connexion element in the nav
-let connexionSelector = document.querySelector(".modal-button-js");
 
-let modalSelector = document.querySelector(".modal-connexion-js");
+/**
+ * MENU
+ */
 let navSelector = document.querySelector("nav");
 let burgerNavSelector = document.querySelector(".burger-nav-js");
-
-connexionSelector.addEventListener("click", function () {
-    if(connexionSelector.childNodes[1].textContent == "Connexion"){
-        modalSelector.classList.remove("hidden");
-    }
-})
-
-modalSelector.addEventListener("click", function (e) {
-    if (e.target !== this) {
-        return;
-    }
-    modalSelector.classList.add("hidden");
-
-})
-
-
+//Get the connexion element in the nav
 burgerNavSelector.addEventListener("click", function () {
     console.log("Hello");
     navSelector.classList.toggle("h-10");
     navSelector.classList.toggle("h-full");
 })
 
+
+/**
+ * MODAL
+ */
+class Modal {
+
+    constructor(buttonSelector, allButton, modalViewSelector) {
+        this.buttonSelector = buttonSelector;
+        this.allButton = allButton;
+        this.modalViewSelector = modalViewSelector;
+    }
+
+    eventOneButton = () => {
+        this.buttonSelector.addEventListener("click", (e) => {
+            e.preventDefault();
+            this.modalViewSelector.classList.remove("hidden");
+            document.body.classList.add("overflow-hidden");
+        });
+        this.#modalHandler();
+    }
+
+    eventAllButton = () => {
+        this.allButton.forEach(oneButton => {
+            oneButton.addEventListener("click", (e) => {
+                e.preventDefault();
+                this.modalViewSelector.classList.toggle("hidden");
+            });
+        });
+        this.#modalHandler();
+    }
+
+    #modalHandler = () =>{
+        this.modalViewSelector.addEventListener("click",  (e) => {
+            if (e.target !== this.modalViewSelector) {
+                return;
+            }
+            this.modalViewSelector.classList.add("hidden");
+            document.body.classList.remove("overflow-hidden");
+        })
+    }
+}
+
+if (document.querySelector(".modal-button-js") !== null && document.querySelector(".modal-view-js") !== null) {
+    if(document.querySelectorAll(".modal-button-js".length > 1)){
+    const modal = new Modal(null,document.querySelectorAll(".modal-button-js"), document.querySelector(".modal-view-js"))
+    modal.eventAllButton();
+    }else{
+        const modal = new Modal(document.querySelector(".modal-button-js"), null, document.querySelector(".modal-view-js"))
+        modal.eventOneButton();
+    }
+
+}else{
+    console.log("Il n'y a pas de modal sur cette page !");
+}
 
 
 /**
@@ -41,28 +77,28 @@ burgerNavSelector.addEventListener("click", function () {
 //Selector 
 let sectionPresentationSelector = document.querySelector(".presentation");
 
-function writeText(newText){
-    gsap.to(".text-change-js", {repeat: 1, duration: 4, text: newText, ease: "out", yoyo: true});
-    
+function writeText(newText) {
+    gsap.to(".text-change-js", { repeat: 1, duration: 4, text: newText, ease: "out", yoyo: true });
+
 
 
 }
-if(sectionPresentationSelector !== null){
-    setInterval(function(){
+if (sectionPresentationSelector !== null) {
+    setInterval(function () {
         document.querySelector(".clignote").classList.toggle("hidden");
-    },500);
-    
-    sectionPresentationSelector.addEventListener("mouseenter", function(e){
+    }, 500);
+
+    sectionPresentationSelector.addEventListener("mouseenter", function (e) {
         console.log(e);
-    
+
         writeText("JavaScript");
-        setTimeout(function(){
+        setTimeout(function () {
             writeText("PHP");
-        },8000);
-        setTimeout(function(){
+        }, 8000);
+        setTimeout(function () {
             writeText("Tailwinds");
-        },16000);
-    
+        }, 16000);
+
         e.target.removeEventListener(e.type, arguments.callee);
     })
 }
@@ -75,12 +111,12 @@ if(sectionPresentationSelector !== null){
  */
 function escapeHtml(text) {
     var map = {
-      '&': '&amp;',
-      '<': '&lt;',
-      '>': '&gt;',
-      '"': '&quot;',
-      "'": '&#039;'
+        '&': '&amp;',
+        '<': '&lt;',
+        '>': '&gt;',
+        '"': '&quot;',
+        "'": '&#039;'
     };
-    
-    return text.replace(/[&<>"']/g, function(m) { return map[m]; });
-  }
+
+    return text.replace(/[&<>"']/g, function (m) { return map[m]; });
+}

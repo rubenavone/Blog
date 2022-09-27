@@ -3,6 +3,7 @@
 
 class Admin_home_controller{
 
+
     public function show_home_admin(){
         $content_title = "";
         $title = "Administration";

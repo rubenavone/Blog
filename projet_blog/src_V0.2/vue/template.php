@@ -20,7 +20,7 @@
     }
 </style>
 
-<body class="bg-gray-200">
+<body class="bg-gray-200 ">
     <nav class="bg-blue-800 w-full justify-center lg:h-32 absolute lg:flex pl-5 pr-10 lg:shadow-2xl h-10  top-0 z-20 overflow-hidden ease-in duration-300 ">
 
         <div class="lg:w-1/6 w-6/6 h-auto lg:block mx-auto flex relative">
@@ -49,7 +49,7 @@
         <ul class="lg:flex lg:flex-col justify-end text-white text-2xl lg:h-full items-center w-1/6 hidden ">
             <?php
             if (isset($_SESSION['connected'])) { ?>
-                <a href="/profil" class="hover:text-blue-300 modal-button-js">
+                <a href="/profil" class="hover:text-blue-300">
                     <li>Profil</li>
                 </a>
                 <a href="/deconnexion" class="hover:text-blue-300 ">
@@ -63,7 +63,7 @@
             <?php }
             if (isset($_SESSION['connected']) && $_SESSION["role"] == 1) : ?>
 
-                <a href="/admin" class="hover:text-blue-300 modal-button-js">
+                <a href="/admin" class="hover:text-blue-300">
                     <li>Administration</li>
                 </a>
             <?php else : ?>
@@ -82,22 +82,22 @@
             <a href="#" class="hover:text-blue-300">
                 <li class="">Projet</li>
             </a>
- $
+
             <?php
             if (isset($_SESSION['connected'])) { ?>
 
-                <a href="/deconnexion" class="hover:text-blue-300 modal-button-js  ">
+                <a href="deconnexion" class="hover:text-blue-300">
                     <li>Deconnecter</li>
                 </a>
             <?php } else { ?>
 
-                <a href="/connexion" class="hover:text-blue-300 modal-button-js">
+                <a href="connexion" class="hover:text-blue-300 modal-button-js">
                     <li>Connexion</li>
                 </a>
             <?php }
             if (isset($_SESSION['connected'])) : ?>
 
-                <a href="/connexion" class="hover:text-blue-300 modal-button-js">
+                <a href="/connexion" class="hover:text-blue-300">
                     <li>Admin</li>
                 </a>
             <?php endif; ?>
@@ -111,8 +111,8 @@
     <?= $content ?>
 
 
-    <section class="w-full h-screen absolute top-0 flex justify-center items-center modal-connexion-js hidden ">
-        <article class="w-2/4 bg-white flex justify-center h-[400px] items-center z-20 border-4 border-blue-700">
+    <section class="w-full h-screen absolute top-0 z-30 flex justify-center items-center modal-view-js hidden bg-[rgba(0,0,0,0.9)]">
+        <article class="w-2/4 bg-white flex justify-center h-[400px] items-center z-20 border-4 border-blue-700 bg-white opacity-100">
             <section class="w-2/4 text-center">
                 <p>
                     J'ai déjà un compte, je souhaite me connecter

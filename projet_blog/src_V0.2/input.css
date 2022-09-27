@@ -1,5 +1,3 @@
-
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -24,14 +22,19 @@
 } */
 
 
-.modal-connexion-js{
+.modal-connexion-js {
     background-color: rgba(30, 64, 175, 0.5);
 }
 
-html{
+html {
     font-family: "caviar_dreamsregular";
 }
+
 input:invalid {
     border: red solid 3px;
-  }
-  
+}
+
+pre:nth-child(1) {
+    margin-top: 10%;
+}
+
