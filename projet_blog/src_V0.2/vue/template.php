@@ -2,11 +2,13 @@
 <html lang="fr">
 
 <head>
-    <meta charset="UTF-8" X-Content-Type-Options=nosniff http-equiv="X-UA-Compatible"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" content="IE=edge"/>
+    <meta charset="UTF-8" X-Content-Type-Options=nosniff http-equiv="X-UA-Compatible" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" content="IE=edge" />
     <title>Inscription</title>
-    <link href="/dist/output.css" rel="stylesheet" type="text/css"/>
-    <?= $_SESSION["role"] == 1 ?"<link href='/dist/admin.css' rel='stylesheet' type='text/css' />" : "" ?> 
+    <link href="/dist/output.css" rel="stylesheet" type="text/css" />
+    <!-- <link href="/dist/dark.css" rel="stylesheet" type="text/css" class="dark" /> -->
+
+    <?= $_SESSION["role"] == 1 ? "<link href='/dist/admin.css' rel='stylesheet' type='text/css' />" : "" ?>
     <script src="https://www.google.com/recaptcha/api.js" async defer></script>
 
 </head>
@@ -25,12 +27,13 @@
 
         <div class="lg:w-1/6 w-6/6 h-auto lg:block mx-auto flex relative">
             <object type="image/svg+xml" data="/dist/img/text.svg" class="logo w-64 items-center ">
-
             </object>
-            
+            <section id="boite" class="border border-black ml-10 w-[4rem] rounded-full">
+                <div class="box w-7 h-7 rounded-full  bg-gray-400"></div>
+            </section>
             <svg xmlns="http://www.w3.org/2000/svg" id="menu-button" class="right-0 h-6 w-6 cursor-pointer lg:hidden block mt-2 burger-nav-js absolute" fill="none" viewBox="0 0 24 24" stroke="white">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
-            </svg> 
+            </svg>
         </div>
 
         <ul class="lg:flex justify-center text-white text-2xl lg:h-full items-end w-4/6 pb-5 hidden ">
@@ -40,10 +43,6 @@
             <a href="/articles" class="hover:text-blue-300">
                 <li>Article</li>
             </a>
-            <a href="#" class="hover:text-blue-300">
-                <li class="pl-10">Projet</li>
-            </a>
-
         </ul>
 
         <ul class="lg:flex lg:flex-col justify-end text-white text-2xl lg:h-full items-center w-1/6 hidden ">
@@ -79,13 +78,13 @@
             <a href="/articles" class="hover:text-blue-300">
                 <li>Article</li>
             </a>
-            <a href="#" class="hover:text-blue-300">
-                <li class="">Projet</li>
-            </a>
+
 
             <?php
             if (isset($_SESSION['connected'])) { ?>
-
+                <a href="/profil" class="hover:text-blue-300">
+                    <li>Profil</li>
+                </a>
                 <a href="deconnexion" class="hover:text-blue-300">
                     <li>Deconnecter</li>
                 </a>
@@ -95,10 +94,10 @@
                     <li>Connexion</li>
                 </a>
             <?php }
-            if (isset($_SESSION['connected'])) : ?>
+            if (isset($_SESSION['connected']) && $_SESSION["role"] == 1) : ?>
 
-                <a href="/connexion" class="hover:text-blue-300">
-                    <li>Admin</li>
+                <a href="/admin" class="hover:text-blue-300">
+                    <li>Administration</li>
                 </a>
             <?php endif; ?>
         </ul>
@@ -108,8 +107,9 @@
     </div>
     <h1 class="text-center text-2xl text-gray-700 mt-5 mb-5 "><?= $content_title ?> <span class=" z-10 before:block before:absolute before:-inset-1 before:-skew-y-3 before:bg-blue-800 relative inline-block "><span class="relative text-white"><?= $title ?></span> </span></h1>
 
-    <?= $content ?>
 
+
+    <?= $content ?>
 
     <section class="w-full h-screen absolute top-0 z-30 flex justify-center items-center modal-view-js hidden bg-[rgba(0,0,0,0.9)]">
         <article class="w-2/4 bg-white flex justify-center h-[400px] items-center z-20 border-4 border-blue-700 bg-white opacity-100">

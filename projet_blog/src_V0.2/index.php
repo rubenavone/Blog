@@ -60,39 +60,37 @@ try {
       $user = new User_controller;
       $user->deconnexion();
       break;
-    case   "profil";
+    case "profil";
       require "controller/User/User_controller.php";
       $user = new User_controller;
       $user->profil_user();
       break;
-    case   "admin";
-      // var_dump(empty($request_uri[1]));
+    case "admin";
       if (empty($request_uri[1])) {
-        // echo "0 url après request_uri[1]";
         require "controller/Admin/admin_home_controller.php";
         $admin = new Admin_home_controller;
         $admin->show_home_admin();
       } else if ($request_uri[1] === "articles") {
-        require "controller/Admin/Master_article_controller.php";
-        $admin = new Master_article_controller;
-        $admin->show_master_article();
-      } else if ($request_uri[1] === "addArticle") {
-        require 'controller/Article/Article_controller.php';
-        $article = new Article_controller();
-        $article->addArticle();
+        if (empty($request_uri[2])) {
+          require "controller/Admin/Master_article_controller.php";
+          $admin = new Master_article_controller;
+          $admin->show_master_article();
+        } else if ($request_uri[2] === "addArticle") {
+          require 'controller/Article/Article_controller.php';
+          $article = new Article_controller();
+          $article->addArticle();
+        }else if ($request_uri[2] === "delete"){
+          require 'controller/Article/Article_controller.php';
+          $article = new Article_controller();
+          empty($request_uri[3]) ? throw new Exception("") :  $article->delete_article($request_uri[3]);
+        }
       } else {
-      throw new Exception("Erreur exceptionelle");
-
+        throw new Exception("");
       }
     default:
-      throw new Exception("Erreur exceptionelle");
-
+      throw new Exception("");
       break;
   }
 } catch (Exception $ex) {
   require 'controller/ctrl_404.php';
-
-  // echo $ex->getMessage();
-  // echo $ex->xdebug_message;
-  // var_dump($ex);
 }

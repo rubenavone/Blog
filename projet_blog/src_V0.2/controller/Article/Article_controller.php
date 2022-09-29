@@ -32,9 +32,9 @@ class Article_controller
         $title = "Article";
         $flag = true;
         $error = "not";
-
+        
         if (!isset($_SESSION['connected'])) {
-            header('location: connexion?error=intedit');
+            header('location: connexion?error=interdit');
         }
 
         #Récuperation de la date 
@@ -48,11 +48,9 @@ class Article_controller
         }
 
         if(!$flag){
-            $path = Utils_controller::check_image("img-art");
-
+            $path = Utils_controller::check_image("img-article");
             if ($path === "") {
                 $path = "default.jpg";
-                $entry_value = '<p  class="text-xl before:block before:absolute before:-inset-1 before:-skew-y-2 before:bg-red-600 relative inline-block " > <span class="relative text-white " >Image de profile par défaut</span> </p> ';
             }
         }
 
@@ -104,6 +102,7 @@ class Article_controller
         require './vue/Article/view_one_article.php';
 
     }
+
     public function show_preview($id_art){
        $preview = $this->new_article->article_preview_by_id($this->bdd, $id_art);
         
@@ -120,4 +119,13 @@ class Article_controller
         include "./vue/Article/view_all_articles.php";
     }
 
+    public function delete_article($id_art){
+        if(isset($_SESSION["role"]) && !empty($id_art)){
+            $this->new_article->delete_article($this->bdd, $id_art);
+            header("location: /admin/articles");
+
+        }else{
+            header("location: /admin/articles");
+        }
+    }
 }

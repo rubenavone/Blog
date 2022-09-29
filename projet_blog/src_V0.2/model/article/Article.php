@@ -2,7 +2,9 @@
 
 class Article
 {
-    function __construct(private ?STRING $name_art, private ?STRING $content_art,  private ?STRING $date_art,   private ?INT $id_art, private ?INT $id_type = null , private ?STRING $image_art = "default.jpg")
+    function __construct(private ?STRING $name_art, private ?STRING $content_art,  
+    private ?STRING $date_art,   private ?INT $id_art, private ?INT $id_type = null , 
+    private ?STRING $image_art = "default.jpg", private ?INT $id_util = 1)
     {
 
     }
@@ -59,7 +61,17 @@ class Article
     public function get_image_art(): STRING{
         return $this->image_art;
     }
+
     public function set_image_art($value): VOID{
         $this->image_art = $value;
     }
+
+    public function get_id_util(): INT{
+        return $this->id_util;
+    }
+
+    public function set_id_util($value): VOID{
+        $this->id_util = $value;
+    }
+
 }

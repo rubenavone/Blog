@@ -8,7 +8,7 @@ ob_start();
         <p>
             Connexion
         </p>
-        <form action="" class="justify-center items-center flex flex-col " method="POST">
+        <form action="<?= $_SERVER['REQUEST_URI'] ?>" class="justify-center items-center flex flex-col " method="POST">
             <label class="block w-64">
                 <input type="mail" class="mt-5 block w-full px-0.5 border-1 border-b-2 border-gray-200 focus:ring-0 focus:border-blue-800" placeholder="Votre mail" name="mail_util" />
             </label>

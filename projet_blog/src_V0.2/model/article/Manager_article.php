@@ -4,8 +4,8 @@ class Manager_article extends Article
     public function add_article($bdd)
     {
         try {
-            $req = $bdd->prepare("INSERT INTO article(name_art, content_art, date_art, id_type,image_art) VALUE
-            (:name_art, :content_art, :date_art, :id_type, :image_art)");
+            $req = $bdd->prepare("INSERT INTO article(name_art, content_art, date_art, id_type,image_art, id_util) VALUE
+            (:name_art, :content_art, :date_art, :id_type, :image_art, :id_util)");
 
             $req->execute([
                 'name_art' => $this->get_name_art(),
@@ -13,6 +13,7 @@ class Manager_article extends Article
                 'date_art' => $this->get_date_art(),
                 'id_type' => $this->get_id_type(),
                 'image_art' => $this->get_image_art(),
+                'id_util' => $this->get_id_util(),
             ]);
         } catch (Exception $e) {
             die('Erreur dans la requete:' . $e->getMessage());
@@ -31,9 +32,7 @@ class Manager_article extends Article
     
     public function article_preview_by_id($bdd, $id){
         $req = $bdd->prepare("SELECT content_art FROM article WHERE id_art = :id_art ");
-        $req->execute([
-            'id_art' => $id,
-        ]);
+        $req->execute(['id_art' => $id,]);
         $data = $req->fetch(PDO::FETCH_OBJ);
         return $data;
     }
@@ -51,6 +50,16 @@ class Manager_article extends Article
             return $data;
         } catch (Exception $e) {
             die('Erreur dans la requete:' . $e->getMessage());
+        }
+    }
+
+    public function delete_article($bdd, $id){
+        try{
+            $req = $bdd->prepare("DELETE FROM `article` where id_art = :id_art");
+            $req->execute(['id_art' => $id]);
+        }catch (Exception $e){
+            die('Erreur dans la requete:' . $e->getMessage());
+
         }
     }
 }

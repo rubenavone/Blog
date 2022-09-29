@@ -18,7 +18,7 @@
             <?php } else {
             ?>
                 <a href="./connexion">
-                    <button class="rounded-full bg-blue-800 text-white h-10 w-60  mx-auto mt-5 ">Me connecter pour ajouter un commentaire</button>
+                    <button class="rounded-full bg-blue-800 text-white h-10 w-60  mx-auto mt-5 ">Connectez vous </button>
                 </a>
             <?php } ?>
         </section>

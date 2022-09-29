@@ -1,9 +1,11 @@
 <?php
 ob_start();
+$_SESSION["delete"] = null;
 ?>
+
 <main class="flex flex-col ml-5 mr-10 text-center">
   <article class="flex items-center mt-10 mb-10">
-    <a href="addArticle">
+    <a href="articles/addArticle">
       <button class="rounded-full bg-blue-800 text-white h-10 w-60 ">Ajouter un article</button>
     </a>
   </article>
@@ -16,7 +18,7 @@ ob_start();
         <th class="border border-slate-600">Auteur</th>
         <th class="border border-slate-600">Catégorie</th>
         <th class="border border-slate-600">Date</th>
-        <th class="border border-slate-600">Suppression</th>
+        <th class="border border-slate-600">Gestion</th>
 
       </tr>
     </thead>
@@ -26,13 +28,17 @@ ob_start();
       foreach ($this->new_article->get_all_articles($this->bdd) as $article) {
         $actual_type = $this->type->get_one_type($this->bdd, $article->id_type);
       ?>
-        <tr >
+        <tr id="<?= $article->id_art?>" >
           <td class="border border-slate-700 hover:bg-neutral-50"><?= $article->id_art ?></td>
           <td class="border border-slate-700 hover:bg-neutral-50"><?= $article->name_art ?></td>
           <td class="border border-slate-700 hover:bg-neutral-50"><?= $article->name_util . $article->first_name_util ?></td>
           <td class="border border-slate-700 hover:bg-neutral-50"><?= $article->name_type ?></td>
           <td class="border border-slate-700 hover:bg-neutral-50"><?= $article->date_art ?></td>
-          <td class="border border-slate-700 hover:bg-neutral-50"><a href="/" class="modal-button-js"><div class="w-auto">X</div></a></td>
+          <td class="border border-slate-700 hover:bg-neutral-50">
+            <a href="/" class="modal-button-js"><button class="w-auto" id="<?= $article->id_art ?> ">❌ Supprimer</button></a>
+            <a href="/" class=""><button class="w-auto " id=" <?= $article->id_art?> ">🖊️ Editer</button></a>
+            
+          </td>
         </tr>
 
       <?php } ?>
@@ -49,9 +55,9 @@ ob_start();
 
     <section class="w-2/4 mx-auto mb-10">
 
-      <a href="#"><button class="rounded-full bg-blue-800 text-white h-10 w-1/3 mx-auto mt-5">Annuler</button></a>
+      <a href=""><button class="rounded-full bg-blue-800 text-white h-10 w-1/3 mx-auto mt-5 valid">Valider</button></a>
 
-      <a href="/addUser" class="delete-value"><button class="rounded-full bg-blue-800 text-white h-10 w-1/3 mx-auto mt-5">Valider</button></a>
+      <a href=""><button class="rounded-full bg-blue-800 text-white h-10 w-1/3 mx-auto mt-5 cancel">Annuler</button></a>
     </section>
 
   </article>

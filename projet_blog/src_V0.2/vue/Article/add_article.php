@@ -1,7 +1,7 @@
 <?php
 ob_start();
 ?>
-<form action="" class="justify-center flex" method="POST">
+<form action="" class="justify-center flex" method="POST" enctype="multipart/form-data">
     <div class="mt-8 mr-10 ml-10 w-full lg:w-2/5">
         <div class="grid grid-cols-1 gap-6">
 
@@ -27,7 +27,7 @@ ob_start();
 
                 <label for="img-article" class="block">
                     <span class="text-gray-700">Image pour l'article</span>
-                    <input type="file" class="     file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-blue-800 file:text-white  mt-1 mb-5 form-control block w-4/4 px-3 py-1.5 border-0 border-b-2 text-base font-normal text-gray-700 bg-gray-200 bg-clip-padding  border-solid  rounded-md transition ease-in-out m-0 " name="img-article" />
+                    <input type="file" class="file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-blue-800 file:text-white  mt-1 mb-5 form-control block w-4/4 px-3 py-1.5 border-0 border-b-2 text-base font-normal text-gray-700 bg-gray-200 bg-clip-padding  border-solid  rounded-md transition ease-in-out m-0 " name="img-article" />
                 </label>
             </div>
 
@@ -43,8 +43,14 @@ ob_start();
     </div>
 </form>
 
-<?php if ($error === "ok") { ?>
-    <p class="text-center text-green-600"> L'article est envoyer </p>
+<?php if ($error === "ok") {
+?>
+    <p  class=" text-xl before:block before:absolute before:-inset-1 before:-skew-y-2 before:bg-green-600 relative inline-block" > <span class="relative text-white ">Article Ajouté</span><p>
+    <?php if (!isset($_FILES["img-art"])) { ?>
+        <p class="text-xl before:block before:absolute before:-inset-1 before:-skew-y-2 before:bg-red-600 relative inline-block "> <span class="relative text-white ">Image de profile par défaut</span> </p> 
+    <?php } ?>
+
+
 <?php } else if ($error === "error") { ?>
     '<p class="text-center text-red-600"> Désoler une erreur est survenue il manque le titre ou le contenus </p>';
 <?php } else {

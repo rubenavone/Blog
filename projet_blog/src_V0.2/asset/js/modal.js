@@ -37,9 +37,15 @@ class Modal {
             oneButton.addEventListener("click", (e) => {
                 e.preventDefault();
                 this.modalViewSelector.classList.toggle("hidden");
+                document.body.classList.add("overflow-hidden");
+                this.#masterViewDeleter(e.target.id);   
             });
         });
         this.#modalHandler();
+    }
+
+    #masterViewDeleter = (id) =>{
+        document.querySelector(".valid").parentElement.href =  `articles/delete/${id} `;
     }
 
     #modalHandler = () =>{
@@ -65,13 +71,13 @@ if (document.querySelector(".modal-button-js") !== null && document.querySelecto
 }else{
     console.log("Il n'y a pas de modal sur cette page !");
 }
-
+/**
+ * END MODAL
+ */
 
 /**
  * GSAP ANIMATION
  */
-
-
 //Text animation
 
 //Selector 
@@ -79,9 +85,6 @@ let sectionPresentationSelector = document.querySelector(".presentation");
 
 function writeText(newText) {
     gsap.to(".text-change-js", { repeat: 1, duration: 4, text: newText, ease: "out", yoyo: true });
-
-
-
 }
 if (sectionPresentationSelector !== null) {
     setInterval(function () {
@@ -104,19 +107,39 @@ if (sectionPresentationSelector !== null) {
 }
 
 /**
- * Fonction qui permet de rendre saine une chaine de caractère
- * Cela permet d'éviter une injection XSS
- * @param {String} text 
- * @returns 
+ * Switch light/dark theme
+ * TODO add it to the local Storage
+ * TODO take a look on navigator preference
  */
-function escapeHtml(text) {
-    var map = {
-        '&': '&amp;',
-        '<': '&lt;',
-        '>': '&gt;',
-        '"': '&quot;',
-        "'": '&#039;'
-    };
+let cssThemeSelector = document.querySelector(".dark");
+let boiteDeclenche = document.querySelector("#boite");
 
-    return text.replace(/[&<>"']/g, function (m) { return map[m]; });
+let clicked = true
+
+
+boiteDeclenche.addEventListener("click", function(){
+    if(clicked === true){
+        console.log("aller", clicked);
+        moveForward();
+        clicked = false;
+    }else{
+        console.log("retour" , clicked);
+        moveBackward();
+        clicked = true;
+    }
+
+    
+})
+
+function moveForward(){
+    gsap.to(".box", {x: 34, backgroundColor: "#fcd34d"});
 }
+
+
+function moveBackward(){
+    gsap.to(".box", {x: 0, backgroundColor: "#9ca3af"});
+}
+
+/**
+ * END GSAP
+ */

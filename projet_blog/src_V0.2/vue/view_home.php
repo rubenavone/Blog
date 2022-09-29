@@ -60,6 +60,7 @@ ob_start();
     <img src="./dist/img/diego-ph-fIq0tET6llw-unsplash.jpg" alt="" class="lg:w-4/4tailwind w-4/4 h-[400px] object-cover object-center">
 </section>
 
+
 <?php
 $content = ob_get_clean();
 
