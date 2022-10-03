@@ -2,15 +2,12 @@
 
 session_start();
 
+# Si aucun role alors visiteur role = 0;
 if (!isset($_SESSION["role"])) {
   $_SESSION["role"] = 0;
 }
 
-
-
 # Test soit l'url a une route sinon on renvoi à la racine
-
-
 $LOGIN_MANDATORY_URL = [
   "deconnexion",
   "addArticle",
@@ -23,7 +20,7 @@ try {
   if (!isset($_GET["page"])) $_GET["page"] = "/";
   $request_uri = explode('/', $_GET["page"]);
   if (!isset($_SESSION['connected']) && in_array($request_uri[0], $LOGIN_MANDATORY_URL)) {
-    throw new Exception("Erreur exceptionelle");
+    throw new Exception("500");
   }
 
   switch ($request_uri[0]) {
@@ -79,18 +76,26 @@ try {
           require 'controller/Article/Article_controller.php';
           $article = new Article_controller();
           $article->addArticle();
-        }else if ($request_uri[2] === "delete"){
+        } else if ($request_uri[2] === "editArticle") {
+          if (empty($request_uri[3])) {
+            throw new Exception("404");
+          } else {
+            require 'controller/Article/Article_controller.php';
+            $article = new Article_controller();
+            $article->edit_article(htmlspecialchars($request_uri[3]));
+          }
+        } else if ($request_uri[2] === "delete") {
           require 'controller/Article/Article_controller.php';
           $article = new Article_controller();
-          empty($request_uri[3]) ? throw new Exception("") :  $article->delete_article($request_uri[3]);
+          empty($request_uri[3]) ? throw new Exception("404") :  $article->delete_article($request_uri[3]);
         }
       } else {
-        throw new Exception("");
+        throw new Exception("404");
       }
     default:
-      throw new Exception("");
+      throw new Exception("404");
       break;
   }
 } catch (Exception $ex) {
-  require 'controller/ctrl_404.php';
+  $ex->getMessage() === "404" ? require 'controller/ctrl_404.php' : require 'controller/ctrl_500.php';
 }

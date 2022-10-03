@@ -2,7 +2,7 @@
     ob_start();
 ?>
 <header>
-    <img class="w-full h-40 object-contain" src="./dist/img/<?=$article_wanted->image_art?>" alt="">
+    <img class="w-full h-40 object-contain" src="./dist/img/<?=$article_wanted->get_image_art()?>" alt="">
 </header>
 <section class="flex flex-col text-left items-center w-4/5 mx-auto mt-20">
             <article class="columns-2">
@@ -33,7 +33,6 @@
             foreach ($comment_wanted as $comment) { ?>
                 <?php
                 $id_util = $comment->id_util;
-
                 $actual_user = $this->manage_user->user_by_id($this->bdd, $id_util);
                 ?>
                 <div class="p-6 w-1/3 lg:w-2/3  bg-white rounded-xl shadow-lg flex lg:flex-col lg:items-center lg:text-white space-x-4 mb-14 break-all ">

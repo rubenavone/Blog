@@ -16,7 +16,7 @@ class Type{
     public function set_id_type($value):VOID{
         $this->id_type = $value;
     }
-    public function get_name_type():INT{
+    public function get_name_type():STRING{
         return $this->name_type;
     }
     public function set_name_type($value):VOID{

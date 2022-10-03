@@ -9,7 +9,12 @@ class Manager_type extends Type
             $req = $bdd->prepare("SELECT * FROM type");
             $req->execute();
             $data = $req->fetchAll(PDO::FETCH_OBJ);
-            return $data;
+            $data_array = [];
+            foreach ($data as $value) {
+                $type = new Type($value->id_type, $value->name_type, null);
+                array_push($data_array, $type);
+            }
+            return $data_array;
         } catch (Exception $e) {
             die('Erreur dans la requete:' . $e->getMessage());
         }

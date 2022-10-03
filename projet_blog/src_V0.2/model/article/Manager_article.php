@@ -1,4 +1,6 @@
 <?php
+
+
 class Manager_article extends Article
 {
     public function add_article($bdd)
@@ -16,25 +18,46 @@ class Manager_article extends Article
                 'id_util' => $this->get_id_util(),
             ]);
         } catch (Exception $e) {
-            die('Erreur dans la requete:' . $e->getMessage());
+            die('Erreur dans la requête:' . $e->getMessage());
         }
     }
 
     public function article_by_id($bdd, $id)
     {
-        $req = $bdd->prepare("SELECT * FROM article WHERE id_art = :id_art ");
-        $req->execute([
-            'id_art' => $id,
-        ]);
-        $data = $req->fetch(PDO::FETCH_OBJ);
-        return $data;
+        try {
+            $req = $bdd->prepare("SELECT * FROM article WHERE id_art = :id_art ");
+            $req->execute([
+                'id_art' => $id,
+            ]);
+            $data = $req->fetch(PDO::FETCH_OBJ);
+            if (!empty($data)) {
+                $new_art = new Article(
+                    $data->name_art,
+                    $data->content_art,
+                    $data->date_art,
+                    $data->id_art,
+                    $data->id_type,
+                    $data->image_art,
+                    $data->id_util
+                );
+                return $new_art;
+            }
+            return $data;
+        } catch (Exception $e) {
+            die('Erreur dans la requête:' . $e->getMessage());
+        }
     }
-    
-    public function article_preview_by_id($bdd, $id){
-        $req = $bdd->prepare("SELECT content_art FROM article WHERE id_art = :id_art ");
-        $req->execute(['id_art' => $id,]);
-        $data = $req->fetch(PDO::FETCH_OBJ);
-        return $data;
+
+    public function article_preview_by_id($bdd, $id)
+    {
+        try {
+            $req = $bdd->prepare("SELECT content_art FROM article WHERE id_art = :id_art ");
+            $req->execute(['id_art' => $id,]);
+            $data = $req->fetch(PDO::FETCH_OBJ);
+            return $data;
+        } catch (Exception $e) {
+            die('Erreur dans la requête:' . $e->getMessage());
+        }
     }
 
     public function get_all_articles($bdd)
@@ -49,17 +72,37 @@ class Manager_article extends Article
             $data = $req->fetchAll(PDO::FETCH_OBJ);
             return $data;
         } catch (Exception $e) {
-            die('Erreur dans la requete:' . $e->getMessage());
+            die('Erreur dans la requête:' . $e->getMessage());
         }
     }
 
-    public function delete_article($bdd, $id){
-        try{
+    public function delete_article($bdd, $id)
+    {
+        try {
             $req = $bdd->prepare("DELETE FROM `article` where id_art = :id_art");
             $req->execute(['id_art' => $id]);
-        }catch (Exception $e){
-            die('Erreur dans la requete:' . $e->getMessage());
+        } catch (Exception $e) {
+            die('Erreur dans la requête:' . $e->getMessage());
+        }
+    }
 
+    public function edit_article($bdd, $id)
+    {
+        try {
+            $req = $bdd->prepare("UPDATE article SET name_art = :name_art, content_art = :content_art,
+            date_art = :date_art, id_type = :id_type,image_art = :image_art, id_util = :id_util
+            WHERE id_art = :id_art ");
+            $req->execute([
+                'name_art' => $this->get_name_art(),
+                'content_art' => $this->get_content_art(),
+                'date_art' => $this->get_date_art(),
+                'id_type' => $this->get_id_type(),
+                'image_art' => $this->get_image_art(),
+                'id_util' => $this->get_id_util(),
+                'id_art' => $id
+            ]);
+        } catch (Exception $e) {
+            die('Erreur dans la requête:' . $e->getMessage());
         }
     }
 }

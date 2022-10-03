@@ -12,7 +12,6 @@ require './controller/Utils/Utils_controller.php';
 
 class Article_controller
 {
-    private $new_article;
     private $manage_comment;
     private $manage_user;
     private $type;
@@ -28,48 +27,75 @@ class Article_controller
 
     public function addArticle()
     {
-        $content_title = "Ajouter un";
-        $title = "Article";
-        $flag = true;
-        $error = "not";
-        
-        if (!isset($_SESSION['connected'])) {
-            header('location: connexion?error=interdit');
-        }
+        try {
+            $content_title = "Ajouter un";
+            $title = "Article";
+            $flag = true;
+            $error = "not";
 
-        #Récuperation de la date 
-        #Verifier le contenus des input
-        if (isset($_POST['submit'])) {
-            $flag = false;
-        }
-
-        if((!$flag && empty($_POST['name-article'])) || (!$flag && empty($_POST['content-article']))){
-            $error = "error";
-        }
-
-        if(!$flag){
-            $path = Utils_controller::check_image("img-article");
-            if ($path === "") {
-                $path = "default.jpg";
+            if (!isset($_SESSION['connected'])) {
+                header('location: connexion?error=interdit');
             }
-        }
 
-        if (!$flag && !empty($_POST['name-article']) && !empty($_POST['content-article'])) {
-            if (empty($_POST['date-article'])) {
-                $_POST['date-article'] = date("Y-m-d");
+            #Récuperation de la date 
+            #Verifier le contenus des input
+            if (isset($_POST['submit'])) {
+                $flag = false;
             }
-            $new_article = new Manager_article($_POST['name-article'], $_POST['content-article'], $_POST['date-article'], 1);
-            $new_article->set_id_type($_POST["id-type"]);
-            $new_article->set_image_art($path);
-            $new_article->add_article($this->bdd);
-            $error = "ok";
+
+            if ((!$flag && empty($_POST['name-article'])) || (!$flag && empty($_POST['content-article']))) {
+                $error = "error";
+            }
+
+            if (!$flag) {
+                $path = Utils_controller::check_image("img-article");
+                if ($path === "") {
+                    $path = "default.jpg";
+                }
+            }
+
+            if (!$flag && !empty($_POST['name-article']) && !empty($_POST['content-article'])) {
+                if (empty($_POST['date-article'])) {
+                    $_POST['date-article'] = date("Y-m-d");
+                }
+                $new_article = new Manager_article($_POST['name-article'], $_POST['content-article'], $_POST['date-article'], 1);
+                $new_article->set_id_type($_POST["id-type"]);
+                $new_article->set_image_art($path);
+                $new_article->add_article($this->bdd);
+                $error = "ok";
+            }
+
+            $type = new Manager_type(null, null, null);
+
+            $allTypes = $type->get_all_types($this->bdd);
+
+            include './vue/Article/add_article.php';
+        } catch (Exception $e) {
+            die('Erreur Dans lors de l\'ajout' . $e->getMessage());
         }
+    }
+    public function edit_article($is_edit = null)
+    {
+        try {
+            $content_title = "Modifier un";
+            $title = "Article";
+            $article_wanted = $this->new_article->article_by_id($this->bdd, $is_edit);
+            $type = new Manager_type(null, null, null);
+            $allTypes = $type->get_all_types($this->bdd);
 
-        $type = new Manager_type(null, null, null);
 
-        $allTypes = $type->get_all_types($this->bdd);
+            if (isset($_POST['submit'])) {
+                $flag = false;
+            }
 
-        include './vue/Article/add_article.php';
+            // if($_POST['name-article'] !== $article_wanted->get_name_art()){
+                
+            // }
+
+            include './vue/Article/edit_article.php';
+        } catch (Exception $e) {
+            die("Erreur lors de la mofication" . $e->getMessage());
+        }
     }
 
     public function show_article()
@@ -88,43 +114,43 @@ class Article_controller
             $comment_wanted = $this->manage_comment->comment_by_id($this->bdd, $_GET['id']);
 
             if ($article_wanted) {
-                $title = $article_wanted->name_art;
-                $lines = explode(".", $article_wanted->content_art);
+                $title = $article_wanted->get_name_art();
+                $lines = explode(".", $article_wanted->get_content_art());
                 $content_title = "";
             } else {
                 header("location: ./404");
             }
-   
         } else {
             header("location: ./articles");
         }
 
         require './vue/Article/view_one_article.php';
-
     }
 
-    public function show_preview($id_art){
-       $preview = $this->new_article->article_preview_by_id($this->bdd, $id_art);
-        
-       if($preview){
-        $lines = explode(".", $preview->content_art);
-       }
-       return $lines[0];
+    public function show_preview($id_art)
+    {
+        $preview = $this->new_article->article_preview_by_id($this->bdd, $id_art);
+
+        if ($preview) {
+            $lines = explode(".", $preview->content_art);
+        }
+        return $lines[0];
     }
 
-    public function show_all_articles(){
+    public function show_all_articles()
+    {
         $content_title = "Tous les";
         $title = "Articles";
 
         include "./vue/Article/view_all_articles.php";
     }
 
-    public function delete_article($id_art){
-        if(isset($_SESSION["role"]) && !empty($id_art)){
+    public function delete_article($id_art)
+    {
+        if (isset($_SESSION["role"]) && !empty($id_art)) {
             $this->new_article->delete_article($this->bdd, $id_art);
             header("location: /admin/articles");
-
-        }else{
+        } else {
             header("location: /admin/articles");
         }
     }

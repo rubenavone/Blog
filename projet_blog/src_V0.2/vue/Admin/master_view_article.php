@@ -36,8 +36,7 @@ $_SESSION["delete"] = null;
           <td class="border border-slate-700 hover:bg-neutral-50"><?= $article->date_art ?></td>
           <td class="border border-slate-700 hover:bg-neutral-50">
             <a href="/" class="modal-button-js"><button class="w-auto" id="<?= $article->id_art ?> ">❌ Supprimer</button></a>
-            <a href="/" class=""><button class="w-auto " id=" <?= $article->id_art?> ">🖊️ Editer</button></a>
-            
+            <a href="articles/editArticle/<?= $article->id_art?>" class=""><button class="w-auto ">🖊️ Editer</button></a>
           </td>
         </tr>
 

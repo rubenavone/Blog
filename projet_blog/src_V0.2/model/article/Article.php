@@ -6,7 +6,13 @@ class Article
     private ?STRING $date_art,   private ?INT $id_art, private ?INT $id_type = null , 
     private ?STRING $image_art = "default.jpg", private ?INT $id_util = 1)
     {
-
+        $this->name_art = $name_art;
+        $this->content_art = $content_art;
+        $this->date_art = $date_art;
+        $this->id_art = $id_art;
+        $this->id_type = $id_type;
+        $this->image_art = $image_art;
+        $this->id_util = $id_util;
     }
 
     public function get_name_art(): STRING

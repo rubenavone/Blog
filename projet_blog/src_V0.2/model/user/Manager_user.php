@@ -64,7 +64,7 @@ class Manager_user extends User
         }
     }
 
-   public function user_by_id($bdd, $id)
+   public function user_by_id($bdd, $id): OBJECT
     {
         try{
             $req = $bdd->prepare("SELECT * FROM utilisateur WHERE id_util = :id_util ");
@@ -74,7 +74,7 @@ class Manager_user extends User
             $data = $req->fetch(PDO::FETCH_OBJ);
             return $data;
         }catch(Exception $e){
-            echo $e;
+            die('Erreur dans la requete:' . $e->getMessage());
         }
     }
 

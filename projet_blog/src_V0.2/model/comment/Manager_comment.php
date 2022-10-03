@@ -1,7 +1,9 @@
 <?php
 
-class Manager_comment extends Comment {
-    public function add_comment($bdd){
+class Manager_comment extends Comment
+{
+    public function add_comment($bdd)
+    {
         try {
             $req = $bdd->prepare("INSERT INTO commenter(id_art, id_util, commentaire, date_commentaire) VALUE
             (:id_art, :id_util, :commentaire, :date_commentaire)");
@@ -21,15 +23,24 @@ class Manager_comment extends Comment {
 
     public function comment_by_id($bdd, $id)
     {
-        $req = $bdd->prepare("SELECT * FROM commenter WHERE id_art = :id_art ");
-        $req->execute([
-            'id_art' => $id,
-        ]);
-        $data = $req->fetchAll(PDO::FETCH_OBJ);
-        return $data;
+        try {
+            $req = $bdd->prepare("SELECT * FROM commenter WHERE id_art = :id_art ");
+            $req->execute([
+                'id_art' => $id,
+            ]);
+            $data = $req->fetchAll(PDO::FETCH_OBJ);
+            return $data;
+        } catch (Exception $e) {
+            die('Erreur dans la requete:' . $e->getMessage());
+        }
     }
 
-    public function remove_comment($bdd){
-
+    public function remove_comment($bdd)
+    {
+        try {
+            /***CODE***/
+        } catch (Exception $e) {
+            die('Erreur dans la requete:' . $e->getMessage());
+        }
     }
 }

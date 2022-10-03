@@ -4,7 +4,6 @@ class Utils_controller{
     static function check_image($posted_img) {
 
         if (!empty($_FILES[$posted_img]['name'])) {
-
             $temp_name = $_FILES[$posted_img]["tmp_name"];
             $name = $_FILES[$posted_img]["name"];
             $size = $_FILES[$posted_img]["size"];
