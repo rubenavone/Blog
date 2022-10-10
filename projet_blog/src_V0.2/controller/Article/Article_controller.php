@@ -16,6 +16,7 @@ class Article_controller
     private $manage_user;
     private $type;
     private $bdd;
+
     public function __construct()
     {
         $this->new_article = new Manager_article(null, null, null, null);
@@ -58,40 +59,80 @@ class Article_controller
                 if (empty($_POST['date-article'])) {
                     $_POST['date-article'] = date("Y-m-d");
                 }
-                $new_article = new Manager_article($_POST['name-article'], $_POST['content-article'], $_POST['date-article'], 1);
+                $new_article = new Manager_article(
+                    $_POST['name-article'],
+                    $_POST['content-article'],
+                    $_POST['date-article'],
+                    1
+                );
                 $new_article->set_id_type($_POST["id-type"]);
                 $new_article->set_image_art($path);
                 $new_article->add_article($this->bdd);
                 $error = "ok";
             }
 
-            $type = new Manager_type(null, null, null);
-
-            $allTypes = $type->get_all_types($this->bdd);
+            $allTypes = $this->type->get_all_types($this->bdd);
 
             include './vue/Article/add_article.php';
         } catch (Exception $e) {
             die('Erreur Dans lors de l\'ajout' . $e->getMessage());
         }
     }
+
+    /**
+     * TODO : finish this method
+     */
     public function edit_article($is_edit = null)
     {
         try {
             $content_title = "Modifier un";
             $title = "Article";
             $article_wanted = $this->new_article->article_by_id($this->bdd, $is_edit);
-            $type = new Manager_type(null, null, null);
-            $allTypes = $type->get_all_types($this->bdd);
+            $allTypes = $this->type->get_all_types($this->bdd);
+            $flag = true;
 
+            $edited_article = new Article(
+                $article_wanted->get_name_art(),
+                $article_wanted->get_content_art(),
+                $article_wanted->get_date_art(),
+                $article_wanted->get_id_art(),
+                $article_wanted->get_id_type(),
+                $article_wanted->get_image_art(),
+                $article_wanted->get_id_util()
+            );
 
             if (isset($_POST['submit'])) {
                 $flag = false;
             }
 
-            // if($_POST['name-article'] !== $article_wanted->get_name_art()){
-                
-            // }
+            if (!$flag && $_POST['name-article'] !== $article_wanted->get_name_art() && !empty($_POST['name-article'])) {
+                $edited_article->set_name_art($_POST['name-article']);
+            }
 
+            if (
+                !$flag &&  $_POST['content-article'] !== $article_wanted->get_content_art()
+                && !empty($_POST['content-article'])
+            ) {
+                $edited_article->set_content_art($_POST['content-article']);
+            }
+
+            if (!$flag && $_POST['date-article'] !== $article_wanted->get_date_art() && !empty($_POST['date-article'])) {
+                $edited_article->set_date_art($_POST['date-article']);
+            }
+
+            if (!$flag && $_POST['id-type'] !== $article_wanted->get_id_type() && !empty($_POST['id-type'])) {
+                $edited_article->set_id_type($_POST['id-type']);
+            }
+
+            if (
+                !$flag && isset($_POST['img-article']) && $_POST['img-article'] !== $article_wanted->get_image_art()
+                && !empty($_POST['img-article'])
+            ) {
+                $edited_article->set_image_art($_POST['img-article']);
+            }
+
+            var_dump($edited_article);
+            $this->new_article->edit_article($this->bdd, $edited_article->get_id_art(), $edited_article);
             include './vue/Article/edit_article.php';
         } catch (Exception $e) {
             die("Erreur lors de la mofication" . $e->getMessage());

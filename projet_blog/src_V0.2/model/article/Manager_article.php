@@ -3,10 +3,11 @@
 
 class Manager_article extends Article
 {
-    public function add_article($bdd)
+    public function add_article(object $bdd):void
     {
         try {
-            $req = $bdd->prepare("INSERT INTO article(name_art, content_art, date_art, id_type,image_art, id_util) VALUE
+            $req = $bdd->prepare("INSERT INTO article(name_art, content_art, date_art
+            , id_type,image_art, id_util) VALUE
             (:name_art, :content_art, :date_art, :id_type, :image_art, :id_util)");
 
             $req->execute([
@@ -22,7 +23,7 @@ class Manager_article extends Article
         }
     }
 
-    public function article_by_id($bdd, $id)
+    public function article_by_id(object $bdd, INT $id):Article
     {
         try {
             $req = $bdd->prepare("SELECT * FROM article WHERE id_art = :id_art ");
@@ -48,7 +49,7 @@ class Manager_article extends Article
         }
     }
 
-    public function article_preview_by_id($bdd, $id)
+    public function article_preview_by_id(object $bdd, INT $id):Object
     {
         try {
             $req = $bdd->prepare("SELECT content_art FROM article WHERE id_art = :id_art ");
@@ -60,7 +61,7 @@ class Manager_article extends Article
         }
     }
 
-    public function get_all_articles($bdd)
+    public function get_all_articles(object $bdd):Array
     {
         try {
             $req = $bdd->prepare("SELECT * FROM `article`
@@ -76,7 +77,7 @@ class Manager_article extends Article
         }
     }
 
-    public function delete_article($bdd, $id)
+    public function delete_article(object $bdd, int $id):Void
     {
         try {
             $req = $bdd->prepare("DELETE FROM `article` where id_art = :id_art");
@@ -86,19 +87,19 @@ class Manager_article extends Article
         }
     }
 
-    public function edit_article($bdd, $id)
+    public function edit_article(object $bdd, int $id, Article $edited_article):Void
     {
         try {
             $req = $bdd->prepare("UPDATE article SET name_art = :name_art, content_art = :content_art,
             date_art = :date_art, id_type = :id_type,image_art = :image_art, id_util = :id_util
             WHERE id_art = :id_art ");
             $req->execute([
-                'name_art' => $this->get_name_art(),
-                'content_art' => $this->get_content_art(),
-                'date_art' => $this->get_date_art(),
-                'id_type' => $this->get_id_type(),
-                'image_art' => $this->get_image_art(),
-                'id_util' => $this->get_id_util(),
+                'name_art' => $edited_article->get_name_art(),
+                'content_art' => $edited_article->get_content_art(),
+                'date_art' => $edited_article->get_date_art(),
+                'id_type' => $edited_article->get_id_type(),
+                'image_art' => $edited_article->get_image_art(),
+                'id_util' => $edited_article->get_id_util(),
                 'id_art' => $id
             ]);
         } catch (Exception $e) {

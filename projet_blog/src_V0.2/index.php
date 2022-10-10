@@ -22,7 +22,6 @@ try {
   if (!isset($_SESSION['connected']) && in_array($request_uri[0], $LOGIN_MANDATORY_URL)) {
     throw new Exception("500");
   }
-
   switch ($request_uri[0]) {
     case "":
       require 'controller/ctrl_show_home.php';

@@ -5,13 +5,16 @@ require './model/comment/Comment.php';
 require './model/comment/Manager_comment.php';
 require './controller/Utils/Utils_controller.php';
 #Flag on baisse le drapeau si une condition n'est pas remplis ainsi ils passe des les else
+
 class User_controller
 {
     private $bdd;
+
     public function __construct()
     {
         $this->bdd = BDD::getBDD();
     }
+
     public function addUser()
     {
         # Déclaration d'un tableau vide pour afficher certaine valeur ou non
@@ -60,6 +63,7 @@ class User_controller
 
         require './vue/User/add_user.php';
     }
+
     public function add_comment()
     {
         $content_title = "Ajouter un";
@@ -89,6 +93,7 @@ class User_controller
 
         include './vue/User/add_comment.php';
     }
+
     public function connexion()
     {
         $content_title = "Interface de ";
@@ -142,6 +147,7 @@ class User_controller
         include 'vue/User/view_connexion.php';
 
     }
+
     public function deconnexion()
     {
         session_destroy();

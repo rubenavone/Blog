@@ -1,6 +1,5 @@
 <?php
 ob_start();
-var_dump($article_wanted)
 ?>
 <form action="" class="justify-center flex" method="POST" enctype="multipart/form-data">
     <div class="mt-8 mr-10 ml-10 w-full lg:w-2/5">
