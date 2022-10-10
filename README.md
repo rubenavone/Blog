@@ -13,7 +13,7 @@ Les visiteurs devront pouvoir consulter les articles et les commentaires.
 
 La stack :  
 PHP8.1.18  
-Mysql 5.2 (en cours d'uppgrade pour la 8)  
+Mysql 8.0.3 
 Apache 2.4.51   
 Tailwinds 3.1.6
 
@@ -37,6 +37,10 @@ et normalement c'est tout.
 Pour le modifier il faudra lancer le WATCHER de tailwinds
 
 npx tailwindcss -i ./input.css -o ./dist/output.css --watch
+
+Edition d'un script npm dans package.json
+Il suffit dans la V0.2 de taper npm run tw pour lancer le watcher de tailwinds.
+Plus de détail dans le fichier correspondant.
 
 Pour mieux comprendre le code rendez-vous sur la documentation de tailwindcss
 
@@ -111,11 +115,4 @@ Pour mieux comprendre le code rendez-vous sur la documentation de tailwindcss
     .gitkeep: keep empty folders in your projects.
 
 
-### TODO
-
-Faire les modification sur le dist; changer dans la ligne de watcher la sortie par public, mettre les image dans public et les upload d'image aussi.
-
-Faire en sorte que la Class PDO soit dans model et pas dans utils.
-
-Utils_controllern verifier si c'est bien placer ou pas via.
 

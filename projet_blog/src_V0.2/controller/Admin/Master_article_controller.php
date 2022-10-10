@@ -24,7 +24,7 @@ class Master_article_controller{
         $this->bdd = BDD::getBDD();
     }
     
-    public function show_master_article(){
+    public function show_master_article():void{
         $content_title = "Gestion des";
         $title = "Articles";
 

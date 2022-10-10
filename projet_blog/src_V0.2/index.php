@@ -81,7 +81,7 @@ try {
           } else {
             require 'controller/Article/Article_controller.php';
             $article = new Article_controller();
-            $article->edit_article(htmlspecialchars($request_uri[3]));
+            $article->edit_article(htmlspecialchars(intval($request_uri[3])));
           }
         } else if ($request_uri[2] === "delete") {
           require 'controller/Article/Article_controller.php';

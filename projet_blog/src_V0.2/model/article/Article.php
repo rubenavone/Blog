@@ -15,68 +15,68 @@ class Article
         $this->id_util = $id_util;
     }
 
-    public function get_name_art(): STRING
+    public function get_name_art(): string
     {
         return htmlspecialchars($this->name_art);
     }
 
-    public function set_name_art($value): VOID
+    public function set_name_art(string $value): VOID
     {
         $this->name_art = $value;
     }
 
-    public function get_content_art(): STRING
+    public function get_content_art(): string
     {
         return $this->content_art;
     }
 
-    public function set_content_art($value): VOID
+    public function set_content_art(string $value): void
     {
         $this->content_art = $value;
     }
 
-    public function get_date_art(): STRING
+    public function get_date_art(): string
     {
         return $this->date_art;
     }
-    public function set_date_art($value): VOID
+    public function set_date_art(DateTime $value): void
     {
         $this->date_art = $value;
     }
 
-    public function get_id_art(): INT
+    public function get_id_art(): int
     {
         return $this->id_art;
     }
 
-    public function set_id_art($value): VOID
+    public function set_id_art(int $value): void
     {
         $this->id_art = $value;
     }
 
-    public function get_id_type(): INT
+    public function get_id_type(): int
     {
         return $this->id_type;
     }
 
-    public function set_id_type($value): VOID
+    public function set_id_type(int $value): void
     {
         $this->id_type = $value;
     }
 
-    public function get_image_art(): STRING{
+    public function get_image_art(): string{
         return $this->image_art;
     }
 
-    public function set_image_art($value): VOID{
+    public function set_image_art(string $value): void{
         $this->image_art = $value;
     }
 
-    public function get_id_util(): INT{
+    public function get_id_util(): int{
         return $this->id_util;
     }
 
-    public function set_id_util($value): VOID{
+    public function set_id_util(int $value): void{
         $this->id_util = $value;
     }
 

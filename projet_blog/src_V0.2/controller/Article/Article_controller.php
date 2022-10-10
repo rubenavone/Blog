@@ -26,7 +26,7 @@ class Article_controller
         $this->bdd = BDD::getBDD();
     }
 
-    public function addArticle()
+    public function addArticle():void
     {
         try {
             $content_title = "Ajouter un";
@@ -82,15 +82,17 @@ class Article_controller
     /**
      * TODO : finish this method
      */
-    public function edit_article($is_edit = null)
+    public function edit_article(int $id):void
     {
         try {
             $content_title = "Modifier un";
             $title = "Article";
-            $article_wanted = $this->new_article->article_by_id($this->bdd, $is_edit);
+            $article_wanted = $this->new_article->article_by_id($this->bdd, $id);
             $allTypes = $this->type->get_all_types($this->bdd);
             $flag = true;
-
+            if(!$article_wanted){
+                throw new Exception();
+            }
             $edited_article = new Article(
                 $article_wanted->get_name_art(),
                 $article_wanted->get_content_art(),
@@ -124,31 +126,35 @@ class Article_controller
                 $edited_article->set_id_type($_POST['id-type']);
             }
 
-            if (
-                !$flag && isset($_POST['img-article']) && $_POST['img-article'] !== $article_wanted->get_image_art()
-                && !empty($_POST['img-article'])
-            ) {
-                $edited_article->set_image_art($_POST['img-article']);
+            if (!$flag ) {
+                $path = Utils_controller::check_image("img-article");
+                if (!empty($path)) {
+                    $edited_article->set_image_art($path);
+                }
             }
 
-            var_dump($edited_article);
-            $this->new_article->edit_article($this->bdd, $edited_article->get_id_art(), $edited_article);
+            if(!$flag){
+                $this->new_article->edit_article($this->bdd, $edited_article->get_id_art(), $edited_article);
+                header("location: ".$edited_article->get_id_art());
+            }
+
             include './vue/Article/edit_article.php';
         } catch (Exception $e) {
             die("Erreur lors de la mofication" . $e->getMessage());
         }
     }
 
-    public function show_article()
+    public function show_article():void
     {
+        $flag = true;
 
         $_SESSION['temp_page'] = "article?id=" . $_GET["id"];
 
         if (isset($_GET['id']) && !empty($_GET['id'])) {
-            $continue = true;
+            $flag = false;
         }
 
-        if ($continue && $_GET['id'] !== null) {
+        if (!$flag && $_GET['id'] !== null) {
 
             #Récuperation de l'articles et des commentaire si il existe
             $article_wanted = $this->new_article->article_by_id($this->bdd, $_GET['id']);
@@ -168,7 +174,7 @@ class Article_controller
         require './vue/Article/view_one_article.php';
     }
 
-    public function show_preview($id_art)
+    public function show_preview(int $id_art):string
     {
         $preview = $this->new_article->article_preview_by_id($this->bdd, $id_art);
 
@@ -178,7 +184,7 @@ class Article_controller
         return $lines[0];
     }
 
-    public function show_all_articles()
+    public function show_all_articles():void
     {
         $content_title = "Tous les";
         $title = "Articles";
@@ -186,7 +192,7 @@ class Article_controller
         include "./vue/Article/view_all_articles.php";
     }
 
-    public function delete_article($id_art)
+    public function delete_article(int $id_art):void
     {
         if (isset($_SESSION["role"]) && !empty($id_art)) {
             $this->new_article->delete_article($this->bdd, $id_art);

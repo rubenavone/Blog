@@ -1,8 +1,10 @@
 <?php
 class Utils_controller{
     
-    static function check_image($posted_img) {
-
+    static public function check_image(string $posted_img):string {
+        /**
+         * TODO Vérifier le type de fichiers, Gestion des effet de bord trop léger
+         */
         if (!empty($_FILES[$posted_img]['name'])) {
             $temp_name = $_FILES[$posted_img]["tmp_name"];
             $name = $_FILES[$posted_img]["name"];
@@ -15,5 +17,7 @@ class Utils_controller{
             return "";
         }
     }
-
+    /**
+     * Fonction de compression d'image
+     */
 }

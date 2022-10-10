@@ -23,7 +23,7 @@ class Manager_article extends Article
         }
     }
 
-    public function article_by_id(object $bdd, INT $id):Article
+    public function article_by_id(object $bdd, INT $id):Article | bool
     {
         try {
             $req = $bdd->prepare("SELECT * FROM article WHERE id_art = :id_art ");

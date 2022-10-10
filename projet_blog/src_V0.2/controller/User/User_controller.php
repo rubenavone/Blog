@@ -15,7 +15,7 @@ class User_controller
         $this->bdd = BDD::getBDD();
     }
 
-    public function addUser()
+    public function addUser():void
     {
         # Déclaration d'un tableau vide pour afficher certaine valeur ou non
         $entry = [];
@@ -30,7 +30,7 @@ class User_controller
             var_dump($_FILES);
         }
 
-        # Ici on verifie si touts nos champ sont remplis
+        # Ici on verifie si touts nos champs sont remplis
         if (!$flag && !empty($_POST['name_util']) && !empty($_POST['first_name_util']) && !empty($_POST['mail_util']) && !empty($_POST['mdp_util'])) {
             # Instanciation d'un nouvel utilisateur, définis img_util vide car on à pas encore le chemin
             $new_user = new Manager_user(htmlspecialchars($_POST['name_util']), htmlspecialchars($_POST['first_name_util']), htmlspecialchars($_POST['mail_util']), $_POST['mdp_util'], htmlspecialchars(""));
@@ -64,7 +64,7 @@ class User_controller
         require './vue/User/add_user.php';
     }
 
-    public function add_comment()
+    public function add_comment():void
     {
         $content_title = "Ajouter un";
         $title = "Commentaire";
@@ -94,7 +94,7 @@ class User_controller
         include './vue/User/add_comment.php';
     }
 
-    public function connexion()
+    public function connexion():void
     {
         $content_title = "Interface de ";
         $title = "Connexion";
@@ -148,14 +148,14 @@ class User_controller
 
     }
 
-    public function deconnexion()
+    public function deconnexion():void
     {
         session_destroy();
         unset($_COOKIE['PHPSESSID']);
         header('location: / ');
     }
 
-    public function profil_user()
+    public function profil_user():void
     {
         $content_title = "Profil ";
         $title = "Connexion";

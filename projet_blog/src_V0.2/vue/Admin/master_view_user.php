@@ -1,7 +1,9 @@
 <?php
 ob_start();
 $_SESSION["delete"] = null;
-
+/**
+ * TODO: Adapter pour afficher tout les utilisateur
+ */
 ?>
 
 <main class="flex flex-col ml-5 mr-10 text-center">
