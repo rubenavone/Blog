@@ -1,28 +1,28 @@
 <?php
 
-require './utils/connect_bdd.php';
-require './model/article/Article.php';
-require './model/category/Category.php';
-require './model/category/Manager_category.php';
-require './model/article/Manager_article.php';
-require './model/comment/Comment.php';
-require './model/comment/Manager_comment.php';
-require './model/user/Manager_user.php';
-require './controller/Utils/Utils_controller.php';
+require_once './utils/connect_bdd.php';
+require_once './model/article/Article.php';
+require_once './model/category/Category.php';
+require_once './model/category/Manager_category.php';
+require_once './model/article/Manager_article.php';
+require_once './model/comment/Comment.php';
+require_once './model/comment/Manager_comment.php';
+require_once './model/user/Manager_user.php';
+require_once './controller/Utils/Utils_controller.php';
 
 class Article_controller
 {
     private $manage_comment;
     private $manage_user;
-    private $type;
+    private $category;
     private $bdd;
 
     public function __construct()
     {
         $this->new_article = new Manager_article(null, null, null, null);
         $this->manage_comment = new Manager_comment(null, null, null, null);
-        $this->manage_user = new Manager_user(null, null, null, null, null);
-        $this->type = new Manager_type(null, null, null);
+        $this->manage_user = new Manager_user(null,null, null, null, null, null);
+        $this->category = new Manager_category(null, null, null);
         $this->bdd = BDD::getBDD();
     }
 
@@ -65,13 +65,13 @@ class Article_controller
                     $_POST['date-article'],
                     1
                 );
-                $new_article->set_id_type($_POST["id-type"]);
+                $new_article->set_id_category($_POST["id-category"]);
                 $new_article->set_image_art($path);
                 $new_article->add_article($this->bdd);
                 $error = "ok";
             }
 
-            $allTypes = $this->type->get_all_types($this->bdd);
+            $all_categories = $this->category->get_all_categories($this->bdd);
 
             include './vue/Article/add_article.php';
         } catch (Exception $e) {
@@ -88,7 +88,8 @@ class Article_controller
             $content_title = "Modifier un";
             $title = "Article";
             $article_wanted = $this->new_article->article_by_id($this->bdd, $id);
-            $allTypes = $this->type->get_all_types($this->bdd);
+            $all_categories = $this->category->get_all_categories($this->bdd);
+
             $flag = true;
             if(!$article_wanted){
                 throw new Exception();
@@ -98,9 +99,9 @@ class Article_controller
                 $article_wanted->get_content_art(),
                 $article_wanted->get_date_art(),
                 $article_wanted->get_id_art(),
-                $article_wanted->get_id_type(),
+                $article_wanted->get_id_category(),
                 $article_wanted->get_image_art(),
-                $article_wanted->get_id_util()
+                $article_wanted->get_id_user()
             );
 
             if (isset($_POST['submit'])) {
@@ -122,8 +123,8 @@ class Article_controller
                 $edited_article->set_date_art($_POST['date-article']);
             }
 
-            if (!$flag && $_POST['id-type'] !== $article_wanted->get_id_type() && !empty($_POST['id-type'])) {
-                $edited_article->set_id_type($_POST['id-type']);
+            if (!$flag && $_POST['id-category'] !== $article_wanted->get_id_category() && !empty($_POST['id-category'])) {
+                $edited_article->set_id_category($_POST['id-category']);
             }
 
             if (!$flag ) {
@@ -171,7 +172,7 @@ class Article_controller
             header("location: ./articles");
         }
 
-        require './vue/Article/view_one_article.php';
+        require_once './vue/Article/view_one_article.php';
     }
 
     public function show_preview(int $id_art):string

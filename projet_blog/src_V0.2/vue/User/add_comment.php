@@ -28,5 +28,5 @@
               }
           }
       $content = ob_get_clean();
-      require './vue/template.php';
+      require_once './vue/template.php';
       ?>

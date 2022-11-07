@@ -24,70 +24,78 @@ try {
   }
   switch ($request_uri[0]) {
     case "":
-      require 'controller/ctrl_show_home.php';
+      require_once 'controller/ctrl_show_home.php';
       break;
     case "articles":
-      require 'controller/Article/Article_controller.php';
+      require_once 'controller/Article/Article_controller.php';
       $article = new Article_controller();
       $article->show_all_articles();
       break;
     case "article":
-      require 'controller/Article/Article_controller.php';
+      require_once 'controller/Article/Article_controller.php';
       $article = new Article_controller();
       $article->show_article();
       break;
     case "addComment":
-      require "controller/User/User_controller.php";
+      require_once "controller/User/User_controller.php";
       $user = new User_controller;
       $user->add_comment();
       break;
     case "addUser":
-      require "controller/User/User_controller.php";
+      require_once "controller/User/User_controller.php";
       $user = new User_controller;
       $user->addUser();
       break;
     case "connexion";
-      require "controller/User/User_controller.php";
+      require_once "controller/User/User_controller.php";
       $user = new User_controller;
       $user->connexion();
       break;
     case "deconnexion";
-      require "controller/User/User_controller.php";
+      require_once "controller/User/User_controller.php";
       $user = new User_controller;
       $user->deconnexion();
       break;
     case "profil";
-      require "controller/User/User_controller.php";
+      require_once "controller/User/User_controller.php";
       $user = new User_controller;
       $user->profil_user();
       break;
     case "admin";
       if (empty($request_uri[1])) {
-        require "controller/Admin/admin_home_controller.php";
+        require_once "controller/Admin/admin_home_controller.php";
         $admin = new Admin_home_controller;
         $admin->show_home_admin();
       } else if ($request_uri[1] === "articles") {
         if (empty($request_uri[2])) {
-          require "controller/Admin/Master_article_controller.php";
+          require_once "controller/Admin/Master_article_controller.php";
           $admin = new Master_article_controller;
           $admin->show_master_article();
         } else if ($request_uri[2] === "addArticle") {
-          require 'controller/Article/Article_controller.php';
+          require_once 'controller/Article/Article_controller.php';
           $article = new Article_controller();
           $article->addArticle();
         } else if ($request_uri[2] === "editArticle") {
           if (empty($request_uri[3])) {
             throw new Exception("404");
           } else {
-            require 'controller/Article/Article_controller.php';
+            require_once 'controller/Article/Article_controller.php';
             $article = new Article_controller();
             $article->edit_article(htmlspecialchars(intval($request_uri[3])));
           }
         } else if ($request_uri[2] === "delete") {
-          require 'controller/Article/Article_controller.php';
+          require_once 'controller/Article/Article_controller.php';
           $article = new Article_controller();
           empty($request_uri[3]) ? throw new Exception("404") :  $article->delete_article($request_uri[3]);
         }
+      } else if ($request_uri[1] === "utilisateur") {
+        require_once "controller/Admin/Master_user_controller.php";
+        $admin = new Master_user_controller;
+        $admin->show_master_user();
+      } else if ($request_uri[1] === "categorie") {
+        require_once "controller/Admin/Master_category_controller.php";
+        $admin = new Master_category_controller;
+        $admin->show_master_category();
       } else {
         throw new Exception("404");
       }
@@ -96,5 +104,5 @@ try {
       break;
   }
 } catch (Exception $ex) {
-  $ex->getMessage() === "404" ? require 'controller/ctrl_404.php' : require 'controller/ctrl_500.php';
+  $ex->getMessage() === "404" ? require_once 'controller/ctrl_404.php' : require_once 'controller/ctrl_500.php';
 }

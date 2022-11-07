@@ -7,16 +7,16 @@ class Manager_article extends Article
     {
         try {
             $req = $bdd->prepare("INSERT INTO article(name_art, content_art, date_art
-            , id_type,image_art, id_util) VALUE
-            (:name_art, :content_art, :date_art, :id_type, :image_art, :id_util)");
+            , id_category,image_art, id_user) VALUE
+            (:name_art, :content_art, :date_art, :id_category, :image_art, :id_user)");
 
             $req->execute([
                 'name_art' => $this->get_name_art(),
                 'content_art' => $this->get_content_art(),
                 'date_art' => $this->get_date_art(),
-                'id_type' => $this->get_id_type(),
+                'id_category' => $this->get_id_category(),
                 'image_art' => $this->get_image_art(),
-                'id_util' => $this->get_id_util(),
+                'id_user' => $this->get_id_user(),
             ]);
         } catch (Exception $e) {
             die('Erreur dans la requête:' . $e->getMessage());
@@ -37,9 +37,9 @@ class Manager_article extends Article
                     $data->content_art,
                     $data->date_art,
                     $data->id_art,
-                    $data->id_type,
+                    $data->id_category,
                     $data->image_art,
-                    $data->id_util
+                    $data->id_user
                 );
                 return $new_art;
             }
@@ -62,13 +62,13 @@ class Manager_article extends Article
     }
 
     public function get_all_articles(object $bdd):Array
-    {
+    {   
         try {
             $req = $bdd->prepare("SELECT * FROM `article`
             INNER JOIN
-            `type` ON type.id_type = article.id_type
+            `category` ON category.id_category = article.id_category
             INNER JOIN 
-            `utilisateur` ON utilisateur.id_util = article.id_util");
+            `user` ON user.id_user = article.id_user");
             $req->execute();
             $data = $req->fetchAll(PDO::FETCH_OBJ);
             return $data;
@@ -91,15 +91,15 @@ class Manager_article extends Article
     {
         try {
             $req = $bdd->prepare("UPDATE article SET name_art = :name_art, content_art = :content_art,
-            date_art = :date_art, id_type = :id_type,image_art = :image_art, id_util = :id_util
+            date_art = :date_art, id_category = :id_category,image_art = :image_art, id_user = :id_user
             WHERE id_art = :id_art ");
             $req->execute([
                 'name_art' => $edited_article->get_name_art(),
                 'content_art' => $edited_article->get_content_art(),
                 'date_art' => $edited_article->get_date_art(),
-                'id_type' => $edited_article->get_id_type(),
+                'id_category' => $edited_article->get_id_category(),
                 'image_art' => $edited_article->get_image_art(),
-                'id_util' => $edited_article->get_id_util(),
+                'id_user' => $edited_article->get_id_user(),
                 'id_art' => $id
             ]);
         } catch (Exception $e) {

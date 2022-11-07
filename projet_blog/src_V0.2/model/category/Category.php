@@ -1,31 +1,31 @@
 <?php
 
-class Type{
+class Category{
 
-    function __construct(private ?INT $id_type, private ?STRING $name_type, private ?STRING $img_type)
+    function __construct(private ?INT $id_category, private ?STRING $name_category, private ?STRING $img_category)
     {
-        $this->id_type = $id_type;
-        $this->name_type = $name_type;
-        $this->img_type = $img_type;
+        $this->id_category = $id_category;
+        $this->name_category = $name_category;
+        $this->img_category = $img_category;
 
     }
 
-    public function get_id_type():INT{
-        return $this->id_type;
+    public function get_id_category():INT{
+        return $this->id_category;
     }
-    public function set_id_type($value):VOID{
-        $this->id_type = $value;
+    public function set_id_category($value):VOID{
+        $this->id_category = $value;
     }
-    public function get_name_type():STRING{
-        return $this->name_type;
+    public function get_name_category():STRING{
+        return $this->name_category;
     }
-    public function set_name_type($value):VOID{
-        $this->name_type = $value;
+    public function set_name_category($value):VOID{
+        $this->name_category = $value;
     }
-    public function get_img_type():INT{
-        return $this->img_type;
+    public function get_img_category():INT{
+        return $this->img_category;
     }
-    public function set_img_type($value):VOID{
-        $this->img_type = $value;
+    public function set_img_category($value):VOID{
+        $this->img_category = $value;
     }
 }

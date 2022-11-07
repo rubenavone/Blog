@@ -32,16 +32,16 @@
             <?php
             foreach ($comment_wanted as $comment) { ?>
                 <?php
-                $id_util = $comment->id_util;
-                $actual_user = $this->manage_user->user_by_id($this->bdd, $id_util);
+                $id_user = $comment->id_user;
+                $actual_user = $this->manage_user->user_by_id($this->bdd, $id_user);
                 ?>
                 <div class="p-6 w-1/3 lg:w-2/3  bg-white rounded-xl shadow-lg flex lg:flex-col lg:items-center lg:text-white space-x-4 mb-14 break-all ">
                     <div class="shrink-0">
-                        <img class="h-12 w-12" src="./dist/img/<?= $actual_user->img_util ?>" alt="image de profil de <?= $actual_user->name_util ?>">
+                        <img class="h-12 w-12" src="./dist/img/<?= $actual_user->img_user ?>" alt="image de profil de <?= $actual_user->name_user ?>">
                     </div>
                     <div>
-                        <div class="text-xl font-medium text-black"> <?= $actual_user->name_util ?> <?= $actual_user->first_name_util ?></div>
-                        <p class="text-slate-500 "><?= $comment->commentaire ?></p>
+                        <div class="text-xl font-medium text-black"> <?= $actual_user->name_user ?> <?= $actual_user->first_name_user ?></div>
+                        <p class="text-slate-500 "><?= $comment->comment ?></p>
                     </div>
                 </div>
             <?php }
@@ -51,5 +51,5 @@
 <?php 
 $content = ob_get_clean();
 
-require './vue/template.php';
+require_once './vue/template.php';
 ?>

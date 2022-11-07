@@ -7,16 +7,17 @@ $_SESSION["delete"] = null;
 ?>
 
 <main class="flex flex-col ml-5 mr-10 text-center">
-
+  <article class="flex items-center mt-10 mb-10">
+    <a href="#">
+      <button class="rounded-full bg-blue-800 text-white h-10 w-60 ">Ajouter une category</button>
+    </a>
+  </article>
   <table class="border-collapse border border-slate-500">
     <thead>
       <tr>
         <th class="border border-slate-600">ID</th>
 
-        <th class="border border-slate-600">Pseudo</th>
-        <th class="border border-slate-600">Mail</th>
-        <th class="border border-slate-600">Role</th>
-        <th class="border border-slate-600">Nombre de commentaire</th>
+        <th class="border border-slate-600">Name</th>
         <th class="border border-slate-600">Gestion</th>
 
 
@@ -25,23 +26,20 @@ $_SESSION["delete"] = null;
     <tbody>
 
       <?php
-      foreach ($user_tr as $user) {
-      ?>
-        <tr id="" >
-          <td class="border border-slate-700 hover:bg-neutral-50"><?= $user->get_id_user() ?></td>
-          <td class="border border-slate-700 hover:bg-neutral-50"><?= $user->get_name_user() ?></td>
-          <td class="border border-slate-700 hover:bg-neutral-50"><?= $user->get_mail_user() ?></td>
-          <td class="border border-slate-700 hover:bg-neutral-50"><?= $user->get_id_role() ?></td>
+      foreach ($categories_tr as $category) {
 
-          <td class="border border-slate-700 hover:bg-neutral-50"></td>
+      ?>
+        <tr id="">
+          <td class="border border-slate-700 hover:bg-neutral-50"><?= $category->get_id_category() ?></td>
+          <td class="border border-slate-700 hover:bg-neutral-50"><?= $category->get_name_category() ?></td>
           <td class="border border-slate-700 hover:bg-neutral-50">
             <a href="#" class="modal-button-js"><button class="w-auto" id="">❌ Supprimer</button></a>
             <a href="#" class=""><button class="w-auto ">🖊️ Editer</button></a>
           </td>
         </tr>
 
-      <?php 
-      } 
+      <?php
+      }
       ?>
 
     </tbody>

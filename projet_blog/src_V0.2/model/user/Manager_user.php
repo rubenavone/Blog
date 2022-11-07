@@ -2,41 +2,46 @@
 require "./model/user/User.php";
 class Manager_user extends User
 {
-    public function add_user($bdd): VOID
+    public function add_user(object $bdd): VOID
     {
         try {
-            $req = $bdd->prepare("INSERT INTO utilisateur(name_util, first_name_util, mail_util, mdp_util, img_util) VALUE
-            (:name_util, :first_name_util, :mail_util, :mdp_util, :img_util)");
+            $req = $bdd->prepare("INSERT INTO user(name_user, first_name_user, mail_user, password_user, img_user) VALUE
+            (:name_user, :first_name_user, :mail_user, :password_user, :img_user)");
 
             $req->execute([
-                'name_util' => $this->get_name_util(),
-                'first_name_util' => $this->get_first_name_util(),
-                'mail_util' => $this->get_mail_util(),
-                'mdp_util' => password_hash($this->get_mdp_util(), PASSWORD_DEFAULT),
-                'img_util' => $this->get_img_util(),
+                'name_user' => $this->get_name_user(),
+                'first_name_user' => $this->get_first_name_user(),
+                'mail_user' => $this->get_mail_user(),
+                'password_user' => password_hash($this->get_password_user(), PASSWORD_DEFAULT),
+                'img_user' => $this->get_img_user(),
             ]);
         } catch (Exception $e) {
             die('Erreur dans la requete:' . $e->getMessage());
         }
     }
 
-    public function get_all_user($bdd): array
+    public function get_all_users(object $bdd): array
     {
         try {
-            $req = $bdd->prepare("SELECT * FROM utilisateur");
+            $req = $bdd->prepare("SELECT * FROM user");
             $req->execute();
             $data = $req->fetchAll(PDO::FETCH_OBJ);
-            return $data;
+            $users = [];
+            foreach ($data as $user) {
+                $actual_user = new User($user->id_user, $user->name_user, $user->first_name_user, $user->mail_user, $user->password_user, $user->img_user);
+                array_push($users, $actual_user);
+            }
+            return $users;
         } catch (Exception $e) {
             die('Erreur dans la requete:' . $e->getMessage());
         }
     }
 
-    public function verify_mail_exist($bdd): BOOL
+    public function verify_mail_exist(object $bdd): BOOL
     {
         try {
-            $req = $bdd->prepare("SELECT * FROM utilisateur WHERE mail_util = :mail_util");
-            $req->execute(array("mail_util" => $this->get_mail_util()));
+            $req = $bdd->prepare("SELECT * FROM user WHERE mail_user = :mail_user");
+            $req->execute(array("mail_user" => $this->get_mail_user()));
             $data = $req->fetchAll(PDO::FETCH_OBJ);
             if (!empty($data)) {
                 return true;
@@ -48,11 +53,11 @@ class Manager_user extends User
         }
     }
 
-    public function verify_user($bdd): OBJECT
+    public function verify_user(object $bdd): OBJECT
     {
         try {
-            $req = $bdd->prepare("SELECT * FROM utilisateur WHERE mail_util = :mail_util");
-            $req->execute(array("mail_util" => $this->get_mail_util()));
+            $req = $bdd->prepare("SELECT * FROM user WHERE mail_user = :mail_user");
+            $req->execute(array("mail_user" => $this->get_mail_user()));
             $data = $req->fetch(PDO::FETCH_OBJ);
             if (!empty($data)) {
                 return $data;
@@ -64,12 +69,12 @@ class Manager_user extends User
         }
     }
 
-   public function user_by_id($bdd, $id): OBJECT
+   public function user_by_id(object $bdd, int $id): OBJECT
     {
         try{
-            $req = $bdd->prepare("SELECT * FROM utilisateur WHERE id_util = :id_util ");
+            $req = $bdd->prepare("SELECT * FROM user WHERE id_user = :id_user ");
             $req->execute([
-                'id_util' => $id,
+                'id_user' => $id,
             ]);
             $data = $req->fetch(PDO::FETCH_OBJ);
             return $data;
