@@ -20,7 +20,7 @@ try {
   if (!isset($_GET["page"])) $_GET["page"] = "/";
   $request_uri = explode('/', $_GET["page"]);
   if (!isset($_SESSION['connected']) && in_array($request_uri[0], $LOGIN_MANDATORY_URL)) {
-    throw new Exception("500");
+    throw new Exception("401");
   }
   switch ($request_uri[0]) {
     case "":
@@ -104,5 +104,5 @@ try {
       break;
   }
 } catch (Exception $ex) {
-  $ex->getMessage() === "404" ? require_once 'controller/ctrl_404.php' : require_once 'controller/ctrl_500.php';
+  $ex->getMessage() === "404" ? require_once 'controller/ctrl_404.php' : require_once 'controller/ctrl_401.php';
 }
