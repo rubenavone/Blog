@@ -2,4 +2,4 @@
 $content_title = "Erreur";
 $title = "404";
 
-require 'vue/404.php';
+require_once 'vue/404.php';

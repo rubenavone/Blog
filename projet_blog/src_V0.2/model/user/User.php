@@ -1,60 +1,62 @@
 <?php
 
 class User{
-    private ?INT $id_util;
-    private ?INT $id_role = 2;
+    
 
-   public function __construct(private ?STRING $name_util, private ?STRING $first_name_util, private ?STRING $mail_util, private ?STRING $mdp_util, private ?STRING $img_util)
+
+   public function __construct(private ?INT $id_user,  private ?STRING $name_user,
+    private ?STRING $first_name_user, private ?STRING $mail_user, private ?STRING $password_user,
+     private ?STRING $img_user,private ?INT $status_user = 0,private ?INT $id_role = 2)
     {
-        $this->name_util = $name_util;
-        $this->first_name_util = $first_name_util;
-        $this->mail_util = $mail_util;
-        $this->mdp_util = $mdp_util;
-        $this->img_util = $img_util;
+        $this->name_user = $name_user;
+        $this->first_name_user = $first_name_user;
+        $this->mail_user = $mail_user;
+        $this->password_user = $password_user;
+        $this->img_user = $img_user;
     }
 
-    public function get_id_util():INT{
-        return $this->id_util;
+    public function get_id_user():INT{
+        return $this->id_user;
     }
 
-    public function get_name_util():STRING{
-        return $this->name_util;
+    public function get_name_user():STRING{
+        return $this->name_user;
     }
 
-    public function set_name_util($value):VOID{
-         $this->name_util = $value;
+    public function set_name_user($value):VOID{
+         $this->name_user = $value;
     }
 
-    public function get_first_name_util():STRING{
-        return $this->first_name_util;
+    public function get_first_name_user():STRING{
+        return $this->first_name_user;
     }
 
-    public function set_first_name_util($value):VOID{
-         $this->first_name_util = $value;
+    public function set_first_name_user($value):VOID{
+         $this->first_name_user = $value;
     }
 
-    public function get_mail_util():STRING{
-        return $this->mail_util;
+    public function get_mail_user():STRING{
+        return $this->mail_user;
     }
 
-    public function set_mail_util($value):VOID{
-         $this->mail_util = $value;
+    public function set_mail_user($value):VOID{
+         $this->mail_user = $value;
     }
 
-    public function get_mdp_util():STRING{
-        return $this->mdp_util;
+    public function get_password_user():STRING{
+        return $this->password_user;
     }
 
-    public function set_mdp_util($value):VOID{
-         $this->mdp_util = $value;
+    public function set_password_user($value):VOID{
+         $this->password_user = $value;
     }
 
-    public function get_img_util():STRING{
-        return $this->img_util;
+    public function get_img_user():STRING{
+        return $this->img_user;
     }
 
-    public function set_img_util($value):VOID{
-         $this->img_util = $value;
+    public function set_img_user($value):VOID{
+         $this->img_user = $value;
     }
 
     public function get_id_role():INT{

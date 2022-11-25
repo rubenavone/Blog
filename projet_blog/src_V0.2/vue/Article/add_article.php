@@ -13,8 +13,8 @@ ob_start();
             <label for="id-type" class="block">
                 <span class="text-gray-700">Dans quel catégorie</span>
                 <select class=" mb-5 rounded-md block w-full mt-2 px-0.5 border-0 border-b-2 border-gray-200 focus:ring-0 focus:border-blue-800" name="id-type">
-                    <?php foreach ($allTypes as $value) { ?>
-                        <option value="<?= $value->get_id_type() ?>" /> <?= $value->get_name_type() ?> </option>
+                    <?php foreach ($all_categories as $value) { ?>
+                        <option value="<?= $value->get_id_category() ?>" /> <?= $value->get_name_category() ?> </option>
                     <?php } ?>
                 </select>
             </label>
@@ -56,5 +56,5 @@ ob_start();
 <?php } else {
 }
 $content = ob_get_clean();
-require './vue/template.php';
+require_once './vue/template.php';
 ?>

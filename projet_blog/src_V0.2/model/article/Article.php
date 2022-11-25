@@ -3,16 +3,16 @@
 class Article
 {
     function __construct(private ?STRING $name_art, private ?STRING $content_art,  
-    private ?STRING $date_art,   private ?INT $id_art, private ?INT $id_type = null , 
-    private ?STRING $image_art = "default.jpg", private ?INT $id_util = 1)
+    private ?STRING $date_art,   private ?INT $id_art, private ?INT $id_category = null , 
+    private ?STRING $image_art = "default.jpg", private ?INT $id_user = 1)
     {
         $this->name_art = $name_art;
         $this->content_art = $content_art;
         $this->date_art = $date_art;
         $this->id_art = $id_art;
-        $this->id_type = $id_type;
+        $this->id_category = $id_category;
         $this->image_art = $image_art;
-        $this->id_util = $id_util;
+        $this->id_user = $id_user;
     }
 
     public function get_name_art(): string
@@ -54,14 +54,14 @@ class Article
         $this->id_art = $value;
     }
 
-    public function get_id_type(): int
+    public function get_id_category(): int
     {
-        return $this->id_type;
+        return $this->id_category;
     }
 
-    public function set_id_type(int $value): void
+    public function set_id_category(int $value): void
     {
-        $this->id_type = $value;
+        $this->id_category = $value;
     }
 
     public function get_image_art(): string{
@@ -72,12 +72,12 @@ class Article
         $this->image_art = $value;
     }
 
-    public function get_id_util(): int{
-        return $this->id_util;
+    public function get_id_user(): int{
+        return $this->id_user;
     }
 
-    public function set_id_util(int $value): void{
-        $this->id_util = $value;
+    public function set_id_user(int $value): void{
+        $this->id_user = $value;
     }
 
 }

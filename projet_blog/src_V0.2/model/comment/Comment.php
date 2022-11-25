@@ -2,12 +2,12 @@
 
 class Comment {
 
-    function __construct(private ?INT $id_art, private ?INT $id_util, private ?STRING $commentaire, private ?STRING $date_commentaire)
+    function __construct(private ?INT $id_art, private ?INT $id_user, private ?STRING $comment, private ?STRING $date_comment)
     {
         $this->id_art = $id_art;
-        $this->id_util = $id_util;
-        $this->commentaire = $commentaire;
-        $this->date_commentaire = $date_commentaire;
+        $this->id_user = $id_user;
+        $this->comment = $comment;
+        $this->date_comment = $date_comment;
 
     }
 
@@ -19,27 +19,27 @@ class Comment {
         $this->id_art = $value;
     }
     
-    public function get_id_util():INT{
-        return $this->id_util;
+    public function get_id_user():INT{
+        return $this->id_user;
     }
 
-    public function set_id_util($value):VOID{
-        $this->id_util = $value;
+    public function set_id_user($value):VOID{
+        $this->id_user = $value;
     }
 
-    public function get_commentaire():STRING{
-        return $this->commentaire;
+    public function get_comment():STRING{
+        return $this->comment;
     }
 
-    public function set_commentaire($value):VOID{
-        $this->commentaire = $value;
+    public function set_comment($value):VOID{
+        $this->comment = $value;
     }
 
-    public function get_date_commentaire():STRING{
-        return $this->date_commentaire;
+    public function get_date_comment():STRING{
+        return $this->date_comment;
     }
 
-    public function set_date_commentaire($value):VOID{
-        $this->date_commentaire = $value;
+    public function set_date_comment($value):VOID{
+        $this->date_comment = $value;
     }
 }

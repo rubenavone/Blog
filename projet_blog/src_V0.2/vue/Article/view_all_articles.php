@@ -2,7 +2,7 @@
 <main class="flex flex-wrap justify-around text-center ">
      <?php
      foreach ($this->new_article->get_all_articles($this->bdd) as $article) {
-          $actual_type = $this->type->get_one_type($this->bdd, $article->id_type);
+          $actual_category = $this->category->get_one_category($this->bdd, $article->id_category);
      ?>
           <article class="relative mt-20  ">
                <a href="./article?id=<?= $article->id_art ?>" class=" top-0 text-6xl mx-auto">
@@ -22,6 +22,6 @@
 </main>
 <?php
 $content = ob_get_clean();
-require './vue/template.php';
+require_once './vue/template.php';
 
 ?>

@@ -43,6 +43,7 @@ class Modal {
         this.#modalHandler();
     }
 
+
     #masterViewDeleter = (id) =>{
         document.querySelector(".valid").parentElement.href =  `articles/delete/${id} `;
     }
@@ -70,6 +71,10 @@ if (document.querySelector(".modal-button-js") !== null && document.querySelecto
 }else{
     console.log("Il n'y a pas de modal sur cette page !");
 }
+
+//Cette ligne peut permettre de faire la distinction entre les page et ainsi adapter l'url de redirection de la modal
+console.log(window.location.href.split("/").includes("articles"));
+
 /**
  * END MODAL
  */

@@ -1,9 +1,9 @@
 <?php
-require "./utils/connect_bdd.php";
-require "./model/user/Manager_user.php";
-require './model/comment/Comment.php';
-require './model/comment/Manager_comment.php';
-require './controller/Utils/Utils_controller.php';
+require_once "./utils/connect_bdd.php";
+require_once "./model/user/Manager_user.php";
+require_once './model/comment/Comment.php';
+require_once './model/comment/Manager_comment.php';
+require_once './controller/Utils/Utils_controller.php';
 #Flag on baisse le drapeau si une condition n'est pas remplis ainsi ils passe des les else
 
 class User_controller
@@ -33,7 +33,7 @@ class User_controller
         # Ici on verifie si touts nos champs sont remplis
         if (!$flag && !empty($_POST['name_util']) && !empty($_POST['first_name_util']) && !empty($_POST['mail_util']) && !empty($_POST['mdp_util'])) {
             # Instanciation d'un nouvel utilisateur, définis img_util vide car on à pas encore le chemin
-            $new_user = new Manager_user(htmlspecialchars($_POST['name_util']), htmlspecialchars($_POST['first_name_util']), htmlspecialchars($_POST['mail_util']), $_POST['mdp_util'], htmlspecialchars(""));
+            $new_user = new Manager_user(null,htmlspecialchars($_POST['name_util']), htmlspecialchars($_POST['first_name_util']), htmlspecialchars($_POST['mail_util']), $_POST['mdp_util'], htmlspecialchars(""));
         } else {
             $entry_value = '<p  class="text-xl before:block before:absolute before:-inset-1 before:-skew-y-2 before:bg-red-600 relative inline-block " > <span class="relative text-white " >Désoler une erreur est survenue   </span> </p> ';
             array_push($entry, $entry_value);
@@ -51,7 +51,7 @@ class User_controller
                 array_push($entry, $entry_value);
             }
 
-            $new_user->set_img_util($path);
+            $new_user->set_img_user($path);
             $new_user->add_user($this->bdd);
 
             $entry_value = '<p  class=" text-xl before:block before:absolute before:-inset-1 before:-skew-y-2 before:bg-green-600 relative inline-block" > <span class="relative text-white ">Inscription validé</span><p>';
@@ -61,7 +61,7 @@ class User_controller
             array_push($entry, $entry_value);
         }
 
-        require './vue/User/add_user.php';
+        require_once './vue/User/add_user.php';
     }
 
     public function add_comment():void
@@ -116,7 +116,7 @@ class User_controller
             }
 
             if (!$flag && !empty($_POST['mail_util'] and !empty($_POST['mdp_util']))) {
-                $util = new Manager_user("", "", $_POST['mail_util'], $_POST['mdp_util'], "");
+                $util = new Manager_user(null,"", "", $_POST['mail_util'], $_POST['mdp_util'], "");
             } else if (!isset($_GET["error"])) {
                 header('location: connexion?error=2');
                 
@@ -127,13 +127,13 @@ class User_controller
             #Verification que le mail exist en base de données
             if (!$flag && !empty($util->verify_mail_exist($this->bdd))) {
                 $user = $util->verify_user($this->bdd);
-                $hash = $user->mdp_util;
+                $hash = $user->password_user;
             } else if (!$flag) {
                 header('location: connexion?error=2');
             }
             if (!$flag && password_verify($_POST['mdp_util'], $hash)) {
-                $_SESSION['id'] = $user->id_util;
-                $_SESSION['name'] = $user->name_util;
+                $_SESSION['id'] = $user->id_user;
+                $_SESSION['name'] = $user->name_user;
                 $_SESSION['connected'] = true;
                 $_SESSION['role'] = $user->id_role;
                 if (isset($_SESSION["temp_page"])) {
