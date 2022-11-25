@@ -6,8 +6,7 @@ let navSelector = document.querySelector("nav");
 let burgerNavSelector = document.querySelector(".burger-nav-js");
 //Get the connexion element in the nav
 burgerNavSelector.addEventListener("click", function () {
-    console.log("Hello");
-    navSelector.classList.toggle("h-10");
+    // navSelector.classList.toggle("h-10");
     navSelector.classList.toggle("h-full");
 })
 
