@@ -6,8 +6,10 @@ require_once './model/user/Manager_user.php';
 require_once './controller/Utils/Utils_controller.php';
 
 class Master_user_controller{
-    private $manage_user;
-    private $bdd;
+    
+    private Manager_user $manage_user;
+    private PDO $bdd;
+
     public function __construct()
     {
         $this->manage_user = new Manager_user(null,null, null, null, null, null);

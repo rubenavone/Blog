@@ -3,7 +3,7 @@
 class Manager_category extends Category
 {
 
-    public function get_all_categories(object $bdd):array
+    public function get_all_categories(OBJECT $bdd):ARRAY
     {
         try {
             $req = $bdd->prepare("SELECT * FROM category");
@@ -20,7 +20,7 @@ class Manager_category extends Category
         }
     }
 
-    public function get_one_category(object $bdd, $id):object
+    public function get_one_category(OBJECT $bdd, $id):OBJECT
     {
         try {
             $req = $bdd->prepare("SELECT * FROM category WHERE id_category = :id_category");
@@ -35,11 +35,11 @@ class Manager_category extends Category
         }
     }
 
-    public function add_category(object $bdd){
+    public function add_category(OBJECT $bdd){
         try{
             $req = $bdd->prepare("INSERT INTO category(name-category) VALUE (:name-category) ");
             $req->execute([
-                'name-category' =>$this->get_name_category()
+                'name-category' => $this->get_name_category()
             ]);
         }catch(Exception $e){
             die('Erreur dans la requete:' . $e->getMessage());

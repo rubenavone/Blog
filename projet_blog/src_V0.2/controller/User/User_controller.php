@@ -8,14 +8,14 @@ require_once './controller/Utils/Utils_controller.php';
 
 class User_controller
 {
-    private $bdd;
+    private PDO $bdd;
 
     public function __construct()
     {
         $this->bdd = BDD::getBDD();
     }
 
-    public function addUser():void
+    public function addUser():VOID
     {
         # Déclaration d'un tableau vide pour afficher certaine valeur ou non
         $entry = [];
@@ -47,24 +47,24 @@ class User_controller
 
             if ($path === "") {
                 $path = "default.jpg";
-                $entry_value = '<p  class="text-xl before:block before:absolute before:-inset-1 before:-skew-y-2 before:bg-red-600 relative inline-block " > <span class="relative text-white " >Image de profile par défaut</span> </p> ';
+                $entry_value = '<p class="text-xl before:block before:absolute before:-inset-1 before:-skew-y-2 before:bg-red-600 relative inline-block " > <span class="relative text-white " >Image de profile par défaut</span> </p> ';
                 array_push($entry, $entry_value);
             }
 
             $new_user->set_img_user($path);
             $new_user->add_user($this->bdd);
 
-            $entry_value = '<p  class=" text-xl before:block before:absolute before:-inset-1 before:-skew-y-2 before:bg-green-600 relative inline-block" > <span class="relative text-white ">Inscription validé</span><p>';
+            $entry_value = '<p class=" text-xl before:block before:absolute before:-inset-1 before:-skew-y-2 before:bg-green-600 relative inline-block" > <span class="relative text-white ">Inscription validé</span><p>';
             array_push($entry, $entry_value);
         } else {
-            $entry_value = '<p  class="text-xl before:block before:absolute before:-inset-1 before:-skew-y-2 before:bg-red-600 relative inline-block " > <span class="relative text-white " >Désoler le mail est déjà utilisé <a href="#" class="text-gray-600"> Oublie ? </a></span> </p> ';
+            $entry_value = '<p class="text-xl before:block before:absolute before:-inset-1 before:-skew-y-2 before:bg-red-600 relative inline-block " > <span class="relative text-white " >Désoler le mail est déjà utilisé <a href="#" class="text-gray-600"> Oublie ? </a></span> </p> ';
             array_push($entry, $entry_value);
         }
 
         require_once './vue/User/add_user.php';
     }
 
-    public function add_comment():void
+    public function add_comment():VOID
     {
         $content_title = "Ajouter un";
         $title = "Commentaire";
@@ -94,7 +94,7 @@ class User_controller
         include './vue/User/add_comment.php';
     }
 
-    public function connexion():void
+    public function connexion():VOID
     {
         $content_title = "Interface de ";
         $title = "Connexion";
@@ -148,14 +148,14 @@ class User_controller
 
     }
 
-    public function deconnexion():void
+    public function deconnexion():VOID
     {
         session_destroy();
         unset($_COOKIE['PHPSESSID']);
         header('location: / ');
     }
 
-    public function profil_user():void
+    public function profil_user():VOID
     {
         $content_title = "Profil ";
         $title = "Connexion";

@@ -10,11 +10,11 @@ require_once './model/user/Manager_user.php';
 require_once './controller/Utils/Utils_controller.php';
 
 class Master_article_controller{
-    private $new_article;
-    private $manage_comment;
-    private $manage_user;
-    private $category;
-    private $bdd;
+    private Manager_article $new_article;
+    private Manager_comment $manage_comment;
+    private Manager_user $manage_user;
+    private Manager_category $category;
+    private PDO $bdd;
     public function __construct()
     {
         $this->new_article = new Manager_article(null, null, null, null);

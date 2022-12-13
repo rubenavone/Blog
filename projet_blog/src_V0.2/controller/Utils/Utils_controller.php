@@ -1,7 +1,7 @@
 <?php
 class Utils_controller{
     
-    static public function check_image(string $posted_img):string {
+    static public function check_image(STRING $posted_img):STRING {
         /**
          * TODO Vérifier le type de fichiers, Gestion des effet de bord trop léger
          */

@@ -2,23 +2,23 @@
 
 session_start();
 
-# Si aucun role alors visiteur role = 0;
+
 if (!isset($_SESSION["role"])) {
   $_SESSION["role"] = 0;
 }
 
-# Test soit l'url a une route sinon on renvoi à la racine
 $LOGIN_MANDATORY_URL = [
   "deconnexion",
   "addArticle",
   "admin",
 ];
 
-
 /****************************/
 try {
   if (!isset($_GET["page"])) $_GET["page"] = "/";
+
   $request_uri = explode('/', $_GET["page"]);
+
   if (!isset($_SESSION['connected']) && in_array($request_uri[0], $LOGIN_MANDATORY_URL)) {
     throw new Exception("401");
   }
@@ -104,5 +104,5 @@ try {
       break;
   }
 } catch (Exception $ex) {
-  $ex->getMessage() === "404" ? require_once 'controller/ctrl_404.php' : require_once 'controller/ctrl_401.php';
+  $ex->getMessage() == "404" ? require_once 'controller/ctrl_404.php' : require_once 'controller/ctrl_401.php';
 }

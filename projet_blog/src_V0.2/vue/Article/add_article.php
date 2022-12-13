@@ -10,9 +10,9 @@ ob_start();
                 <input type="text" class=" mb-5 rounded-md mt-2 block w-full px-0.5 border-0 border-b-2 border-gray-200 focus:ring-0 focus:border-blue-800" placeholder="Nom de l'article" name="name-article" />
             </label>
 
-            <label for="id-type" class="block">
+            <label for="id-category" class="block">
                 <span class="text-gray-700">Dans quel catégorie</span>
-                <select class=" mb-5 rounded-md block w-full mt-2 px-0.5 border-0 border-b-2 border-gray-200 focus:ring-0 focus:border-blue-800" name="id-type">
+                <select class=" mb-5 rounded-md block w-full mt-2 px-0.5 border-0 border-b-2 border-gray-200 focus:ring-0 focus:border-blue-800" name="id-category">
                     <?php foreach ($all_categories as $value) { ?>
                         <option value="<?= $value->get_id_category() ?>" /> <?= $value->get_name_category() ?> </option>
                     <?php } ?>
@@ -52,9 +52,8 @@ ob_start();
 
 
 <?php } else if ($error === "error") { ?>
-    '<p class="text-center text-red-600"> Désoler une erreur est survenue il manque le titre ou le contenus </p>';
-<?php } else {
-}
+    '<p class="text-center text-red-600"> Désolé une erreur est survenue il manque le titre ou le contenus </p>';
+<?php }
 $content = ob_get_clean();
 require_once './vue/template.php';
 ?>

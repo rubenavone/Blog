@@ -4,11 +4,11 @@
 
 // $bdd = new PDO('mysql:host=localhost;dbname=blog_folio', 'root', '',
 // array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
-$bdd = BDD::getBDD();
-
 
 class BDD{
-    private static $instances = [];
+
+    private static ARRAY $instances = [];
+    private PDO $bdd;   
     
     private function __construct(){
         $data = file_get_contents('./secret.json'); 
@@ -21,8 +21,10 @@ class BDD{
             [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]
         );
     }
+
     public static function getBDD(){
         $cls = static::class;
+
         if (!isset(self::$instances[$cls])) {
             self::$instances[$cls] = new static();
         }

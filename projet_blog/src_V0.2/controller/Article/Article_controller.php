@@ -12,10 +12,11 @@ require_once './controller/Utils/Utils_controller.php';
 
 class Article_controller
 {
-    private $manage_comment;
-    private $manage_user;
-    private $category;
-    private $bdd;
+    private Manager_article $new_article; 
+    private Manager_comment $manage_comment;
+    private Manager_user $manage_user;
+    private Manager_category $category;
+    private PDO $bdd;
 
     public function __construct()
     {
@@ -26,7 +27,7 @@ class Article_controller
         $this->bdd = BDD::getBDD();
     }
 
-    public function addArticle():void
+    public function addArticle():VOID
     {
         try {
             $content_title = "Ajouter un";
@@ -65,6 +66,7 @@ class Article_controller
                     $_POST['date-article'],
                     1
                 );
+    
                 $new_article->set_id_category($_POST["id-category"]);
                 $new_article->set_image_art($path);
                 $new_article->add_article($this->bdd);
@@ -82,7 +84,7 @@ class Article_controller
     /**
      * TODO : finish this method
      */
-    public function edit_article(int $id):void
+    public function edit_article(INT $id):VOID
     {
         try {
             $content_title = "Modifier un";
@@ -145,7 +147,7 @@ class Article_controller
         }
     }
 
-    public function show_article():void
+    public function show_article():VOID
     {
         $flag = true;
 
@@ -157,7 +159,7 @@ class Article_controller
 
         if (!$flag && $_GET['id'] !== null) {
 
-            #Récuperation de l'articles et des commentaire si il existe
+            #Récuperation de l'articles et des commentaires 
             $article_wanted = $this->new_article->article_by_id($this->bdd, $_GET['id']);
             $comment_wanted = $this->manage_comment->comment_by_id($this->bdd, $_GET['id']);
 
@@ -175,7 +177,7 @@ class Article_controller
         require_once './vue/Article/view_one_article.php';
     }
 
-    public function show_preview(int $id_art):string
+    public function show_preview(INT $id_art):string
     {
         $preview = $this->new_article->article_preview_by_id($this->bdd, $id_art);
 
@@ -185,7 +187,7 @@ class Article_controller
         return $lines[0];
     }
 
-    public function show_all_articles():void
+    public function show_all_articles():VOID
     {
         $content_title = "Tous les";
         $title = "Articles";
@@ -193,7 +195,7 @@ class Article_controller
         include "./vue/Article/view_all_articles.php";
     }
 
-    public function delete_article(int $id_art):void
+    public function delete_article(INT $id_art):VOID
     {
         if (isset($_SESSION["role"]) && !empty($id_art)) {
             $this->new_article->delete_article($this->bdd, $id_art);

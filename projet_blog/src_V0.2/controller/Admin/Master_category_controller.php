@@ -5,15 +5,17 @@ require_once './model/category/Manager_category.php';
 
 
 class Master_category_controller{
-    private $category;
-    private $bdd;
+    
+    private Manager_category $categories;
+    private PDO $bdd;
+
     public function __construct()
     {
         $this->categories = new Manager_category(null, null, null);
         $this->bdd = BDD::getBDD();
     }
     
-    public function show_master_category():void{
+    public function show_master_category():VOID{
         $content_title = "Gestion des";
         $title = "Catégories";
         $categories_tr = [];

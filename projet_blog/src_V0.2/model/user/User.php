@@ -2,8 +2,6 @@
 
 class User{
     
-
-
    public function __construct(private ?INT $id_user,  private ?STRING $name_user,
     private ?STRING $first_name_user, private ?STRING $mail_user, private ?STRING $password_user,
      private ?STRING $img_user,private ?INT $status_user = 0,private ?INT $id_role = 2)
@@ -19,11 +17,15 @@ class User{
         return $this->id_user;
     }
 
+    public function set_id_user(INT $value):VOID{
+        $this->id_user = $value;  
+    }
+
     public function get_name_user():STRING{
         return $this->name_user;
     }
 
-    public function set_name_user($value):VOID{
+    public function set_name_user(STRING $value):VOID{
          $this->name_user = $value;
     }
 
@@ -31,7 +33,7 @@ class User{
         return $this->first_name_user;
     }
 
-    public function set_first_name_user($value):VOID{
+    public function set_first_name_user(STRING $value):VOID{
          $this->first_name_user = $value;
     }
 
@@ -39,7 +41,7 @@ class User{
         return $this->mail_user;
     }
 
-    public function set_mail_user($value):VOID{
+    public function set_mail_user(STRING $value):VOID{
          $this->mail_user = $value;
     }
 
@@ -47,7 +49,7 @@ class User{
         return $this->password_user;
     }
 
-    public function set_password_user($value):VOID{
+    public function set_password_user(STRING $value):VOID{
          $this->password_user = $value;
     }
 
@@ -55,7 +57,7 @@ class User{
         return $this->img_user;
     }
 
-    public function set_img_user($value):VOID{
+    public function set_img_user(STRING $value):VOID{
          $this->img_user = $value;
     }
 
@@ -63,9 +65,7 @@ class User{
         return $this->id_role;
     }
 
-    public function set_id_role($value):VOID{
+    public function set_id_role(INT $value):VOID{
          $this->id_role = $value;
     }
-
-
 }

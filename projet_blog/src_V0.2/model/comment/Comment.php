@@ -15,7 +15,7 @@ class Comment {
         return $this->id_art;
     }
 
-    public function set_id_art($value):VOID{
+    public function set_id_art(INT $value):VOID{
         $this->id_art = $value;
     }
     
@@ -23,7 +23,7 @@ class Comment {
         return $this->id_user;
     }
 
-    public function set_id_user($value):VOID{
+    public function set_id_user(INT $value):VOID{
         $this->id_user = $value;
     }
 
@@ -31,7 +31,7 @@ class Comment {
         return $this->comment;
     }
 
-    public function set_comment($value):VOID{
+    public function set_comment(STRING $value):VOID{
         $this->comment = $value;
     }
 
@@ -39,7 +39,7 @@ class Comment {
         return $this->date_comment;
     }
 
-    public function set_date_comment($value):VOID{
+    public function set_date_comment(STRING $value):VOID{
         $this->date_comment = $value;
     }
 }

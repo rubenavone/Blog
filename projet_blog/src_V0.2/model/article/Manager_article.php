@@ -3,7 +3,7 @@
 
 class Manager_article extends Article
 {
-    public function add_article(object $bdd):void
+    public function add_article(PDO $bdd):VOID
     {
         try {
             $req = $bdd->prepare("INSERT INTO article(name_art, content_art, date_art
@@ -23,7 +23,7 @@ class Manager_article extends Article
         }
     }
 
-    public function article_by_id(object $bdd, INT $id):Article | bool
+    public function article_by_id(PDO $bdd, INT $id):Article | bool
     {
         try {
             $req = $bdd->prepare("SELECT * FROM article WHERE id_art = :id_art ");
@@ -49,7 +49,7 @@ class Manager_article extends Article
         }
     }
 
-    public function article_preview_by_id(object $bdd, INT $id):Object
+    public function article_preview_by_id(PDO $bdd, INT $id):OBJECT
     {
         try {
             $req = $bdd->prepare("SELECT content_art FROM article WHERE id_art = :id_art ");
@@ -61,7 +61,7 @@ class Manager_article extends Article
         }
     }
 
-    public function get_all_articles(object $bdd):Array
+    public function get_all_articles(PDO $bdd):Array
     {   
         try {
             $req = $bdd->prepare("SELECT * FROM `article`
@@ -77,7 +77,7 @@ class Manager_article extends Article
         }
     }
 
-    public function delete_article(object $bdd, int $id):Void
+    public function delete_article(PDO $bdd, INT $id):VOID
     {
         try {
             $req = $bdd->prepare("DELETE FROM `article` where id_art = :id_art");
@@ -87,7 +87,7 @@ class Manager_article extends Article
         }
     }
 
-    public function edit_article(object $bdd, int $id, Article $edited_article):Void
+    public function edit_article(PDO $bdd, INT $id, Article $edited_article):VOID
     {
         try {
             $req = $bdd->prepare("UPDATE article SET name_art = :name_art, content_art = :content_art,
