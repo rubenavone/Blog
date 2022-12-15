@@ -1,6 +1,5 @@
 <?php
 
-
 class Manager_article extends Article
 {
     public function add_article(PDO $bdd):VOID
