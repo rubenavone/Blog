@@ -9,7 +9,6 @@
     <!-- <link href="/dist/dark.css" rel="stylesheet" type="text/css" class="dark" /> -->
 
     <?= $_SESSION["role"] == 1 ? "<link href='/dist/admin.css' rel='stylesheet' type='text/css' />" : "" ?>
-    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
 
 </head>
 <style>
@@ -140,9 +139,10 @@
 
         </article>
     </section>
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.10.4/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.10.4/TextPlugin.min.js"></script>
-    <script src="/asset/js/modal.js"></script>
+    <script src="/asset/js/main.js" type="module"></script>
 
 </body>
 

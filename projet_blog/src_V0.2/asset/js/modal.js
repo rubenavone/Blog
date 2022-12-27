@@ -1,21 +1,11 @@
 
-/**
- * MENU
- */
-let navSelector = document.querySelector("nav");
-let burgerNavSelector = document.querySelector(".burger-nav-js");
-//Get the connexion element in the nav
-burgerNavSelector.addEventListener("click", function () {
-    // navSelector.classList.toggle("h-10");
-    navSelector.classList.toggle("h-full");
-})
+
 
 
 /**
  * MODAL
  */
 class Modal {
-
     constructor(buttonSelector, allButton, modalViewSelector) {
         this.buttonSelector = buttonSelector;
         this.allButton = allButton;
@@ -28,7 +18,32 @@ class Modal {
             this.modalViewSelector.classList.remove("hidden");
             document.body.classList.add("overflow-hidden");
         });
-        this.#modalHandler();
+        this.modalHandler();
+    }
+
+    modalHandler = () => {
+        this.modalViewSelector.addEventListener("click", (e) => {
+            if (e.target !== this.modalViewSelector) {
+                return;
+            }
+            this.modalViewSelector.classList.add("hidden");
+            document.body.classList.remove("overflow-hidden");
+        })
+    }
+
+   
+}
+
+class MasterViewModal extends Modal {
+
+
+    #masterViewDeleter = (id) => {
+        try{
+            document.querySelector(".valid").parentElement.href = `articles/delete/${id} `;
+
+        }catch(e){
+
+        }
     }
 
     eventAllButton = () => {
@@ -37,40 +52,28 @@ class Modal {
                 e.preventDefault();
                 this.modalViewSelector.classList.toggle("hidden");
                 document.body.classList.add("overflow-hidden");
-                this.#masterViewDeleter(e.target.id);   
+                this.#masterViewDeleter(e.target.id);
             });
         });
-        this.#modalHandler();
-    }
-
-
-    #masterViewDeleter = (id) =>{
-        document.querySelector(".valid").parentElement.href =  `articles/delete/${id} `;
-    }
-
-    #modalHandler = () =>{
-        this.modalViewSelector.addEventListener("click",  (e) => {
-            if (e.target !== this.modalViewSelector) {
-                return;
-            }
-            this.modalViewSelector.classList.add("hidden");
-            document.body.classList.remove("overflow-hidden");
-        })
+        this.modalHandler();
     }
 }
 
-if (document.querySelector(".modal-button-js") !== null && document.querySelector(".modal-view-js") !== null) {
-    if(document.querySelectorAll(".modal-button-js".length > 1)){
-    const modal = new Modal(null,document.querySelectorAll(".modal-button-js"), document.querySelector(".modal-view-js"))
-    modal.eventAllButton();
-    }else{
-        const modal = new Modal(document.querySelector(".modal-button-js"), null, document.querySelector(".modal-view-js"))
-        modal.eventOneButton();
+function modalLauncher() {
+    let flag = false;
+    if (document.querySelector(".modal-button-js") !== null && document.querySelector(".modal-view-js") !== null) {
+        flag = true;
+    } else {
+        console.log("Il n'y a pas de modal sur cette page !");
     }
 
-}else{
-    console.log("Il n'y a pas de modal sur cette page !");
+    if (flag && document.querySelectorAll(".modal-button-js".length > 1)) {
+
+    } else {
+   
+    }
 }
+
 
 //Cette ligne peut permettre de faire la distinction entre les page et ainsi adapter l'url de redirection de la modal
 console.log(window.location.href.split("/").includes("articles"));
@@ -121,29 +124,31 @@ let boiteDeclenche = document.querySelector("#boite");
 let clicked = true
 
 
-boiteDeclenche.addEventListener("click", function(){
-    if(clicked === true){
+boiteDeclenche.addEventListener("click", function () {
+    if (clicked === true) {
         console.log("aller", clicked);
         moveForward();
         clicked = false;
-    }else{
-        console.log("retour" , clicked);
+    } else {
+        console.log("retour", clicked);
         moveBackward();
         clicked = true;
     }
 
-    
+
 })
 
-function moveForward(){
-    gsap.to(".box", {x: 34, backgroundColor: "#fcd34d"});
+function moveForward() {
+    gsap.to(".box", { x: 34, backgroundColor: "#fcd34d" });
 }
 
 
-function moveBackward(){
-    gsap.to(".box", {x: 0, backgroundColor: "#9ca3af"});
+function moveBackward() {
+    gsap.to(".box", { x: 0, backgroundColor: "#9ca3af" });
 }
 
 /**
  * END GSAP
  */
+
+export {Modal, MasterViewModal, modalLauncher}
