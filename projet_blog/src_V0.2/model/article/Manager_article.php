@@ -22,6 +22,10 @@ class Manager_article extends Article
         }
     }
 
+    static function create_manager_article(){
+        return new Manager_article(null, null, null, null);
+    }
+
     public function article_by_id(PDO $bdd, INT $id):Article | bool
     {
         try {

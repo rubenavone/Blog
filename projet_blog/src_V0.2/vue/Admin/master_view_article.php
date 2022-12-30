@@ -26,7 +26,7 @@ $_SESSION["delete"] = null;
     <tbody>
 
       <?php
-      foreach ($this->new_article->get_all_articles($this->bdd) as $article) {
+      foreach ($this->manage_article->get_all_articles($this->bdd) as $article) {
         $actual_category = $this->category->get_one_category($this->bdd, $article->id_category);
       ?>
         <tr id="<?= $article->id_art?>" >

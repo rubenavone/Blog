@@ -2,6 +2,11 @@
 
 class Manager_comment extends Comment
 {
+    
+    static function create_manager_comment(){
+        return new Manager_comment(null, null, null, null);
+    }
+
     public function add_comment(object $bdd):void
     {
         try {
