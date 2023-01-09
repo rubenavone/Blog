@@ -1,7 +1,7 @@
 <?php ob_start(); ?>
 <main class="flex flex-wrap justify-around text-center ">
      <?php
-     foreach ($this->new_article->get_all_articles($this->bdd) as $article) {
+     foreach ($all_articles as $article) {
           $actual_category = $this->category->get_one_category($this->bdd, $article->id_category);
      ?>
           <article class="relative mt-20  ">

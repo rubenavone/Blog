@@ -21,13 +21,15 @@ ob_start();
             <div class="lg:flex justify-between items-center">
                 <label for="date-article" class="block">
                     <span class="text-gray-700">Une date</span>
-                    <input type="date" class="mt-1 mb-5 form-control block w-4/4 px-3 py-1.5  border-0 border-b-2 text-base font-normal text-gray-700 bg-white bg-clip-padding  border-solid border-gray-300 rounded-md transition ease-in-out m-0 focus:ring-0 focus:text-gray-700 focus:bg-white focus:border-blue-800 focus:outline-none " name="date-article">
+                    <input type="date" class="mt-1 mb-5 form-control block w-4/4 px-3 py-1.5  border-0 border-b-2 text-base font-normal text-gray-700 bg-white bg-clip-padding  border-solid border-gray-300 rounded-md
+                     transition ease-in-out m-0 focus:ring-0 focus:text-gray-700 focus:bg-white focus:border-blue-800 focus:outline-none " name="date-article">
                 </label>
 
 
                 <label for="img-article" class="block">
                     <span class="text-gray-700">Image pour l'article</span>
-                    <input type="file" class="file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-blue-800 file:text-white  mt-1 mb-5 form-control block w-4/4 px-3 py-1.5 border-0 border-b-2 text-base font-normal text-gray-700 bg-gray-200 bg-clip-padding  border-solid  rounded-md transition ease-in-out m-0 " name="img-article" />
+                    <input type="file" class="file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-blue-800 file:text-white  mt-1 mb-5 
+                    form-control block w-4/4 px-3 py-1.5 border-0 border-b-2 text-base font-normal text-gray-700 bg-gray-200 bg-clip-padding  border-solid  rounded-md transition ease-in-out m-0 " name="img-article" />
                 </label>
             </div>
 

@@ -12,7 +12,7 @@ require_once './controller/Utils/Utils_controller.php';
 
 class Article_controller
 {
-    private Manager_article $new_article; 
+    private Manager_article $new_article;
     private Manager_comment $manage_comment;
     private Manager_user $manage_user;
     private Manager_category $category;
@@ -22,12 +22,12 @@ class Article_controller
     {
         $this->new_article = new Manager_article(null, null, null, null);
         $this->manage_comment = new Manager_comment(null, null, null, null);
-        $this->manage_user = new Manager_user(null,null, null, null, null, null);
+        $this->manage_user = new Manager_user(null, null, null, null, null, null);
         $this->category = new Manager_category(null, null, null);
         $this->bdd = BDD::getBDD();
     }
 
-    public function addArticle():VOID
+    public function addArticle(): VOID
     {
         try {
             $content_title = "Ajouter un";
@@ -66,7 +66,7 @@ class Article_controller
                     $_POST['date-article'],
                     1
                 );
-    
+
                 $new_article->set_id_category($_POST["id-category"]);
                 $new_article->set_image_art($path);
                 $new_article->add_article($this->bdd);
@@ -84,7 +84,7 @@ class Article_controller
     /**
      * TODO : finish this method
      */
-    public function edit_article(INT $id):VOID
+    public function edit_article(INT $id): VOID
     {
         try {
             $content_title = "Modifier un";
@@ -93,7 +93,7 @@ class Article_controller
             $all_categories = $this->category->get_all_categories($this->bdd);
 
             $flag = true;
-            if(!$article_wanted){
+            if (!$article_wanted) {
                 throw new Exception();
             }
             $edited_article = new Article(
@@ -129,16 +129,16 @@ class Article_controller
                 $edited_article->set_id_category($_POST['id-category']);
             }
 
-            if (!$flag ) {
+            if (!$flag) {
                 $path = Utils_controller::check_image("img-article");
                 if (!empty($path)) {
                     $edited_article->set_image_art($path);
                 }
             }
 
-            if(!$flag){
+            if (!$flag) {
                 $this->new_article->edit_article($this->bdd, $edited_article->get_id_art(), $edited_article);
-                header("location: ".$edited_article->get_id_art());
+                header("location: " . $edited_article->get_id_art());
             }
 
             include './vue/Article/edit_article.php';
@@ -147,14 +147,18 @@ class Article_controller
         }
     }
 
-    public function show_article():VOID
+    public function show_article(): VOID
     {
         $flag = true;
 
-        $_SESSION['temp_page'] = "article?id=" . $_GET["id"];
 
         if (isset($_GET['id']) && !empty($_GET['id'])) {
             $flag = false;
+            $_SESSION['temp_page'] = "article?id=" . $_GET["id"];
+            $_GET["id"] = (int)$_GET["id"];
+            
+        } else {
+            header("location: ./404");
         }
 
         if (!$flag && $_GET['id'] !== null) {
@@ -177,7 +181,7 @@ class Article_controller
         require_once './vue/Article/view_one_article.php';
     }
 
-    public function show_preview(INT $id_art):string
+    public function show_preview(INT $id_art): string
     {
         $preview = $this->new_article->article_preview_by_id($this->bdd, $id_art);
 
@@ -187,15 +191,16 @@ class Article_controller
         return $lines[0];
     }
 
-    public function show_all_articles():VOID
+    public function show_all_articles(): VOID
     {
         $content_title = "Tous les";
         $title = "Articles";
+        $all_articles = $this->new_article->get_all_articles($this->bdd);
 
         include "./vue/Article/view_all_articles.php";
     }
 
-    public function delete_article(INT $id_art):VOID
+    public function delete_article(INT $id_art): VOID
     {
         if (isset($_SESSION["role"]) && !empty($id_art)) {
             $this->new_article->delete_article($this->bdd, $id_art);
