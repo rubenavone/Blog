@@ -30,7 +30,6 @@ function animateText() {
 
 }
 
-
 /**
  * Switch light/dark theme
  * TODO add it to the local Storage
