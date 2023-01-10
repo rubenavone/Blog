@@ -50,14 +50,14 @@ ob_start();
     </article>
 </section>
 <section class="flex flex-col w-full  ">
-    <article class="lg:w-2/4 w-4/4 pt-5 flex flex-col justify-center items-center">
+    <article class="lg:w-2/3 w-4/4 pt-5 flex flex-col justify-center items-center">
         <h2 class="text-center text-3xl">Etre force de proposition</h2>
         <p class="w-2/4 self-center text-center pt-5">Lorem ipsum dolor sit amet,
             consectetur adipisicing elit.
             Aliquid eaque doloribus, autem distinctio repellendus quae! Praesentium vel officia voluptates perferendis.
             Repellendus earum nobis, minima aliquam inventore numquam veritatis dignissimos praesentium!</p>
     </article>
-    <img src="./dist/img/diego-ph-fIq0tET6llw-unsplash.jpg" alt="" class="lg:w-4/4tailwind w-4/4 h-[400px] object-cover object-center">
+    <img src="./dist/img/diego-ph-fIq0tET6llw-unsplash.jpg" alt="" class="lg:w-2/3 w-4/4 h-[400px] object-cover object-center">
 </section>
 
 
