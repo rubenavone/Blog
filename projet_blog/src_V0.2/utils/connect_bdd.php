@@ -6,7 +6,6 @@
 // array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
 
 class BDD{
-
     private static ARRAY $instances = [];
     private PDO $bdd;   
     

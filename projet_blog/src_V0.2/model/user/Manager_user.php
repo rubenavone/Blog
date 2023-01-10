@@ -2,6 +2,10 @@
 require "./model/user/User.php";
 class Manager_user extends User
 {
+    static function create_manager_user(){
+        return new Manager_user(null, null, null, null, null, null);
+    }
+
     public function add_user(object $bdd): VOID
     {
         try {

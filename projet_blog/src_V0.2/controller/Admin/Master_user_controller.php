@@ -12,7 +12,7 @@ class Master_user_controller{
 
     public function __construct()
     {
-        $this->manage_user = new Manager_user(null,null, null, null, null, null);
+        $this->manage_user = Manager_user::create_manager_user();
         $this->bdd = BDD::getBDD();
     }
     

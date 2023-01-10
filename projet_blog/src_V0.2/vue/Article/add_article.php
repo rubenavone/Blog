@@ -1,7 +1,7 @@
 <?php
 ob_start();
 ?>
-<form action="" class="justify-center flex" method="POST" enctype="multipart/form-data">
+<form action="" class=" relative justify-center flex" method="POST" enctype="multipart/form-data">
     <div class="mt-8 mr-10 ml-10 w-full lg:w-2/5">
         <div class="grid grid-cols-1 gap-6">
 
@@ -45,10 +45,13 @@ ob_start();
 
 <?php if ($error === "ok") {
 ?>
-    <p  class=" text-xl before:block before:absolute before:-inset-1 before:-skew-y-2 before:bg-green-600 relative inline-block" > <span class="relative text-white ">Article Ajouté</span><p>
-    <?php if (!isset($_FILES["img-art"])) { ?>
-        <p class="text-xl before:block before:absolute before:-inset-1 before:-skew-y-2 before:bg-red-600 relative inline-block "> <span class="relative text-white ">Image de profile par défaut</span> </p> 
-    <?php } ?>
+    <aside class="absolute bottom-0 left-0">
+        <p class=" text-xl before:block before:absolute before:-inset-1 before:-skew-y-2 before:bg-green-600 relative inline-block"> <span class="relative text-white ">Article Ajouté</span>
+        <p>
+            <?php if (!isset($_FILES["img-art"])) { ?>
+        <p class="text-xl before:block before:absolute before:-inset-1 before:-skew-y-2 before:bg-red-600 relative inline-block "> <span class="relative text-white ">Image de profile par défaut</span> </p>
+    </aside>
+<?php } ?>
 
 
 <?php } else if ($error === "error") { ?>
