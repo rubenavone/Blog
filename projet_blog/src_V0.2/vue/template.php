@@ -21,7 +21,7 @@
     }
 </style>
 
-<body class="bg-gray-200 ">
+<body class="bg-gray-200 relative ">
     <nav class="bg-blue-800 w-full justify-center lg:h-32 absolute lg:flex pl-5 pr-10 lg:shadow-2xl h-10  top-0 z-20 overflow-hidden ease-in duration-300 ">
 
         <div class="lg:w-1/6 w-6/6 h-auto lg:block mx-auto flex relative">
@@ -107,8 +107,9 @@
     <h1 class="text-center text-2xl text-gray-700 mt-5 mb-5 "><?= $content_title ?> <span class=" z-10 before:block before:absolute before:-inset-1 before:-skew-y-3 before:bg-blue-800 relative inline-block "><span class="relative text-white"><?= $title ?></span> </span></h1>
 
 
-
-    <?= $content ?>
+     <main class="min-h-100">
+         <?= $content ?>
+     </main>              
 
     <section class="w-full h-screen absolute top-0 z-30 flex justify-center items-center modal-view-js hidden bg-[rgba(0,0,0,0.9)]">
         <article class="w-2/4 bg-white flex justify-center h-[400px] items-center z-20 border-4 border-blue-700 bg-white opacity-100">
@@ -136,9 +137,11 @@
                 </p>
                 <a href="/addUser"><button class="rounded-full bg-blue-800 text-white h-10 w-1/3 mx-auto mt-5">Let's Go</button></a>
             </section>
-
         </article>
     </section>
+    <footer class=" h-10 bg-blue-800">
+
+    </footer>
     <script src="https://www.google.com/recaptcha/api.js" async defer></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.10.4/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.10.4/TextPlugin.min.js"></script>

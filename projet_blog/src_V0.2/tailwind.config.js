@@ -9,6 +9,9 @@ module.exports = {
       fontFamily:{
         caviar: ["caviar_dreamsregular"],
       },
+      minHeight: {
+        '100': '83.7vh',
+      },
     },
   },
   plugins: [
