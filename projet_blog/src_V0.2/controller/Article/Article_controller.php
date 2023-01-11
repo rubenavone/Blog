@@ -195,7 +195,7 @@ class Article_controller
     {
         $content_title = "Tous les";
         $title = "Articles";
-        $all_articles = $this->new_article->get_all_articles($this->bdd);
+        $all_articles = $this->manage_article->get_all_articles($this->bdd);
 
         include "./vue/Article/view_all_articles.php";
     }
