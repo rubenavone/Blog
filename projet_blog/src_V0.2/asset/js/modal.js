@@ -26,15 +26,12 @@ class Modal {
             document.body.classList.remove("overflow-hidden");
         })
     }
-
 }
 
 class MasterViewModal extends Modal {
-
     #masterViewDeleter = (id) => {
         try{
             document.querySelector(".valid").parentElement.href = `articles/delete/${id} `;
-
         }catch(e){
 
         }

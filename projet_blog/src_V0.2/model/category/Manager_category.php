@@ -2,7 +2,9 @@
 
 class Manager_category extends Category
 {
-
+    static function create_manager_category(){
+        return new Manager_category(null, null, null, null);
+    }
     public function get_all_categories(OBJECT $bdd):ARRAY
     {
         try {

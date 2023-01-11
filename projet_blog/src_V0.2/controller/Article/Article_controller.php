@@ -12,7 +12,7 @@ require_once './controller/Utils/Utils_controller.php';
 
 class Article_controller
 {
-    private Manager_article $new_article;
+    private Manager_article $manage_article; 
     private Manager_comment $manage_comment;
     private Manager_user $manage_user;
     private Manager_category $category;
@@ -20,10 +20,10 @@ class Article_controller
 
     public function __construct()
     {
-        $this->new_article = new Manager_article(null, null, null, null);
-        $this->manage_comment = new Manager_comment(null, null, null, null);
-        $this->manage_user = new Manager_user(null, null, null, null, null, null);
-        $this->category = new Manager_category(null, null, null);
+        $this->manage_article = Manager_article::create_manager_article();
+        $this->manage_comment = Manager_comment::create_manager_comment();
+        $this->manage_user = Manager_user::create_manager_user();
+        $this->category = Manager_category::create_manager_category();
         $this->bdd = BDD::getBDD();
     }
 
@@ -60,16 +60,16 @@ class Article_controller
                 if (empty($_POST['date-article'])) {
                     $_POST['date-article'] = date("Y-m-d");
                 }
-                $new_article = new Manager_article(
+                $manage_article = new Manager_article(
                     $_POST['name-article'],
                     $_POST['content-article'],
                     $_POST['date-article'],
                     1
                 );
-
-                $new_article->set_id_category($_POST["id-category"]);
-                $new_article->set_image_art($path);
-                $new_article->add_article($this->bdd);
+    
+                $manage_article->set_id_category($_POST["id-category"]);
+                $manage_article->set_image_art($path);
+                $manage_article->add_article($this->bdd);
                 $error = "ok";
             }
 
@@ -89,7 +89,7 @@ class Article_controller
         try {
             $content_title = "Modifier un";
             $title = "Article";
-            $article_wanted = $this->new_article->article_by_id($this->bdd, $id);
+            $article_wanted = $this->manage_article->article_by_id($this->bdd, $id);
             $all_categories = $this->category->get_all_categories($this->bdd);
 
             $flag = true;
@@ -136,9 +136,9 @@ class Article_controller
                 }
             }
 
-            if (!$flag) {
-                $this->new_article->edit_article($this->bdd, $edited_article->get_id_art(), $edited_article);
-                header("location: " . $edited_article->get_id_art());
+            if(!$flag){
+                $this->manage_article->edit_article($this->bdd, $edited_article->get_id_art(), $edited_article);
+                header("location: ".$edited_article->get_id_art());
             }
 
             include './vue/Article/edit_article.php';
@@ -164,7 +164,7 @@ class Article_controller
         if (!$flag && $_GET['id'] !== null) {
 
             #Récuperation de l'articles et des commentaires 
-            $article_wanted = $this->new_article->article_by_id($this->bdd, $_GET['id']);
+            $article_wanted = $this->manage_article->article_by_id($this->bdd, $_GET['id']);
             $comment_wanted = $this->manage_comment->comment_by_id($this->bdd, $_GET['id']);
 
             if ($article_wanted) {
@@ -183,7 +183,7 @@ class Article_controller
 
     public function show_preview(INT $id_art): string
     {
-        $preview = $this->new_article->article_preview_by_id($this->bdd, $id_art);
+        $preview = $this->manage_article->article_preview_by_id($this->bdd, $id_art);
 
         if ($preview) {
             $lines = explode(".", $preview->content_art);
@@ -203,7 +203,7 @@ class Article_controller
     public function delete_article(INT $id_art): VOID
     {
         if (isset($_SESSION["role"]) && !empty($id_art)) {
-            $this->new_article->delete_article($this->bdd, $id_art);
+            $this->manage_article->delete_article($this->bdd, htmlspecialchars($id_art));
             header("location: /admin/articles");
         } else {
             header("location: /admin/articles");

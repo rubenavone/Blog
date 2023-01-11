@@ -10,17 +10,18 @@ require_once './model/user/Manager_user.php';
 require_once './controller/Utils/Utils_controller.php';
 
 class Master_article_controller{
-    private Manager_article $new_article;
+    private Manager_article $manage_article;
     private Manager_comment $manage_comment;
     private Manager_user $manage_user;
     private Manager_category $category;
     private PDO $bdd;
+    
     public function __construct()
     {
-        $this->new_article = new Manager_article(null, null, null, null);
-        $this->manage_comment = new Manager_comment(null, null, null, null);
-        $this->manage_user = new Manager_user(null,null, null, null, null, null);
-        $this->category = new Manager_category(null, null, null);
+        $this->manage_article = Manager_article::create_manager_article();
+        $this->manage_comment = Manager_comment::create_manager_comment();
+        $this->manage_user = Manager_user::create_manager_user();
+        $this->category = Manager_category::create_manager_category();
         $this->bdd = BDD::getBDD();
     }
     
@@ -32,7 +33,7 @@ class Master_article_controller{
          * Commen instancier l'ensemble dans un objet ? 
          */
         $articles_tr = [];
-        foreach ($this->new_article->get_all_articles($this->bdd) as $article) {
+        foreach ($this->manage_article->get_all_articles($this->bdd) as $article) {
             array_push($articles_tr, $article);
         }
 
