@@ -10,9 +10,10 @@ if (!isset($_SESSION["role"])) {
 $LOGIN_MANDATORY_URL = [
   "deconnexion",
   "addArticle",
+];
+$LOGIN_MANDATORY_URL_ADMIN = [
   "admin",
 ];
-
 /****************************/
 try {
   if (!isset($_GET["page"])) $_GET["page"] = "/";
@@ -20,6 +21,9 @@ try {
   $request_uri = explode('/', $_GET["page"]);
 
   if (!isset($_SESSION['connected']) && in_array($request_uri[0], $LOGIN_MANDATORY_URL)) {
+    throw new Exception("401");
+  }
+  if ($_SESSION["role"] !== 1 && in_array($request_uri[0], $LOGIN_MANDATORY_URL_ADMIN)) {
     throw new Exception("401");
   }
   switch ($request_uri[0]) {

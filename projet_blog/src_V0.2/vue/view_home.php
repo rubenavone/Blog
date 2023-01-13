@@ -59,7 +59,7 @@ ob_start();
     </article>
 </section>
 
-    <section class="flex mt-12 ">
+    <section class="flex flex-col lg:flex-row mt-12 mb-5 lg:mb-[0px] ">
     <img src="./dist/img/diego-ph-fIq0tET6llw-unsplash.jpg" alt="" class="h-[500px] lg:w-2/3 w-4/4 object-cover object-center">
     <form action="" class="ml-12 lg:w-1/3 w-4/4" >
         <h3 class="text-3xl text-center">Contactez-moi</h3>

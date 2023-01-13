@@ -202,7 +202,7 @@ class Article_controller
 
     public function delete_article(INT $id_art): VOID
     {
-        if (isset($_SESSION["role"]) && !empty($id_art)) {
+        if (isset($_SESSION["role"]) && $_SESSION["role"] == 1) {
             $this->manage_article->delete_article($this->bdd, htmlspecialchars($id_art));
             header("location: /admin/articles");
         } else {
