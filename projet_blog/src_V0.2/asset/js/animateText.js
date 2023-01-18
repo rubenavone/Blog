@@ -2,29 +2,34 @@
  * GSAP ANIMATION
  */
 //Text animation
-
+console.log("animaion loaded")
 //Selector 
 function animateText() {
 
     let sectionPresentationSelector = document.querySelector(".presentation");
 
     function writeText(newText) {
-        gsap.to(".text-change-js", { repeat: 1, duration: 4, text: newText, ease: "out", yoyo: true });
+        gsap.to(".text-change-js", { repeat: 1, duration: 2, text: newText, ease: "out", yoyo: true });
     }
-
+    function lastWord(newText){
+        gsap.to(".text-change-js", { repeat: 0, duration: 2, text: newText, ease: "out", yoyo: false });
+    }
     setInterval(function () {
         document.querySelector(".clignote").classList.toggle("hidden");
     }, 500);
 
     sectionPresentationSelector.addEventListener("mouseenter", function launchText(e) {
         console.log(e);
-        writeText("JavaScript");
+        writeText("JS");
         setTimeout(function () {
             writeText("PHP");
-        }, 8000);
+        }, 4000);
         setTimeout(function () {
             writeText("Tailwinds");
-        }, 16000);
+        }, 8000);
+        setTimeout(function () {
+            lastWord("Et vous ?");
+        }, 12000);
         sectionPresentationSelector.removeEventListener("mouseenter", launchText)
     })
 

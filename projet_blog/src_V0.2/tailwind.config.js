@@ -10,9 +10,19 @@ module.exports = {
         caviar: ["caviar_dreamsregular"],
       },
       minHeight: {
-        '100': '83.7vh',
+        'mobile': '83.7vh',
       },
+      minHeight: {
+        'large': '74.1vh',
+      },
+      spacing:{
+        'nav': '10vh',
+        'title': '5vh',
+        'header-home': '20vh',
+        'section-home': '50vh',
+      } 
     },
+
   },
   plugins: [
     require('@tailwindcss/forms'),

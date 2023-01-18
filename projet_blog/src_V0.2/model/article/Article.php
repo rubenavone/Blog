@@ -17,7 +17,7 @@ class Article
 
     public function get_name_art(): STRING
     {
-        return htmlspecialchars($this->name_art);
+        return $this->name_art;
     }
 
     public function set_name_art(STRING $value): VOID

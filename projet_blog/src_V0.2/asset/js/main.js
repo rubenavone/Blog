@@ -5,7 +5,9 @@ let path = window.location.pathname;
 if (path === "/"){
     console.log("Home page");
     const {animateText} = await import('./animateText.js');
+    const {slider} = await import('./slider.js');
     animateText();
+    slider.init();
 }else if(path === "/admin/articles" || path === "/admin/categorie" || path === "/admin/utilisateur"){
     console.log("Admin pages");
     const { MasterViewModal } = await import('./modal.js');

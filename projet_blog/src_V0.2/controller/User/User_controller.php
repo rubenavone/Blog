@@ -27,7 +27,6 @@ class User_controller
         # On à définis un name="submit" sur notre input type button pour verifier si il existe dans la super globale $_POST
         if (isset($_POST['submit'])) {
             $flag = false;
-            var_dump($_FILES);
         }
 
         # Ici on verifie si touts nos champs sont remplis

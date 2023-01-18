@@ -6,6 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" content="IE=edge" />
     <title>Inscription</title>
     <link href="/dist/output.css" rel="stylesheet" type="text/css" />
+    <link href="/dist/slider.css" rel="stylesheet" type="text/css" />
+
     <!-- <link href="/dist/dark.css" rel="stylesheet" type="text/css" class="dark" /> -->
 
     <?= $_SESSION["role"] == 1 ? "<link href='/dist/admin.css' rel='stylesheet' type='text/css' />" : "" ?>
@@ -22,7 +24,7 @@
 </style>
 
 <body class="bg-gray-200 relative ">
-    <nav class="bg-blue-800 w-full justify-center lg:h-32 absolute lg:flex pl-5 pr-10 lg:shadow-2xl h-10  top-0 z-20 overflow-hidden ease-in duration-300 ">
+    <nav class="bg-blue-800 w-full justify-center lg:h-nav absolute  lg:flex pl-5 pr-10 lg:shadow-2xl h-10 top-0 z-20 overflow-hidden ease-in duration-300 lg:static ">
 
         <div class="lg:w-1/6 w-6/6 h-auto lg:block mx-auto flex relative">
             <object type="image/svg+xml" data="/dist/img/text.svg" class="logo w-64 items-center ">
@@ -101,18 +103,16 @@
             <?php endif; ?>
         </ul>
     </nav>
-    <div class="h-10 lg:h-32">
 
-    </div>
-    <h1 class="text-center text-2xl text-gray-700 mt-5 mb-5 "><?= $content_title ?> <span class=" z-10 before:block before:absolute before:-inset-1 before:-skew-y-3 before:bg-blue-800 relative inline-block "><span class="relative text-white"><?= $title ?></span> </span></h1>
+    <h1 class="block text-center text-2xl pt-32 pb-5 lg:pt-5 text-gray-700  lg:h-nav "><?= $content_title ?> <span class=" z-10 before:block before:absolute before:-inset-1 before:-skew-y-3 before:bg-blue-800 relative inline-block "><span class="relative text-white"><?= $title ?></span> </span></h1>
 
 
-     <main class="min-h-100">
+     <main class="lg:min-h-large ">
          <?= $content ?>
      </main>              
 
     <section class="w-full h-screen absolute top-0 z-30 flex justify-center items-center modal-view-js hidden bg-[rgba(0,0,0,0.9)]">
-        <article class="w-2/4 bg-white flex justify-center h-[400px] items-center z-20 border-4 border-blue-700 bg-white opacity-100">
+        <article class="w-2/4 flex justify-center h-[400px] items-center z-20 border-4 border-blue-700 bg-white opacity-100">
             <section class="w-2/4 text-center">
                 <p>
                     J'ai déjà un compte, je souhaite me connecter
@@ -139,9 +139,10 @@
             </section>
         </article>
     </section>
-    <footer class=" h-10 bg-blue-800">
+    <footer class=" h-10 bg-blue-800 lg:block hidden">
 
     </footer>
+    <script src="https://code.iconify.design/iconify-icon/1.0.1/iconify-icon.min.js"></script>
     <script src="https://www.google.com/recaptcha/api.js" async defer></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.10.4/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.10.4/TextPlugin.min.js"></script>

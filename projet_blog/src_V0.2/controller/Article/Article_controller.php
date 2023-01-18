@@ -61,14 +61,14 @@ class Article_controller
                     $_POST['date-article'] = date("Y-m-d");
                 }
                 $manage_article = new Manager_article(
-                    $_POST['name-article'],
-                    $_POST['content-article'],
+                    htmlspecialchars($_POST['name-article']),
+                    htmlspecialchars($_POST['content-article']),
                     $_POST['date-article'],
                     1
                 );
     
                 $manage_article->set_id_category($_POST["id-category"]);
-                $manage_article->set_image_art($path);
+                $manage_article->set_image_art(htmlspecialchars($path));
                 $manage_article->add_article($this->bdd);
                 $error = "ok";
             }
@@ -115,9 +115,7 @@ class Article_controller
             }
 
             if (
-                !$flag &&  $_POST['content-article'] !== $article_wanted->get_content_art()
-                && !empty($_POST['content-article'])
-            ) {
+                !$flag &&  $_POST['content-article'] !== $article_wanted->get_content_art() && !empty($_POST['content-article'])) {
                 $edited_article->set_content_art($_POST['content-article']);
             }
 
@@ -143,7 +141,7 @@ class Article_controller
 
             include './vue/Article/edit_article.php';
         } catch (Exception $e) {
-            die("Erreur lors de la mofication" . $e->getMessage());
+            die("Erreur lors de la modification" . $e->getMessage());
         }
     }
 
