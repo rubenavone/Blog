@@ -1,7 +1,6 @@
 .arrow {
     font-size: 5rem;
     position: absolute;
-    z-index: 9999;
 }
 
 .right-arrow {
@@ -16,11 +15,10 @@
 
 .slider {
     width: 100%;
+    max-width:100%;
     min-width: 100%;
     height: 60vh;
-
-    overflow: hidden;
-    
+    overflow: hidden;   
 }
 
 .smooth {
@@ -29,13 +27,20 @@
 .d-flex{
     display: flex;
   }
-  
-section article img {
+section aside{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    width: 50vw;
+    padding: 10vw;
+    text-align: center;
+}
+.slider-pic {
     object-fit: cover;
     object-position: center;
-    width: 100%;
-    height: 60vh;
-    max-width: none;
+    max-width: 50vw;
+    min-width: 50vw;
 }
 article:before{
 padding-top: -500px;

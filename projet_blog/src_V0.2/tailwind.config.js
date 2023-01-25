@@ -10,10 +10,8 @@ module.exports = {
         caviar: ["caviar_dreamsregular"],
       },
       minHeight: {
-        'mobile': '83.7vh',
-      },
-      minHeight: {
-        'large': '74.1vh',
+        'large': '85.7vh',
+        'mobile': '74.1vh',
       },
       spacing:{
         'nav': '10vh',

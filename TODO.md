@@ -39,6 +39,10 @@ Faire un footer
 //Cette ligne peut permettre de faire la distinction entre les page et ainsi adapter l'url de redirection de la modal
 console.log(window.location.href.split("/").includes("articles"));
 
+Fait, mises en place d'un routeur dans "main.js".
+L'ensemble de la partie JavaScript est découper en divers module.
+Ensuite je les intègre dynamiquement selon l'url ou ce situe l'utilisateur. 
+
 ### Visuel 
 
 Revoir la page tout les article, notament le hover qui n'est pas dingue

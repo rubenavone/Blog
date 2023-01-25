@@ -104,10 +104,11 @@
         </ul>
     </nav>
 
-    <h1 class="block text-center text-2xl pt-32 pb-5 lg:pt-5 text-gray-700  lg:h-nav "><?= $content_title ?> <span class=" z-10 before:block before:absolute before:-inset-1 before:-skew-y-3 before:bg-blue-800 relative inline-block "><span class="relative text-white"><?= $title ?></span> </span></h1>
 
 
      <main class="lg:min-h-large ">
+        <h1 class="block text-center text-2xl pt-32 pb-5 lg:pt-5 text-gray-700  lg:h-nav "><?= $content_title ?> <span class=" z-10 before:block before:absolute before:-inset-1 before:-skew-y-3 before:bg-blue-800 relative inline-block "><span class="relative text-white"><?= $title ?></span> </span></h1>
+
          <?= $content ?>
      </main>              
 
@@ -119,7 +120,7 @@
                 </p>
                 <form action="/connexion" class="justify-center items-center flex flex-col ml-10  " method="POST" enctype="multipart/form-data">
                     <label class="block w-64">
-                        <input type="mail" class="mt-5 block w-full px-0.5 border-1 border-b-2 border-gray-200 focus:ring-0 focus:border-blue-800" placeholder="Your name" name="mail_util" />
+                        <input type="mail" class="mt-5 block w-full px-0.5 border-1 border-b-2 border-gray-200 focus:ring-0 focus:border-blue-800" placeholder="Your name" name="mail_util"/>
                     </label>
                     <label class="block w-64">
                         <input type="password" placeholder="votre mot de passe" class="mt-5 block w-full px-0.5 border-1 border-b-2 border-gray-200 focus:ring-0 focus:border-blue-800" placeholder="" name="mdp_util" />
@@ -139,7 +140,19 @@
             </section>
         </article>
     </section>
-    <footer class=" h-10 bg-blue-800 lg:block hidden">
+    <footer class=" h-10 bg-blue-800 items-center lg:flex hidden">
+                <ul class="flex justify-center text-white w-5/6 ">
+                    <li class="mr-10">RGPD</li>
+                    <li>Mention légales</li>
+                </ul>
+                <section class="justify-around text-3xl flex w-1/6 text-white mr-32">
+                    <a href=""><iconify-icon icon="teenyicons:linkedin-outline"></iconify-icon></a>
+                    <a href=""><iconify-icon icon="ri:git-merge-line"></iconify-icon></a>
+                    <a href=""><iconify-icon icon="mdi:resume"></iconify-icon></a>
+                </section>
+                <section class="text-white">
+                    <a href=""><iconify-icon icon="material-symbols:arrow-back-ios" rotate="90deg"></iconify-icon></a>
+                </section>
 
     </footer>
     <script src="https://code.iconify.design/iconify-icon/1.0.1/iconify-icon.min.js"></script>
