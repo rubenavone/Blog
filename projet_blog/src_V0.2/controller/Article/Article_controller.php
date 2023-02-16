@@ -64,11 +64,11 @@ class Article_controller
                     htmlspecialchars($_POST['name-article']),
                     htmlspecialchars($_POST['content-article']),
                     $_POST['date-article'],
-                    1
+                    1,
+                    $_POST["id-category"],
+                    htmlspecialchars($path)
                 );
     
-                $manage_article->set_id_category($_POST["id-category"]);
-                $manage_article->set_image_art(htmlspecialchars($path));
                 $manage_article->add_article($this->bdd);
                 $error = "ok";
             }
