@@ -45,3 +45,33 @@ section aside{
 article:before{
 padding-top: -500px;
 }
+
+
+.day-night-button{
+    background-color: white;
+    font-size: 30px;
+    border: 1px solid black;
+    width: 75px;
+    height:33px;
+    text-align: left;
+    border-radius: 50px;
+    background-color: #87ceeb;
+    transition: all  0.3s ease-in-out;
+}
+
+
+.align-right{
+    margin-left: 36px !important;
+}
+.back-day-color{
+    background-color: #2B2C5A ;
+
+}
+.day-night-emoji{
+    margin-left: -10px;
+    margin-right: -10px;
+    margin-bottom: -10px;
+    margin-top: -14px;
+    transition: all  0.3s ease-in-out;
+
+}

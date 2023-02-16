@@ -2,6 +2,11 @@
 
 class Manager_article extends Article
 {
+    
+    static function create_manager_article(){
+        return new Manager_article(null, null, null, null);
+    }
+
     public function add_article(PDO $bdd):VOID
     {
         try {
@@ -20,10 +25,6 @@ class Manager_article extends Article
         } catch (Exception $e) {
             die('Erreur dans la requête:' . $e->getMessage());
         }
-    }
-
-    static function create_manager_article(){
-        return new Manager_article(null, null, null, null);
     }
 
     public function article_by_id(PDO $bdd, INT $id):Article | bool

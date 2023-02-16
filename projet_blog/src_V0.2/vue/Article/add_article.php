@@ -1,7 +1,7 @@
 <?php
 ob_start();
 ?>
-<form action="" class=" relative justify-center flex" method="POST" enctype="multipart/form-data">
+<form action="" class="relative justify-center flex mb-10" method="POST" enctype="multipart/form-data">
     <div class="mt-8 mr-10 ml-10 w-full lg:w-2/5">
         <div class="grid grid-cols-1 gap-6">
 

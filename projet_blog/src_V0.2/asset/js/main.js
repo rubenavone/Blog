@@ -1,5 +1,5 @@
 import { Modal } from './modal.js';
-
+import { buttonDarkOrLight } from './darkOrLightButton.js';
 
 let path = window.location.pathname;
 console.log(path);
@@ -36,3 +36,4 @@ try {
     console.error("Vous êtes déjà connecté " + e);
 }
 
+buttonDarkOrLight();
