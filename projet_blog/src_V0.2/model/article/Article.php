@@ -49,21 +49,14 @@ class Article
         return $this->id_art;
     }
 
-    public function set_id_art(INT $value): VOID
-    {
-        $this->id_art = $value;
-    }
-
     public function get_id_category(): INT
     {
         return $this->id_category;
     }
-
-    public function set_id_category(INT $value): VOID
+    public function set_id_category($value):VOID
     {
         $this->id_category = $value;
     }
-
     public function get_image_art(): STRING{
         return $this->image_art;
     }
@@ -74,10 +67,6 @@ class Article
 
     public function get_id_user(): INT{
         return $this->id_user;
-    }
-
-    public function set_id_user(INT $value): VOID{
-        $this->id_user = $value;
     }
 
 }
