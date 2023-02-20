@@ -4,7 +4,6 @@ import { Modal } from './modal.js';
 let path = window.location.pathname;
 console.log(path);
 if (path === "/") {
-
     console.log("Home page");
     const { animateText } = await import('./animateText.js');
     const { slider } = await import('./slider.js');
