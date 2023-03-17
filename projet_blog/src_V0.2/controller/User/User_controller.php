@@ -90,7 +90,7 @@ class User_controller
             array_push($entry, $entry_value);
         }
 
-        include './vue/User/add_comment.php';
+        require_once './vue/User/add_comment.php';
     }
 
     public function connexion():VOID
@@ -143,7 +143,7 @@ class User_controller
             } else if (!$flag) {
                 header('location: connexion?error=2');
             }
-        include 'vue/User/view_connexion.php';
+        require_once 'vue/User/view_connexion.php';
 
     }
 
@@ -159,6 +159,6 @@ class User_controller
         $content_title = "Profil ";
         $title = "Connexion";
 
-        include 'vue/User/view_profil.php';
+        require_once 'vue/User/view_profil.php';
     }
 }

@@ -2,9 +2,6 @@
 
 #Instanciation de l'objet PDO pour pouvoir ce connecter à la bdd
 
-// $bdd = new PDO('mysql:host=localhost;dbname=blog_folio', 'root', '',
-// array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
-
 class BDD{
     private static ARRAY $instances = [];
     private PDO $bdd;   
