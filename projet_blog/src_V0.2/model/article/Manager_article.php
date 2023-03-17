@@ -1,8 +1,7 @@
 <?php
 
 class Manager_article extends Article
-{
-    
+{ 
     static function create_manager_article(){
         return new Manager_article(null, null, null, null);
     }
@@ -15,11 +14,11 @@ class Manager_article extends Article
             (:name_art, :content_art, :date_art, :id_category, :image_art, :id_user)");
 
             $req->execute([
-                'name_art' => $this->get_name_art(),
-                'content_art' => $this->get_content_art(),
-                'date_art' => $this->get_date_art(),
-                'id_category' => $this->get_id_category(),
-                'image_art' => $this->get_image_art(),
+                'name_art' => $this->name_art,
+                'content_art' => $this->content_art,
+                'date_art' => $this->date_art,
+                'id_category' => $this->id_category,
+                'image_art' => $this->image_art,
                 'id_user' => $this->get_id_user(),
             ]);
         } catch (Exception $e) {
@@ -98,11 +97,11 @@ class Manager_article extends Article
             date_art = :date_art, id_category = :id_category,image_art = :image_art, id_user = :id_user
             WHERE id_art = :id_art ");
             $req->execute([
-                'name_art' => $edited_article->get_name_art(),
-                'content_art' => $edited_article->get_content_art(),
-                'date_art' => $edited_article->get_date_art(),
-                'id_category' => $edited_article->get_id_category(),
-                'image_art' => $edited_article->get_image_art(),
+                'name_art' => $edited_article->name_art,
+                'content_art' => $edited_article->content_art,
+                'date_art' => $edited_article->date_art,
+                'id_category' => $edited_article->id_category,
+                'image_art' => $edited_article->image_art,
                 'id_user' => $edited_article->get_id_user(),
                 'id_art' => $id
             ]);

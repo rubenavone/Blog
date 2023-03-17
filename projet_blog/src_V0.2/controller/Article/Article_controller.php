@@ -75,7 +75,7 @@ class Article_controller
 
             $all_categories = $this->category->get_all_categories($this->bdd);
 
-            include './vue/Article/add_article.php';
+            require_once './vue/Article/add_article.php';
         } catch (Exception $e) {
             die('Erreur Dans lors de l\'ajout' . $e->getMessage());
         }
@@ -97,12 +97,12 @@ class Article_controller
                 throw new Exception();
             }
             $edited_article = new Article(
-                $article_wanted->get_name_art(),
-                $article_wanted->get_content_art(),
-                $article_wanted->get_date_art(),
+                $article_wanted->name_art,
+                $article_wanted->content_art,
+                $article_wanted->date_art,
                 $article_wanted->get_id_art(),
-                $article_wanted->get_id_category(),
-                $article_wanted->get_image_art(),
+                $article_wanted->id_category,
+                $article_wanted->image_art,
                 $article_wanted->get_id_user()
             );
 
@@ -110,27 +110,27 @@ class Article_controller
                 $flag = false;
             }
 
-            if (!$flag && $_POST['name-article'] !== $article_wanted->get_name_art() && !empty($_POST['name-article'])) {
-                $edited_article->set_name_art($_POST['name-article']);
+            if (!$flag && $_POST['name-article'] !== $article_wanted->name_art && !empty($_POST['name-article'])) {
+                $edited_article->name_art = $_POST['name-article'];
             }
 
             if (
-                !$flag &&  $_POST['content-article'] !== $article_wanted->get_content_art() && !empty($_POST['content-article'])) {
-                $edited_article->set_content_art($_POST['content-article']);
+                !$flag &&  $_POST['content-article'] !== $article_wanted->content_art && !empty($_POST['content-article'])) {
+                $edited_article->content_art =$_POST['content-article'];
             }
 
-            if (!$flag && $_POST['date-article'] !== $article_wanted->get_date_art() && !empty($_POST['date-article'])) {
-                $edited_article->set_date_art($_POST['date-article']);
+            if (!$flag && $_POST['date-article'] !== $article_wanted->date_art && !empty($_POST['date-article'])) {
+                $edited_article->date_art = $_POST['date-article'];
             }
 
-            if (!$flag && $_POST['id-category'] !== $article_wanted->get_id_category() && !empty($_POST['id-category'])) {
-                $edited_article->set_id_category($_POST['id-category']);
+            if (!$flag && $_POST['id-category'] !== $article_wanted->id_category && !empty($_POST['id-category'])) {
+                $edited_article->id_category = $_POST['id-category'];
             }
 
             if (!$flag) {
                 $path = Utils_controller::check_image("img-article");
                 if (!empty($path)) {
-                    $edited_article->set_image_art($path);
+                    $edited_article->image_art = $path;
                 }
             }
 
@@ -139,7 +139,7 @@ class Article_controller
                 header("location: ".$edited_article->get_id_art());
             }
 
-            include './vue/Article/edit_article.php';
+            require_once './vue/Article/edit_article.php';
         } catch (Exception $e) {
             die("Erreur lors de la modification" . $e->getMessage());
         }
@@ -166,8 +166,8 @@ class Article_controller
             $comment_wanted = $this->manage_comment->comment_by_id($this->bdd, $_GET['id']);
 
             if ($article_wanted) {
-                $title = $article_wanted->get_name_art();
-                $lines = explode(".", $article_wanted->get_content_art());
+                $title = $article_wanted->name_art;
+                $lines = explode(".", $article_wanted->content_art);
                 $content_title = "";
             } else {
                 header("location: ./404");
@@ -195,7 +195,7 @@ class Article_controller
         $title = "Articles";
         $all_articles = $this->manage_article->get_all_articles($this->bdd);
 
-        include "./vue/Article/view_all_articles.php";
+        require_once "./vue/Article/view_all_articles.php";
     }
 
     public function delete_article(INT $id_art): VOID

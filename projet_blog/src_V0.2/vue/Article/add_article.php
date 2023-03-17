@@ -14,7 +14,7 @@ ob_start();
                 <span class="text-gray-700">Dans quel catégorie</span>
                 <select class=" mb-5 rounded-md block w-full mt-2 px-0.5 border-0 border-b-2 border-gray-200 focus:ring-0 focus:border-blue-800" name="id-category">
                     <?php foreach ($all_categories as $value) { ?>
-                        <option value="<?= $value->get_id_category() ?>" /> <?= $value->get_name_category() ?> </option>
+                        <option value="<?= $value->get_id_category() ?>" /> <?= $value->name_category ?> </option>
                     <?php } ?>
                 </select>
             </label>

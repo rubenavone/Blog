@@ -2,7 +2,6 @@ function rand() {
     return Math.round(Math.random() * 80);
 }
 
-
 let pictures = [
     {
         "title": "Comprendre les enjeux du numérique",
