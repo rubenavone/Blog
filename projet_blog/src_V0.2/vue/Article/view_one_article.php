@@ -33,7 +33,7 @@ ob_start();
     foreach ($comment_wanted as $comment) { ?>
         <?php
         $id_user = $comment->id_user;
-        $actual_user = $this->manage_user->user_by_id($this->bdd, $id_user);
+        $actual_user = $this->manage_user->user_by_id($id_user);
         ?>
         <div class="p-6 w-1/3 lg:w-2/3  bg-white rounded-xl shadow-lg flex lg:flex-col lg:items-center lg:text-white space-x-4 mb-14 break-all ">
             <div class="shrink-0">

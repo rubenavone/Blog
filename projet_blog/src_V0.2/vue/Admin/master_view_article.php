@@ -25,8 +25,8 @@ require './vue/utils/modal_delete.comp.php';
     <tbody>
 
       <?php
-      foreach ($this->manage_article->get_all_articles($this->bdd) as $article) {
-        $actual_category = $this->category->get_one_category($this->bdd, $article->id_category);
+      foreach ($this->manage_article->get_all_articles() as $article) {
+        $actual_category = $this->manage_category->get_one_category( $article->id_category);
       ?>
         <tr id="<?= $article->id_art ?>">
           <td class="border border-slate-700 hover:bg-neutral-50"><?= $article->id_art ?></td>

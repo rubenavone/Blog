@@ -8,7 +8,7 @@ if (!isset($_SESSION["role"])) {
 
 $LOGIN_MANDATORY_URL = [
   "deconnexion",
-  
+
 ];
 
 $LOGIN_MANDATORY_URL_ADMIN = [

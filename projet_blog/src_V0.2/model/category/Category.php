@@ -1,6 +1,7 @@
 <?php
 
-class Category{
+class Category
+{
 
     function __construct(private ?INT $id_category, public ?STRING $name_category)
     {
@@ -8,9 +9,8 @@ class Category{
         $this->name_category = $name_category;
     }
 
-    public function get_id_category():INT{
+    public function get_id_category(): INT
+    {
         return $this->id_category;
     }
-
-
 }

@@ -1,35 +1,45 @@
 <?php
-
+require_once './utils/connect_bdd.php';
 class Manager_article extends Article
-{ 
-    static function create_manager_article(){
+{
+    private PDO $user_bdd;
+    private PDO $admin_bdd;
+    public function __construct()
+    {
+
+        $this->user_bdd = BDD::get_user_access();
+        $this->admin_bdd = BDD::get_admin_access();
+    }
+
+    static function create_manager_article()
+    {
         return new Manager_article(null, null, null, null);
     }
 
-    public function add_article(PDO $bdd):VOID
+    public function add_article(Article $article): VOID
     {
         try {
-            $req = $bdd->prepare("INSERT INTO article(name_art, content_art, date_art
+            $req = $this->admin_bdd->prepare("INSERT INTO article(name_art, content_art, date_art
             , id_category,image_art, id_user) VALUE
             (:name_art, :content_art, :date_art, :id_category, :image_art, :id_user)");
 
             $req->execute([
-                'name_art' => $this->name_art,
-                'content_art' => $this->content_art,
-                'date_art' => $this->date_art,
-                'id_category' => $this->id_category,
-                'image_art' => $this->image_art,
-                'id_user' => $this->get_id_user(),
+                'name_art' => $article->name_art,
+                'content_art' => $article->content_art,
+                'date_art' => $article->date_art,
+                'id_category' => $article->id_category,
+                'image_art' => $article->image_art,
+                'id_user' => $article->get_id_user(),
             ]);
         } catch (Exception $e) {
             die('Erreur dans la requête:' . $e->getMessage());
         }
     }
 
-    public function article_by_id(PDO $bdd, INT $id):Article | bool
+    public function article_by_id(INT $id): Article | bool
     {
         try {
-            $req = $bdd->prepare("SELECT * FROM article WHERE id_art = :id_art ");
+            $req = $this->user_bdd->prepare("SELECT * FROM article WHERE id_art = :id_art ");
             $req->execute([
                 'id_art' => $id,
             ]);
@@ -52,10 +62,10 @@ class Manager_article extends Article
         }
     }
 
-    public function article_preview_by_id(PDO $bdd, INT $id):OBJECT
+    public function article_preview_by_id( INT $id): OBJECT
     {
         try {
-            $req = $bdd->prepare("SELECT content_art FROM article WHERE id_art = :id_art ");
+            $req = $this->user_bdd->prepare("SELECT content_art FROM article WHERE id_art = :id_art ");
             $req->execute(['id_art' => $id,]);
             $data = $req->fetch(PDO::FETCH_OBJ);
             return $data;
@@ -64,10 +74,10 @@ class Manager_article extends Article
         }
     }
 
-    public function get_all_articles(PDO $bdd):Array
-    {   
+    public function get_all_articles(): array
+    {
         try {
-            $req = $bdd->prepare("SELECT * FROM `article`
+            $req = $this->user_bdd->prepare("SELECT * FROM `article`
             INNER JOIN
             `category` ON category.id_category = article.id_category
             INNER JOIN 
@@ -80,20 +90,20 @@ class Manager_article extends Article
         }
     }
 
-    public function delete_article(PDO $bdd, INT $id):VOID
+    public function delete_article(INT $id): VOID
     {
         try {
-            $req = $bdd->prepare("DELETE FROM `article` where id_art = :id_art");
+            $req = $this->admin_bdd->prepare("DELETE FROM `article` where id_art = :id_art");
             $req->execute(['id_art' => $id]);
         } catch (Exception $e) {
             die('Erreur dans la requête:' . $e->getMessage());
         }
     }
 
-    public function edit_article(PDO $bdd, INT $id, Article $edited_article):VOID
+    public function edit_article(INT $id, Article $edited_article): VOID
     {
         try {
-            $req = $bdd->prepare("UPDATE article SET name_art = :name_art, content_art = :content_art,
+            $req = $this->admin_bdd->prepare("UPDATE article SET name_art = :name_art, content_art = :content_art,
             date_art = :date_art, id_category = :id_category,image_art = :image_art, id_user = :id_user
             WHERE id_art = :id_art ");
             $req->execute([

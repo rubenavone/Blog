@@ -10,10 +10,10 @@ ob_start();
         </p>
         <form action="<?= $_SERVER['REQUEST_URI'] ?>" class="justify-center items-center flex flex-col " method="POST">
             <label class="block w-64">
-                <input type="mail" class="mt-5 block w-full px-0.5 border-1 border-b-2 border-gray-200 focus:ring-0 focus:border-blue-800" placeholder="Votre mail" name="mail_util" />
+                <input type="mail" class="mt-5 block w-full px-0.5 border-1 border-b-2 border-gray-200 focus:ring-0 focus:border-blue-800" placeholder="Votre mail" name="mail_user" />
             </label>
             <label class="block w-64">
-                <input type="password" placeholder="votre mot de passe" class="mt-5 block w-full px-0.5 border-1 border-b-2 border-gray-200 focus:ring-0 focus:border-blue-800" placeholder="" name="mdp_util" />
+                <input type="password" placeholder="votre mot de passe" class="mt-5 block w-full px-0.5 border-1 border-b-2 border-gray-200 focus:ring-0 focus:border-blue-800" placeholder="" name="mdp_user" />
             </label>
 
             <input type="submit" value="submit" class="rounded-full bg-blue-800 text-white w-32 h-10  mt-5" name="submit" />

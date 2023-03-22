@@ -1,7 +1,10 @@
 <?php
-class Utils_controller{
-    
-    static public function check_image(STRING $posted_img):STRING {
+class Utils_controller
+{
+
+    public static function check_image(STRING $posted_img): STRING
+    {
+
         /**
          * TODO Vérifier le type de fichiers, Gestion des effet de bord trop léger
          */
@@ -13,7 +16,7 @@ class Utils_controller{
             $path = "$name";
             move_uploaded_file($temp_name,  "./dist/img/$path");
             return $path;
-        }else{
+        } else {
             return "";
         }
     }

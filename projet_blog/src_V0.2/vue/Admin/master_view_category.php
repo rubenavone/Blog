@@ -30,7 +30,7 @@ require './vue/utils/modal_delete.comp.php';
 
         <tr id="">
           <td class="border border-slate-700 hover:bg-neutral-50"><?= $category->get_id_category() ?></td>
-          <td class="border border-slate-700 hover:bg-neutral-50"><?= $category->get_name_category() ?></td>
+          <td class="border border-slate-700 hover:bg-neutral-50"><?= $category->name_category ?></td>
           <td class="border border-slate-700 hover:bg-neutral-50">
             <a href="#" class="modal-button-js"><button class="w-auto" id="">❌ Supprimer</button></a>
             <a href="#" class=""><button class="w-auto ">🖊️ Editer</button></a>

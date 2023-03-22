@@ -29,7 +29,7 @@ require './vue/utils/modal_delete.comp.php';
       <?php
       foreach ($user_tr as $user) {
       ?>
-        <tr id="" >
+        <tr id="">
           <td class="border border-slate-700 hover:bg-neutral-50"><?= $user->get_id_user() ?></td>
           <td class="border border-slate-700 hover:bg-neutral-50"><?= $user->get_name_user() ?></td>
           <td class="border border-slate-700 hover:bg-neutral-50"><?= $user->get_mail_user() ?></td>
@@ -41,8 +41,8 @@ require './vue/utils/modal_delete.comp.php';
           </td>
         </tr>
 
-      <?php 
-      } 
+      <?php
+      }
       ?>
 
     </tbody>

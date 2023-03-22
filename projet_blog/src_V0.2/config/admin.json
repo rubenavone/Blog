@@ -1,0 +1,5 @@
+{
+    "bdd": "mysql:host=localhost;dbname=blog_folio",
+    "id": "adm",
+    "pwd": "8XnY@//FCyCwPMil"
+}

@@ -14,6 +14,6 @@ ob_start();
 
 <?php
 
-    $modal_delete = ob_get_clean();
+$modal_delete = ob_get_clean();
 
-    ?>
+?>

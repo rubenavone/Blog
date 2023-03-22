@@ -2,7 +2,7 @@
 <main class="flex flex-wrap justify-around text-center ">
      <?php
      foreach ($all_articles as $article) {
-          $actual_category = $this->category->get_one_category($this->bdd, $article->id_category);
+          $actual_category = $this->manage_category->get_one_category($article->id_category);
      ?>
           <article class="relative mt-20  ">
                <a href="./article?id=<?= $article->id_art ?>" class=" top-0 text-6xl mx-auto">
