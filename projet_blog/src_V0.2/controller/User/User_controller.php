@@ -124,8 +124,7 @@ class User_controller
         } else {
             $flag = true;
         }
-        var_dump($actual_user);
-        die;
+   
         #Verification que le mail exist en base de données
         if (!$flag && !empty($this->manage_user->verify_mail_exist($actual_user->get_mail_user()))) {
             $user = $this->manage_user->verify_user($actual_user->get_mail_user());

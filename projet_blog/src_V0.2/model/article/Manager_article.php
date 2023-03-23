@@ -13,7 +13,7 @@ class Manager_article extends Article
 
     static function create_manager_article()
     {
-        return new Manager_article(null, null, null, null);
+        return new self();
     }
 
     public function add_article(Article $article): VOID

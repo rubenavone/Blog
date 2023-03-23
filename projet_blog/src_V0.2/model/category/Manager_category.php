@@ -12,7 +12,7 @@ class Manager_category extends Category
     }
     public static function create_manager_category()
     {
-        return new Manager_category(null, null, null, null);
+        return new self();
     }
     public function get_all_categories(): array
     {
