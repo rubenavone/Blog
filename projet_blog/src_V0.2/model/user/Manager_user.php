@@ -12,7 +12,7 @@ class Manager_user extends User
     }
     static function create_manager_user()
     {
-        return new Manager_user(null, null, null, null, null, null);
+        return new self();
     }
 
     public function add_user(User $user): VOID

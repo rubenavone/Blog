@@ -12,7 +12,7 @@ class Manager_comment extends Comment
     }
     static function create_manager_comment():Manager_comment
     {
-        return new Manager_comment(null, null, null, null);
+        return new self();
     }
 
     public function add_comment(Comment $comment): void

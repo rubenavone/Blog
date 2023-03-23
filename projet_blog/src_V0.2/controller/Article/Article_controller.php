@@ -66,7 +66,7 @@ class Article_controller
                     $_POST["id-category"],
                     htmlspecialchars($path)
                 );
-             
+           
                 $this->manage_article->add_article($article);
                 $error = "ok";
             }

@@ -4,10 +4,9 @@
 
 class BDD
 {
-    private static array $instances = [];
     private PDO $bdd;
 
-    public static function get_user_access()
+    public static function get_user_access():PDO
     {
         $data = file_get_contents('./config/user.json');
         // JSON decode
@@ -19,7 +18,7 @@ class BDD
             [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]
         );
     }
-    public static function get_admin_access()
+    public static function get_admin_access():PDO
     {
         $data = file_get_contents('./config/admin.json');
         // JSON decode
