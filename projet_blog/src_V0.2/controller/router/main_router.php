@@ -35,22 +35,22 @@ try {
     case "addUser":
       require_once "controller/User/User_controller.php";
       $user = new User_controller;
-      $user->addUser();
+      $user->add_user();
       break;
     case "connexion";
       require_once "controller/User/User_controller.php";
       $user = new User_controller;
-      $user->connexion();
+      $user->connect();
       break;
     case "deconnexion";
       require_once "controller/User/User_controller.php";
       $user = new User_controller;
-      $user->deconnexion();
+      $user->disconnect();
       break;
     case "profil";
       require_once "controller/User/User_controller.php";
       $user = new User_controller;
-      $user->profil_user();
+      $user->display_profil();
       break;
     case "admin";
       require "./controller/router/admin_router.php";

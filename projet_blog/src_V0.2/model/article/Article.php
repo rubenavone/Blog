@@ -7,10 +7,10 @@ class Article
         public ?STRING $content_art,
         public ?STRING $date_art,
         private ?INT $id_art,
-        public ?INT $id_category = null,
+        public ?INT $id_category,
         public ?STRING $image_art = "default.jpg",
         private ?INT $id_user = 1
-    ) {
+     ) {
         $this->name_art = $name_art;
         $this->content_art = $content_art;
         $this->date_art = $date_art;

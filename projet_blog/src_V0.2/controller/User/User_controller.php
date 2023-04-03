@@ -17,7 +17,7 @@ class User_controller
         $this->manage_user = Manager_user::create_manager_user();
 
     }
-    public function addUser(): VOID
+    public function add_user(): VOID
     {
         # Déclaration d'un tableau vide pour afficher certaine valeur ou non
         $entry = [];
@@ -34,7 +34,7 @@ class User_controller
         # Ici on verifie si touts nos champs sont remplis
         if (!$flag && !empty($_POST['name_user']) && !empty($_POST['first_name_user']) && !empty($_POST['mail_user']) && !empty($_POST['mdp_user'])) {
             # Instanciation d'un nouvel utilisateur, définis img_user vide car on à pas encore le chemin
-            $new_user = new User(null, htmlspecialchars($_POST['name_user']), htmlspecialchars($_POST['first_name_user']), htmlspecialchars($_POST['mail_user']), $_POST['mdp_user'], htmlspecialchars(""));
+            $new_user = new User(null, htmlspecialchars($_POST['name_user']), htmlspecialchars($_POST['first_name_user']), htmlspecialchars($_POST['mail_user']), $_POST['mdp_user'], htmlspecialchars(""), 1);
         } else {
             $entry_value = '<p  class="text-xl before:block before:absolute before:-inset-1 before:-skew-y-2 before:bg-red-600 relative inline-block " > <span class="relative text-white " >Désoler une erreur est survenue   </span> </p> ';
             array_push($entry, $entry_value);
@@ -95,7 +95,7 @@ class User_controller
         require_once './vue/User/add_comment.php';
     }
 
-    public function connexion(): VOID
+    public function connect(): VOID
     {
         $content_title = "Interface de ";
         $title = "Connexion";
@@ -148,14 +148,14 @@ class User_controller
         require_once 'vue/User/view_connexion.php';
     }
 
-    public function deconnexion(): VOID
+    public function disconnect(): VOID
     {
         session_destroy();
         unset($_COOKIE['PHPSESSID']);
         header('location: / ');
     }
 
-    public function profil_user(): VOID
+    public function display_profil(): VOID
     {
         $content_title = "Profil ";
         $title = "Connexion";

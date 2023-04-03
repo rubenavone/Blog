@@ -7,7 +7,7 @@ try {
 
     switch ($request_uri[1]) {
         case "":
-            require_once "controller/Admin/admin_home_controller.php";
+            require_once "controller/Admin/Admin_home_controller.php";
             $admin = new Admin_home_controller;
             $admin->show_home_admin();
             break;
