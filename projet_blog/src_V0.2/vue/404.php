@@ -1,4 +1,4 @@
-<?php 
+<?php
 ob_start();
 ?>
 <section class="flex items-center flex-col mt-10 text-center">
@@ -7,7 +7,7 @@ ob_start();
 </section>
 
 <?php
-    $content = ob_get_clean();
-    require_once 'vue/template.php';
+$content = ob_get_clean();
+require_once 'vue/template.php';
 
-    ?>
+?>

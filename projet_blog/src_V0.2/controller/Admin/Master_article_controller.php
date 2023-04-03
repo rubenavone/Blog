@@ -9,23 +9,25 @@ require_once './model/comment/Manager_comment.php';
 require_once './model/user/Manager_user.php';
 require_once './controller/Utils/Utils_controller.php';
 
-class Master_article_controller{
+class Master_article_controller
+{
     private Manager_article $manage_article;
     private Manager_comment $manage_comment;
     private Manager_user $manage_user;
-    private Manager_category $category;
-    private PDO $bdd;
-    
+    private Manager_category $manage_category;
+
+
     public function __construct()
     {
         $this->manage_article = Manager_article::create_manager_article();
         $this->manage_comment = Manager_comment::create_manager_comment();
         $this->manage_user = Manager_user::create_manager_user();
-        $this->category = Manager_category::create_manager_category();
-        $this->bdd = BDD::getBDD();
+        $this->manage_category = Manager_category::create_manager_category();
+
     }
-    
-    public function show_master_article():void{
+
+    public function show_master_article(): void
+    {
         $content_title = "Gestion des";
         $title = "Articles";
         /**
@@ -33,12 +35,11 @@ class Master_article_controller{
          * Commen instancier l'ensemble dans un objet ? 
          */
         $articles_tr = [];
-        foreach ($this->manage_article->get_all_articles($this->bdd) as $article) {
+        foreach ($this->manage_article->get_all_articles() as $article) {
             array_push($articles_tr, $article);
         }
 
         # Refacto à faire bonne pratique le __DIR__ donne le chemin courant
         require_once __DIR__ . "/../../vue/Admin/master_view_article.php";
     }
-
 }

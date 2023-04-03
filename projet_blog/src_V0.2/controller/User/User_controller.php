@@ -8,14 +8,16 @@ require_once './controller/Utils/Utils_controller.php';
 
 class User_controller
 {
-    private PDO $bdd;
-
+    private Manager_comment $manage_comment;
+    private Manager_user $manage_user;
     public function __construct()
     {
-        $this->bdd = BDD::getBDD();
-    }
 
-    public function addUser():VOID
+        $this->manage_comment = Manager_comment::create_manager_comment();
+        $this->manage_user = Manager_user::create_manager_user();
+
+    }
+    public function addUser(): VOID
     {
         # Déclaration d'un tableau vide pour afficher certaine valeur ou non
         $entry = [];
@@ -30,9 +32,9 @@ class User_controller
         }
 
         # Ici on verifie si touts nos champs sont remplis
-        if (!$flag && !empty($_POST['name_util']) && !empty($_POST['first_name_util']) && !empty($_POST['mail_util']) && !empty($_POST['mdp_util'])) {
-            # Instanciation d'un nouvel utilisateur, définis img_util vide car on à pas encore le chemin
-            $new_user = new Manager_user(null,htmlspecialchars($_POST['name_util']), htmlspecialchars($_POST['first_name_util']), htmlspecialchars($_POST['mail_util']), $_POST['mdp_util'], htmlspecialchars(""));
+        if (!$flag && !empty($_POST['name_user']) && !empty($_POST['first_name_user']) && !empty($_POST['mail_user']) && !empty($_POST['mdp_user'])) {
+            # Instanciation d'un nouvel utilisateur, définis img_user vide car on à pas encore le chemin
+            $new_user = new User(null, htmlspecialchars($_POST['name_user']), htmlspecialchars($_POST['first_name_user']), htmlspecialchars($_POST['mail_user']), $_POST['mdp_user'], htmlspecialchars(""));
         } else {
             $entry_value = '<p  class="text-xl before:block before:absolute before:-inset-1 before:-skew-y-2 before:bg-red-600 relative inline-block " > <span class="relative text-white " >Désoler une erreur est survenue   </span> </p> ';
             array_push($entry, $entry_value);
@@ -40,9 +42,9 @@ class User_controller
         }
 
         # Ici on verifie que le mail n'existe pas dans la BDD
-        if (!$flag && !$new_user->verify_mail_exist($this->bdd)) {
+        if (!$flag && !$this->manage_user->verify_mail_exist($new_user->get_mail_user())) {
             # Verif de l'existance d'un fichiers (upload ou pas par l'utilisateur)
-            $path = Utils_controller::check_image("img_util");
+            $path = Utils_controller::check_image("img_user");
 
             if ($path === "") {
                 $path = "default.jpg";
@@ -50,8 +52,8 @@ class User_controller
                 array_push($entry, $entry_value);
             }
 
-            $new_user->set_img_user($path);
-            $new_user->add_user($this->bdd);
+            $this->manage_user->set_img_user($path);
+            $this->manage_user->add_user($new_user);
 
             $entry_value = '<p class=" text-xl before:block before:absolute before:-inset-1 before:-skew-y-2 before:bg-green-600 relative inline-block" > <span class="relative text-white ">Inscription validé</span><p>';
             array_push($entry, $entry_value);
@@ -63,7 +65,7 @@ class User_controller
         require_once './vue/User/add_user.php';
     }
 
-    public function add_comment():VOID
+    public function add_comment(): VOID
     {
         $content_title = "Ajouter un";
         $title = "Commentaire";
@@ -78,8 +80,8 @@ class User_controller
             // If the reCAPTCHA API response is valid 
             if ($response_data->success) {
                 if (isset($_POST["commentaire"]) && isset($_SESSION['connected']) && isset($_GET['id'])) {
-                    $new_comment = new Manager_comment(htmlspecialchars($_GET["id"]), $_SESSION['id'], htmlspecialchars($_POST["commentaire"]), null);
-                    $new_comment->add_comment($this->bdd);
+                    $comment = new Comment(htmlspecialchars($_GET["id"]), $_SESSION['id'], htmlspecialchars($_POST["commentaire"]), null);
+                    $this->manage_comment->add_comment($comment);
                     if (isset($_SESSION["temp_page"])) {
                         header('location: ' . $_SESSION["temp_page"]);
                     }
@@ -93,68 +95,68 @@ class User_controller
         require_once './vue/User/add_comment.php';
     }
 
-    public function connexion():VOID
+    public function connexion(): VOID
     {
         $content_title = "Interface de ";
         $title = "Connexion";
         $error = "";
         $flag = true;
-            #Verification que l'utilisateur à bien appuyer sur le boutton
+        #Verification que l'utilisateur à bien appuyer sur le boutton
+        if (isset($_SESSION["temp_page"])) {
+            $go_back_link = $_SESSION["temp_page"];
+        } else {
+            $go_back_link = "";
+        }
+
+        if (isset($_GET['error']) && $_GET['error'] === '2') {
+            $error = 'Erreur mail ou mot de passe<br/>';
+        }
+
+        if (isset($_POST['submit'])) {
+            $flag = false;
+        }
+
+        if (!$flag && !empty($_POST['mail_user'] and !empty($_POST['mdp_user']))) {
+            $actual_user = new User(null, "", "", $_POST['mail_user'], $_POST['mdp_user'], "");
+  
+        } else if (!isset($_GET["error"])) {
+            header('location: connexion?error=2');
+        } else {
+            $flag = true;
+        }
+        var_dump($actual_user);
+        die;
+        #Verification que le mail exist en base de données
+        if (!$flag && !empty($this->manage_user->verify_mail_exist($actual_user->get_mail_user()))) {
+            $user = $this->manage_user->verify_user($actual_user->get_mail_user());
+            $hash = $user->password_user;
+        } else if (!$flag) {
+            header('location: connexion?error=2');
+        }
+        if (!$flag && password_verify($actual_user->get_password_user(), $hash)) {
+            $_SESSION['id'] = $user->id_user;
+            $_SESSION['name'] = $user->name_user;
+            $_SESSION['connected'] = true;
+            $_SESSION['role'] = $user->id_role;
             if (isset($_SESSION["temp_page"])) {
-                $go_back_link = $_SESSION["temp_page"];
+                header('location: ' . $_SESSION["temp_page"]);
             } else {
-                $go_back_link = "";
+                header('location: /');
             }
-
-            if (isset($_GET['error']) && $_GET['error'] === '2') {
-                $error = 'Erreur mail ou mot de passe<br/>';
-            }
-
-            if (isset($_POST['submit'])) {
-                $flag = false;
-            }
-
-            if (!$flag && !empty($_POST['mail_util'] and !empty($_POST['mdp_util']))) {
-                $util = new Manager_user(null,"", "", $_POST['mail_util'], $_POST['mdp_util'], "");
-            } else if (!isset($_GET["error"])) {
-                header('location: connexion?error=2');
-                
-            }else{
-                $flag = true;
-            }
-
-            #Verification que le mail exist en base de données
-            if (!$flag && !empty($util->verify_mail_exist($this->bdd))) {
-                $user = $util->verify_user($this->bdd);
-                $hash = $user->password_user;
-            } else if (!$flag) {
-                header('location: connexion?error=2');
-            }
-            if (!$flag && password_verify($_POST['mdp_util'], $hash)) {
-                $_SESSION['id'] = $user->id_user;
-                $_SESSION['name'] = $user->name_user;
-                $_SESSION['connected'] = true;
-                $_SESSION['role'] = $user->id_role;
-                if (isset($_SESSION["temp_page"])) {
-                    header('location: ' . $_SESSION["temp_page"]);
-                } else {
-                    header('location: /');
-                }
-            } else if (!$flag) {
-                header('location: connexion?error=2');
-            }
+        } else if (!$flag) {
+            header('location: connexion?error=2');
+        }
         require_once 'vue/User/view_connexion.php';
-
     }
 
-    public function deconnexion():VOID
+    public function deconnexion(): VOID
     {
         session_destroy();
         unset($_COOKIE['PHPSESSID']);
         header('location: / ');
     }
 
-    public function profil_user():VOID
+    public function profil_user(): VOID
     {
         $content_title = "Profil ";
         $title = "Connexion";

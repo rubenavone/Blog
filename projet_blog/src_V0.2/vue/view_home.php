@@ -10,10 +10,10 @@ ob_start();
 </header>
 
 <div class="relative hidden lg:block">
-<iconify-icon icon="material-symbols:arrow-back-ios-new" class="left-arrow arrow stroke-white z-0"></iconify-icon>
-  <iconify-icon icon="material-symbols:arrow-forward-ios" class="right-arrow arrow text-white z-0 stroke-black"></iconify-icon>
-  <section class="slider d-flex smooth">
-  </section>
+    <iconify-icon icon="material-symbols:arrow-back-ios-new" class="left-arrow arrow stroke-white z-0"></iconify-icon>
+    <iconify-icon icon="material-symbols:arrow-forward-ios" class="right-arrow arrow text-white z-0 stroke-black"></iconify-icon>
+    <section class="slider d-flex smooth">
+    </section>
 </div>
 
 <section class="flex flex-col w-full lg:flex-row lg:h-section-home">
@@ -30,7 +30,7 @@ ob_start();
         <h2 class="text-center text-3xl">Améliorer, entretenir vos services</h2>
         <p class="w-2/4 self-center text-center pt-5">Les services numériques sont essentiels pour les entreprises de la tech, mais leur maintenance peut être complexe et chronophage. Je suis là pour vous aider à améliorer et entretenir vos services numériques pour vous permettre de vous concentrer sur votre cœur de métier. Avec mes compétences en développement et en maintenance de sites web et d'applications, je suis capable de fournir des services de haute qualité pour votre entreprise.</p>
     </article>
-    <img src="./dist/img/Frame 2.jpg" alt="" class="lg:w-2/4 w-4/4 object-cover"> 
+    <img src="./dist/img/Frame 2.jpg" alt="" class="lg:w-2/4 w-4/4 object-cover">
 </section>
 
 <section class="lg:h-[96vh] overflow-hidden">
@@ -39,8 +39,8 @@ ob_start();
         <article class="pt-5 flex flex-col text-center mt-12">
             <h2 class="text-center text-3xl">Un développeur engagé et passioné</h2>
             <p class="mx-auto w-1/3 text-center pt-5">
-            A la recherche d'un développeur qui est passionné par son métier et engagé dans la réussite de votre entreprise ? Avec un engagement total pour la satisfaction de ses clients, j'apporterais une expertise de qualité à tous ses projets, pour vous offrir des solutions numériques innovantes et sur mesure. Quels que soient vos besoins en matière de développement web ou d'applications, je saurais apporter la touche de créativité et d'innovation dont votre entreprise a besoin.
-           </p>
+                A la recherche d'un développeur qui est passionné par son métier et engagé dans la réussite de votre entreprise ? Avec un engagement total pour la satisfaction de ses clients, j'apporterais une expertise de qualité à tous ses projets, pour vous offrir des solutions numériques innovantes et sur mesure. Quels que soient vos besoins en matière de développement web ou d'applications, je saurais apporter la touche de créativité et d'innovation dont votre entreprise a besoin.
+            </p>
         </article>
     </div>
 
@@ -65,7 +65,7 @@ ob_start();
 
         </form>
     </div>
-    
+
 </section>
 <?php
 
