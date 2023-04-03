@@ -1,4 +1,8 @@
 node_modules
 secret.json
 src_V0.2/dist/output.css
+<<<<<<< HEAD
 src_V0.2/config/*
+=======
+src_V0.2/config/*
+>>>>>>> 3c92ffe (gitignore modified)
