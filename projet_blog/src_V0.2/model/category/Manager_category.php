@@ -2,13 +2,22 @@
 
 class Manager_category extends Category
 {
-    static function create_manager_category(){
-        return new Manager_category(null, null, null, null);
+    private PDO $user_bdd;
+    private PDO $admin_bdd;
+    public function __construct()
+    {
+
+        $this->user_bdd = BDD::get_user_access();
+        $this->admin_bdd = BDD::get_admin_access();
     }
-    public function get_all_categories(OBJECT $bdd):ARRAY
+    public static function create_manager_category()
+    {
+        return new self();
+    }
+    public function get_all_categories(): array
     {
         try {
-            $req = $bdd->prepare("SELECT * FROM category");
+            $req = $this->user_bdd->prepare("SELECT * FROM category");
             $req->execute();
             $data = $req->fetchAll(PDO::FETCH_OBJ);
             $data_array = [];
@@ -22,28 +31,29 @@ class Manager_category extends Category
         }
     }
 
-    public function get_one_category(OBJECT $bdd, $id):OBJECT
+    public function get_one_category($id): OBJECT
     {
         try {
-            $req = $bdd->prepare("SELECT * FROM category WHERE id_category = :id_category");
+            $req = $this->user_bdd->prepare("SELECT * FROM category WHERE id_category = :id_category");
             $req->execute([
-                'id_category'=>$id,
+                'id_category' => $id,
             ]);
             $data = $req->fetch(PDO::FETCH_OBJ);
-        
+
             return new Category($data->id_category, $data->name_category, null);
         } catch (Exception $e) {
             die('Erreur dans la requete:' . $e->getMessage());
         }
     }
 
-    public function add_category(OBJECT $bdd){
-        try{
-            $req = $bdd->prepare("INSERT INTO category(name-category) VALUE (:name-category) ");
+    public function add_category():void
+    {
+        try {
+            $req = $this->admin_bdd->prepare("INSERT INTO category(name-category) VALUE (:name-category) ");
             $req->execute([
-                'name-category' => $this->get_name_category()
+                'name-category' => $this->name_category
             ]);
-        }catch(Exception $e){
+        } catch (Exception $e) {
             die('Erreur dans la requete:' . $e->getMessage());
         }
     }

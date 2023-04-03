@@ -10,24 +10,23 @@ require_once './model/comment/Manager_comment.php';
 require_once './model/user/Manager_user.php';
 require_once './controller/Utils/Utils_controller.php';
 
-class Article_controller
+class Article_controller 
 {
-    private Manager_article $manage_article; 
+    private Manager_article $manage_article;
     private Manager_comment $manage_comment;
     private Manager_user $manage_user;
-    private Manager_category $category;
-    private PDO $bdd;
+    private Manager_category $manage_category;
+
 
     public function __construct()
     {
         $this->manage_article = Manager_article::create_manager_article();
         $this->manage_comment = Manager_comment::create_manager_comment();
         $this->manage_user = Manager_user::create_manager_user();
-        $this->category = Manager_category::create_manager_category();
-        $this->bdd = BDD::getBDD();
+        $this->manage_category = Manager_category::create_manager_category();
     }
 
-    public function addArticle(): VOID
+    public function add_article(): VOID
     {
         try {
             $content_title = "Ajouter un";
@@ -39,8 +38,6 @@ class Article_controller
                 header('location: connexion?error=interdit');
             }
 
-            #Récuperation de la date 
-            #Verifier le contenus des input
             if (isset($_POST['submit'])) {
                 $flag = false;
             }
@@ -60,7 +57,7 @@ class Article_controller
                 if (empty($_POST['date-article'])) {
                     $_POST['date-article'] = date("Y-m-d");
                 }
-                $manage_article = new Manager_article(
+                $article = new Article(
                     htmlspecialchars($_POST['name-article']),
                     htmlspecialchars($_POST['content-article']),
                     $_POST['date-article'],
@@ -68,14 +65,12 @@ class Article_controller
                     $_POST["id-category"],
                     htmlspecialchars($path)
                 );
-    
-                $manage_article->add_article($this->bdd);
+           
+                $this->manage_article->add_article($article);
                 $error = "ok";
             }
-
-            $all_categories = $this->category->get_all_categories($this->bdd);
-
-            include './vue/Article/add_article.php';
+            $all_categories = $this->manage_category->get_all_categories();
+            require_once './vue/Article/add_article.php';
         } catch (Exception $e) {
             die('Erreur Dans lors de l\'ajout' . $e->getMessage());
         }
@@ -89,20 +84,20 @@ class Article_controller
         try {
             $content_title = "Modifier un";
             $title = "Article";
-            $article_wanted = $this->manage_article->article_by_id($this->bdd, $id);
-            $all_categories = $this->category->get_all_categories($this->bdd);
+            $article_wanted = $this->manage_article->article_by_id($id);
+            $all_categories = $this->manage_category->get_all_categories();
 
             $flag = true;
             if (!$article_wanted) {
                 throw new Exception();
             }
             $edited_article = new Article(
-                $article_wanted->get_name_art(),
-                $article_wanted->get_content_art(),
-                $article_wanted->get_date_art(),
+                $article_wanted->name_art,
+                $article_wanted->content_art,
+                $article_wanted->date_art,
                 $article_wanted->get_id_art(),
-                $article_wanted->get_id_category(),
-                $article_wanted->get_image_art(),
+                $article_wanted->id_category,
+                $article_wanted->image_art,
                 $article_wanted->get_id_user()
             );
 
@@ -110,38 +105,40 @@ class Article_controller
                 $flag = false;
             }
 
-            if (!$flag && $_POST['name-article'] !== $article_wanted->get_name_art() && !empty($_POST['name-article'])) {
-                $edited_article->set_name_art($_POST['name-article']);
+            if (!$flag && $_POST['name-article'] !== $article_wanted->name_art && !empty($_POST['name-article'])) {
+                $edited_article->name_art = $_POST['name-article'];
             }
 
             if (
-                !$flag &&  $_POST['content-article'] !== $article_wanted->get_content_art() && !empty($_POST['content-article'])) {
-                $edited_article->set_content_art($_POST['content-article']);
+                !$flag &&  $_POST['content-article'] !== $article_wanted->content_art && !empty($_POST['content-article'])
+            ) {
+                $edited_article->content_art = $_POST['content-article'];
             }
 
-            if (!$flag && $_POST['date-article'] !== $article_wanted->get_date_art() && !empty($_POST['date-article'])) {
-                $edited_article->set_date_art($_POST['date-article']);
+            if (!$flag && $_POST['date-article'] !== $article_wanted->date_art && !empty($_POST['date-article'])) {
+                $edited_article->date_art = $_POST['date-article'];
             }
 
-            if (!$flag && $_POST['id-category'] !== $article_wanted->get_id_category() && !empty($_POST['id-category'])) {
-                $edited_article->set_id_category($_POST['id-category']);
+            if (!$flag && $_POST['id-category'] !== $article_wanted->id_category && !empty($_POST['id-category'])) {
+
+                $edited_article->id_category = $_POST['id-category'];
             }
 
             if (!$flag) {
                 $path = Utils_controller::check_image("img-article");
                 if (!empty($path)) {
-                    $edited_article->set_image_art($path);
+                    $edited_article->image_art = $path;
                 }
             }
 
-            if(!$flag){
-                $this->manage_article->edit_article($this->bdd, $edited_article->get_id_art(), $edited_article);
-                header("location: ".$edited_article->get_id_art());
+            if (!$flag) {
+                $this->manage_article->edit_article($edited_article->get_id_art(), $edited_article);
+                header("location: " . $edited_article->get_id_art());
             }
 
-            include './vue/Article/edit_article.php';
+            require_once './vue/Article/edit_article.php';
         } catch (Exception $e) {
-            die("Erreur lors de la modification" . $e->getMessage());
+            require_once 'controller/ctrl_404.php';
         }
     }
 
@@ -149,12 +146,10 @@ class Article_controller
     {
         $flag = true;
 
-
         if (isset($_GET['id']) && !empty($_GET['id'])) {
             $flag = false;
             $_SESSION['temp_page'] = "article?id=" . $_GET["id"];
             $_GET["id"] = (int)$_GET["id"];
-            
         } else {
             header("location: ./404");
         }
@@ -162,12 +157,12 @@ class Article_controller
         if (!$flag && $_GET['id'] !== null) {
 
             #Récuperation de l'articles et des commentaires 
-            $article_wanted = $this->manage_article->article_by_id($this->bdd, $_GET['id']);
-            $comment_wanted = $this->manage_comment->comment_by_id($this->bdd, $_GET['id']);
+            $article_wanted = $this->manage_article->article_by_id($_GET['id']);
+            $comment_wanted = $this->manage_comment->comment_by_id($_GET['id']);
 
             if ($article_wanted) {
-                $title = $article_wanted->get_name_art();
-                $lines = explode(".", $article_wanted->get_content_art());
+                $title = $article_wanted->name_art;
+                $lines = explode(".", $article_wanted->content_art);
                 $content_title = "";
             } else {
                 header("location: ./404");
@@ -179,9 +174,9 @@ class Article_controller
         require_once './vue/Article/view_one_article.php';
     }
 
-    public function show_preview(INT $id_art): string
+    public function show_preview(INT $id_art): STRING
     {
-        $preview = $this->manage_article->article_preview_by_id($this->bdd, $id_art);
+        $preview = $this->manage_article->article_preview_by_id($id_art);
 
         if ($preview) {
             $lines = explode(".", $preview->content_art);
@@ -193,15 +188,15 @@ class Article_controller
     {
         $content_title = "Tous les";
         $title = "Articles";
-        $all_articles = $this->manage_article->get_all_articles($this->bdd);
+        $all_articles = $this->manage_article->get_all_articles();
 
-        include "./vue/Article/view_all_articles.php";
+        require_once "./vue/Article/view_all_articles.php";
     }
 
     public function delete_article(INT $id_art): VOID
     {
         if (isset($_SESSION["role"]) && $_SESSION["role"] == 1) {
-            $this->manage_article->delete_article($this->bdd, htmlspecialchars($id_art));
+            $this->manage_article->delete_article(htmlspecialchars($id_art));
             header("location: /admin/articles");
         } else {
             header("location: /admin/articles");

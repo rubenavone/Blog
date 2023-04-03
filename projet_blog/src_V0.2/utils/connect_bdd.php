@@ -2,34 +2,32 @@
 
 #Instanciation de l'objet PDO pour pouvoir ce connecter à la bdd
 
-// $bdd = new PDO('mysql:host=localhost;dbname=blog_folio', 'root', '',
-// array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
+class BDD
+{
+    private PDO $bdd;
 
-class BDD{
-    private static ARRAY $instances = [];
-    private PDO $bdd;   
-    
-    private function __construct(){
-        $data = file_get_contents('./secret.json'); 
+    public static function get_user_access():PDO
+    {
+        $data = file_get_contents('./config/user.json');
         // JSON decode
-        $obj = json_decode($data); 
-        $this->bdd = new PDO(
+        $obj = json_decode($data);
+        return new PDO(
             $obj->bdd,
-            $obj->id, 
+            $obj->id,
             $obj->pwd,
             [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]
         );
     }
-
-    public static function getBDD(){
-        $cls = static::class;
-
-        if (!isset(self::$instances[$cls])) {
-            self::$instances[$cls] = new static();
-        }
-
-        return self::$instances[$cls]->bdd;
+    public static function get_admin_access():PDO
+    {
+        $data = file_get_contents('./config/admin.json');
+        // JSON decode
+        $obj = json_decode($data);
+        return new PDO(
+            $obj->bdd,
+            $obj->id,
+            $obj->pwd,
+            [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]
+        );
     }
 }
-
-?>

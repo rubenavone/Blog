@@ -2,34 +2,42 @@
 
 class Manager_comment extends Comment
 {
-    
-    static function create_manager_comment(){
-        return new Manager_comment(null, null, null, null);
+    private PDO $user_bdd;
+    private PDO $admin_bdd;
+    public function __construct()
+    {
+
+        $this->user_bdd = BDD::get_user_access();
+        $this->admin_bdd = BDD::get_admin_access();
+    }
+    static function create_manager_comment():Manager_comment
+    {
+        return new self();
     }
 
-    public function add_comment(object $bdd):void
+    public function add_comment(Comment $comment): void
     {
         try {
-            $req = $bdd->prepare("INSERT INTO comment(id_art, id_user, comment, date_comment) VALUE
+            $req = $this->admin_bdd->prepare("INSERT INTO comment(id_art, id_user, comment, date_comment) VALUE
             (:id_art, :id_user, :comment, :date_comment)");
 
-            $this->set_date_comment(date('y-m-d h:m:s'));
+            $comment->date_comment = date('y-m-d h:m:s');
 
             $req->execute([
-                'id_art' => $this->get_id_art(),
-                'id_user' => $this->get_id_user(),
-                'comment' => $this->get_comment(),
-                'date_comment' => $this->get_date_comment(),
+                'id_art' => $comment->get_id_art(),
+                'id_user' => $comment->get_id_user(),
+                'comment' => $comment->comment,
+                'date_comment' => $comment->date_comment,
             ]);
         } catch (Exception $e) {
             die('Erreur dans la requete:' . $e->getMessage());
         }
     }
 
-    public function comment_by_id(object $bdd, int $id):array
+    public function comment_by_id(INT $id): array
     {
         try {
-            $req = $bdd->prepare("SELECT * FROM comment WHERE id_art = :id_art ");
+            $req = $this->user_bdd->prepare("SELECT * FROM comment WHERE id_art = :id_art ");
             $req->execute([
                 'id_art' => $id,
             ]);
@@ -40,7 +48,7 @@ class Manager_comment extends Comment
         }
     }
 
-    public function remove_comment(object $bdd):void
+    public function remove_comment( INT $id): void
     {
         try {
             /***CODE***/
