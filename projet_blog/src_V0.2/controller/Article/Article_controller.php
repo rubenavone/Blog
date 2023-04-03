@@ -10,13 +10,12 @@ require_once './model/comment/Manager_comment.php';
 require_once './model/user/Manager_user.php';
 require_once './controller/Utils/Utils_controller.php';
 
-class Article_controller
+class Article_controller 
 {
     private Manager_article $manage_article;
     private Manager_comment $manage_comment;
     private Manager_user $manage_user;
     private Manager_category $manage_category;
-
 
 
     public function __construct()
@@ -146,7 +145,6 @@ class Article_controller
     public function show_article(): VOID
     {
         $flag = true;
-
 
         if (isset($_GET['id']) && !empty($_GET['id'])) {
             $flag = false;

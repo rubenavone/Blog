@@ -6,7 +6,6 @@ class Manager_article extends Article
     private PDO $admin_bdd;
     public function __construct()
     {
-
         $this->user_bdd = BDD::get_user_access();
         $this->admin_bdd = BDD::get_admin_access();
     }

@@ -5,6 +5,6 @@ class Admin_home_controller
     {
         $content_title = "";
         $title = "Administration";
-        require_once "./vue/admin/view_admin_home.php";
+        require_once "./vue/Admin/view_admin_home.php";
     }
 }
