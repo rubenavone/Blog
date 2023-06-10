@@ -39,7 +39,6 @@ class Manager_category extends Category
                 'id_category' => $id,
             ]);
             $data = $req->fetch(PDO::FETCH_OBJ);
-
             return new Category($data->id_category, $data->name_category, null);
         } catch (Exception $e) {
             die('Erreur dans la requete:' . $e->getMessage());

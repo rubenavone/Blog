@@ -12,6 +12,7 @@ try {
   if ($_SESSION["role"] !== 1 && in_array($request_uri[0], $LOGIN_MANDATORY_URL_ADMIN)) {
     throw new Exception("401");
   }
+  
 
   switch ($request_uri[0]) {
     case "":

@@ -53,7 +53,7 @@ class Manager_user extends User
     public function verify_mail_exist($mail): BOOL
     {
         try {
-            $req = $this->user_bdd->prepare("SELECT * FROM user WHERE mail_user = :mail_user");
+            $req = $this->user_bdd->prepare("SELECT * FROM user WHERE mail_user = :mail_user LIMIT  0,1");
             $req->execute(array("mail_user" => $mail));
             $data = $req->fetchAll(PDO::FETCH_OBJ);
             if (!empty($data)) {
@@ -69,7 +69,7 @@ class Manager_user extends User
     public function verify_user($mail): OBJECT
     {
         try {
-            $req = $this->user_bdd->prepare("SELECT * FROM user WHERE mail_user = :mail_user");
+            $req = $this->user_bdd->prepare("SELECT * FROM user WHERE mail_user = :mail_user LIMIT 0,1");
             $req->execute(array("mail_user" => $mail));
             $data = $req->fetch(PDO::FETCH_OBJ);
             if (!empty($data)) {
@@ -85,7 +85,7 @@ class Manager_user extends User
     public function user_by_id(int $id): OBJECT
     {
         try {
-            $req = $this->user_bdd->prepare("SELECT * FROM user WHERE id_user = :id_user ");
+            $req = $this->user_bdd->prepare("SELECT * FROM user WHERE id_user = :id_user LIMIT 0,1 ");
             $req->execute([
                 'id_user' => $id,
             ]);

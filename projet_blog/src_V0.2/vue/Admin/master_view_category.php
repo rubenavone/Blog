@@ -10,7 +10,7 @@ require './vue/utils/modal_delete.comp.php';
 
 <main class="flex flex-col ml-5 mr-10 text-center">
   <article class="flex items-center mt-10 mb-10">
-    <a href="#">
+    <a href="/admin/categorie/addCategory">
       <button class="rounded-full bg-blue-800 text-white h-10 w-60 ">Ajouter une category</button>
     </a>
   </article>

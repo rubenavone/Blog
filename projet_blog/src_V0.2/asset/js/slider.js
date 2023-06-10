@@ -1,4 +1,4 @@
-import { pictures } from "./contentSlider";
+import { pictures } from "./contentSlider.js";
 
 
   let slider = {

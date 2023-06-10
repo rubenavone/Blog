@@ -1,6 +1,6 @@
 <?php
-try {
 
+try {
     if (empty($request_uri[1])) {
         $request_uri[1] = "";
     }
@@ -43,9 +43,20 @@ try {
             $admin->show_master_user();
             break;
         case "categorie":
-            require_once "controller/Admin/Master_category_controller.php";
-            $admin = new Master_category_controller;
-            $admin->show_master_category();
+            if(empty($request_uri[2])){
+                require_once "controller/Admin/Master_category_controller.php";
+                $admin = new Master_category_controller;
+                $admin->show_master_category();
+            }
+            if(!empty($request_uri[2] && $request_uri[2] === "addCategory")){
+                try{
+                    require_once "controller/Category/Category_controller.php";
+                    $category = new Category_controller();
+                    $category->add_category();
+                }catch(Exception $e){
+                    exit($e->getMessage);
+                }
+            }
             break;
         default:
             throw new Exception('404');

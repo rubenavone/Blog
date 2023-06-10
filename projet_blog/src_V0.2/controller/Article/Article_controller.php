@@ -72,7 +72,7 @@ class Article_controller
             $all_categories = $this->manage_category->get_all_categories();
             require_once './vue/Article/add_article.php';
         } catch (Exception $e) {
-            die('Erreur Dans lors de l\'ajout' . $e->getMessage());
+            exit('Erreur lors de l\'ajout' . $e->getMessage());
         }
     }
 

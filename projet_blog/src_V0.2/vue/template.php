@@ -16,7 +16,7 @@
 <style>
     @font-face {
         font-family: 'caviar_dreamsregular';
-        src: url('/asset/font/CaviarDreams-webfont.woff') format('woff');
+        src: url('./asset/font/CaviarDreams-webfont.woff') format('woff');
         font-weight: 400;
         font-style: normal;
         font-stretch: 100;
