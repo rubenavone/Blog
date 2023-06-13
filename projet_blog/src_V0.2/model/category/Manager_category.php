@@ -47,7 +47,6 @@ class Manager_category extends Category
 
     public function add_category(Category $category):void
     {
-
         try {
             $req = $this->admin_bdd->prepare("INSERT INTO category(name_category) VALUE (:name_category) ");
             $req->execute([
@@ -56,5 +55,14 @@ class Manager_category extends Category
         } catch (Exception $e) {
             die('Erreur dans la requete:' . $e->getMessage());
         }
+    }
+
+    public function delete_category(){
+        try{
+
+        }catch(Exception $e){
+
+        }
+
     }
 }
