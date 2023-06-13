@@ -1,4 +1,4 @@
-node_modules
-secret.json
-src_V0.2/dist/output.css
 
+node_modules
+src_V0.2/dist/output.css
+src_V0.2/config/*
