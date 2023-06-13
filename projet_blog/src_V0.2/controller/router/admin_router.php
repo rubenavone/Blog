@@ -4,7 +4,7 @@ try {
     if (empty($request_uri[1])) {
         $request_uri[1] = "";
     }
-
+    
     switch ($request_uri[1]) {
         case "":
             require_once "controller/Admin/Admin_home_controller.php";
@@ -31,7 +31,7 @@ try {
                     $article->edit_article(htmlspecialchars(intval($request_uri[3])));
                 }
             }
-            if ( !empty($request_uri[2]) && $request_uri[2] === "delete") {
+            if (!empty($request_uri[2]) && $request_uri[2] === "delete") {
                 require_once 'controller/Article/Article_controller.php';
                 $article = new Article_controller();
                 empty($request_uri[3]) ? throw new Exception("404") :  $article->delete_article($request_uri[3]);
@@ -48,7 +48,7 @@ try {
                 $admin = new Master_category_controller;
                 $admin->show_master_category();
             }
-            if(!empty($request_uri[2] && $request_uri[2] === "addCategory")){
+            if(!empty($request_uri[2]) && $request_uri[2] === "addCategory"){
                 try{
                     require_once "controller/Category/Category_controller.php";
                     $category = new Category_controller();

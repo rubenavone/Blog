@@ -45,12 +45,13 @@ class Manager_category extends Category
         }
     }
 
-    public function add_category():void
+    public function add_category(Category $category):void
     {
+
         try {
-            $req = $this->admin_bdd->prepare("INSERT INTO category(name-category) VALUE (:name-category) ");
+            $req = $this->admin_bdd->prepare("INSERT INTO category(name_category) VALUE (:name_category) ");
             $req->execute([
-                'name-category' => $this->name_category
+                'name_category' => $category->name_category
             ]);
         } catch (Exception $e) {
             die('Erreur dans la requete:' . $e->getMessage());

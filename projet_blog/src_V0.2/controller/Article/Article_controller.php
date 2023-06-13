@@ -10,6 +10,12 @@ require_once './model/comment/Manager_comment.php';
 require_once './model/user/Manager_user.php';
 require_once './controller/Utils/Utils_controller.php';
 
+/**
+ * In these method I inverted all the logical for the flag true -> don't submit because error
+ * I will change this
+ * [x] add_article
+ */
+
 class Article_controller 
 {
     private Manager_article $manage_article;
@@ -25,13 +31,13 @@ class Article_controller
         $this->manage_user = Manager_user::create_manager_user();
         $this->manage_category = Manager_category::create_manager_category();
     }
-
+    
     public function add_article(): VOID
     {
         try {
             $content_title = "Ajouter un";
             $title = "Article";
-            $flag = true;
+            $flag = false;
             $error = "not";
 
             if (!isset($_SESSION['connected'])) {
@@ -39,21 +45,22 @@ class Article_controller
             }
 
             if (isset($_POST['submit'])) {
+                $flag = true;
+            }
+
+            if (($flag && empty($_POST['name-article'])) || ($flag && empty($_POST['content-article']))) {
+                $error = "error";
                 $flag = false;
             }
-
-            if ((!$flag && empty($_POST['name-article'])) || (!$flag && empty($_POST['content-article']))) {
-                $error = "error";
-            }
-
-            if (!$flag) {
+            
+            if ($flag) {
                 $path = Utils_controller::check_image("img-article");
                 if ($path === "") {
                     $path = "default.jpg";
                 }
             }
 
-            if (!$flag && !empty($_POST['name-article']) && !empty($_POST['content-article'])) {
+            if ($flag) {
                 if (empty($_POST['date-article'])) {
                     $_POST['date-article'] = date("Y-m-d");
                 }
@@ -61,7 +68,7 @@ class Article_controller
                     htmlspecialchars($_POST['name-article']),
                     htmlspecialchars($_POST['content-article']),
                     $_POST['date-article'],
-                    1,
+                    null,
                     $_POST["id-category"],
                     htmlspecialchars($path)
                 );
