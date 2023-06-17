@@ -45,5 +45,18 @@ class Category_controller{
       exit('Une erreur est survenue lors de l\'ajout de la catégorie' .  $e->getMessage());
     }
   }
+  public function delete_category(INT $id_cat) :VOID{
+    if(isset($_SESSION["role"]) && $_SESSION["role"] == 1){
+      try{
+      $this->manage_category->delete_category(htmlspecialchars($id_cat));
+      header("location: /admin/categorie");
+      }catch(Exception $e){
+        echo $e;
+        exit();
+      }
 
+    }else{
+      header("location: /admin/categorie");
+    }  
+  }
 }

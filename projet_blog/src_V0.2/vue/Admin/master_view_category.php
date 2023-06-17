@@ -25,14 +25,15 @@ require './vue/utils/modal_delete.comp.php';
     <tbody>
 
       <?php
-      foreach ($categories_tr as $category) {
+foreach ($categories_tr as $category) {
+  
       ?>
-
-        <tr id="">
+        
+        <tr id="<?= $category->get_id_category() ?>">
           <td class="border border-slate-700 hover:bg-neutral-50"><?= $category->get_id_category() ?></td>
           <td class="border border-slate-700 hover:bg-neutral-50"><?= $category->name_category ?></td>
           <td class="border border-slate-700 hover:bg-neutral-50">
-            <a href="#" class="modal-button-js"><button class="w-auto" id="">❌ Supprimer</button></a>
+          <a href="#" class="modal-button-js"><button class="w-auto" id="<?= $category->get_id_category() ?>">❌ Supprimer</button></a>
             <a href="#" class=""><button class="w-auto ">🖊️ Editer</button></a>
           </td>
         </tr>

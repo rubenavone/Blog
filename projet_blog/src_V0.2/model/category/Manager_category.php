@@ -57,9 +57,10 @@ class Manager_category extends Category
         }
     }
 
-    public function delete_category(){
+    public function delete_category( INT $id){
         try{
-
+            $req = $this->admin_bdd->prepare("DELETE FROM category WHERE id_category = :id_category");
+            $req->execute(['id_category' => $id]);
         }catch(Exception $e){
 
         }

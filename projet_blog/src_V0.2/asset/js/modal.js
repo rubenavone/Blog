@@ -30,8 +30,9 @@ class Modal {
 
 class MasterViewModal extends Modal {
     #masterViewDeleter = (id) => {
+        let base = window.location.pathname.split("/")[2];
         try{
-            document.querySelector(".valid").parentElement.href = `articles/delete/${id} `;
+            document.querySelector(".valid").parentElement.href = `${base}/delete/${id} `;
         }catch(e){
 
         }
@@ -44,6 +45,8 @@ class MasterViewModal extends Modal {
                 this.modalViewSelector.classList.toggle("hidden");
                 document.body.classList.add("overflow-hidden");
                 this.#masterViewDeleter(e.target.id);
+                console.log(e.target);
+                
             });
         });
         this.modalHandler();

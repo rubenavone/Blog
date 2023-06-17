@@ -57,6 +57,11 @@ try {
                     exit($e->getMessage);
                 }
             }
+            if(!empty($request_uri[2]) && $request_uri[2] === "delete" ){
+                require_once "controller/Category/Category_controller.php";
+                $category = new Category_controller();
+                empty($request_uri[3]) ? throw new Exception("404") : $category->delete_category($request_uri[3]);
+            }
             break;
         default:
             throw new Exception('404');
