@@ -17,7 +17,7 @@ class Utils_controller
             
             $path = explode("." , $name)[0]; 
             move_uploaded_file($temp_name, "./dist/img/$path");
-            $path = Utils_controller::create_thumbnail("./dist/img/$path");
+            $path = Utils_controller::convert_to_avif("./dist/img/$path");
             unlink("./dist/img/$path");
             return $path;
         } else {
@@ -25,7 +25,7 @@ class Utils_controller
         }
     }
 
-    private static function create_thumbnail(STRING $path){
+    private static function convert_to_avif(STRING $path){
         try{
             $image = new Imagick($path);
             $actual_type = $image->getImageFormat();
