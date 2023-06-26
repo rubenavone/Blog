@@ -43,20 +43,20 @@ ob_start();
         </div>
     </div>
 </form>
-
+<aside class="absolute bottom-[7%] left-0">
 <?php if ($error === "ok") {
 ?>
-    <aside class="absolute bottom-0 left-0">
         <p class=" text-xl before:block before:absolute before:-inset-1 before:-skew-y-2 before:bg-green-600 relative inline-block"> <span class="relative text-white ">Article Ajouté</span>
         <p>
             <?php if (!isset($_FILES["img-art"])) { ?>
         <p class="text-xl before:block before:absolute before:-inset-1 before:-skew-y-2 before:bg-red-600 relative inline-block "> <span class="relative text-white ">Image de profile par défaut</span> </p>
-    </aside>
+    
 <?php } ?>
 
 
-<?php } else if ($error === "error") { ?>
-    '<p class="text-center text-red-600"> Désolé une erreur est survenue il manque le titre ou le contenus </p>';
+<?php } else if(!empty($error) && $error != "ok"){ ?>
+        <p class="text-xl before:block before:absolute before:-inset-1 before:-skew-y-2 before:bg-red-600 relative inline-block "> <span class="relative text-white "><?= $error ?></span> </p>
+    </aside>
 <?php }
 $content = ob_get_clean();
 require_once './vue/template.php';

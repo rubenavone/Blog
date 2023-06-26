@@ -38,7 +38,7 @@ class Article_controller
             $content_title = "Ajouter un";
             $title = "Article";
             $flag = false;
-            $error = "not";
+            $error = "";
 
             if (!isset($_SESSION['connected'])) {
                 header('location: connexion?error=interdit');
@@ -49,12 +49,21 @@ class Article_controller
             }
 
             if (($flag && empty($_POST['name-article'])) || ($flag && empty($_POST['content-article']))) {
-                $error = "error";
+                $error = "Il manque ";
+                empty($_POST['name-article']) ? $error = "$error le nom de l'article" : $error = "$error";
+                empty($_POST['content-article']) ? $error = "$error le contenus de l'article" : $error = "$error";
                 $flag = false;
             }
+
             
+            if($flag && !Utils_controller::check_type($_FILES["img-article"]["type"])){
+                $error = "Le format du fichier est incorecte";
+                $flag = false;
+            }
+
             if ($flag) {
                 $path = Utils_controller::check_image("img-article");
+                
                 if ($path === "") {
                     $path = "default.jpg";
                 }
@@ -79,7 +88,7 @@ class Article_controller
             $all_categories = $this->manage_category->get_all_categories();
             require_once './vue/Article/add_article.php';
         } catch (Exception $e) {
-            exit('Erreur lors de l\'ajout' . $e->getMessage());
+            exit('Erreur lors de l\'ajout ' . $e->getMessage());
         }
     }
 

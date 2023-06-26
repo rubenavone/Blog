@@ -53,7 +53,7 @@ class Manager_category extends Category
                 'name_category' => $category->name_category
             ]);
         } catch (Exception $e) {
-            die('Erreur dans la requete:' . $e->getMessage());
+            exit('Erreur dans la requete:' . $e->getMessage());
         }
     }
 
@@ -62,8 +62,7 @@ class Manager_category extends Category
             $req = $this->admin_bdd->prepare("DELETE FROM category WHERE id_category = :id_category");
             $req->execute(['id_category' => $id]);
         }catch(Exception $e){
-
+            exit('Erreur dans la requete:' . $e->getMessage());
         }
-
     }
 }

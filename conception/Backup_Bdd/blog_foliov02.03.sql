@@ -50,7 +50,19 @@ INSERT INTO `article` (`id_art`, `name_art`, `content_art`, `date_art`, `id_cate
 (3, 'Hello World !', 'Ecrire un Hello world en JavaScript(JS) est relativement simple.\r\nJS est un langage haut niveau et permet d’écrire rapidement du code.\r\n\r\nconsole.log(\"Hello World !\")\r\n\r\nfaite une liaison de votre script avec la balise <script src=\"script.js\"></script> \r\n\r\nEt voila ! \r\nEn quelques ligne vous trouver votre hello world sur votre page\r\n             ', '2022-07-20', 2, 'javascript_type.jpg', 1),
 (4, 'Doctype', '                                Le doctype permet de spécifier au navigateur le type de document que vous allez lui transmettre.\r\nC\'est une information importantes pour le navigateur.\r\n\r\n<!DOCTYPE html>          \r\n\r\nET voila simple et efficace  azdzvzzag               azd                ', '2022-07-20', 3, 'html_type.jpg', 1);
 
--- --------------------------------------------------------
+
+DROP TABLE IF EXISTS `project`;
+CREATE TABLE IF NOT EXISTS `project` (
+  `id_project` int NOT NULL AUTO_INCREMENT,
+  `name_project` varchar(200) COLLATE utf8mb4_unicode_520_ci NOT NULL,
+  `content_project` text COLLATE utf8mb4_unicode_520_ci NOT NULL,
+  `date_project` date NOT NULL,
+  `image_project` varchar(200) NOT NULL,
+  `id_user` int NOT NULL,
+  PRIMARY KEY (`id_project`),
+  KEY `project_type_FK` (`id_user`)
+) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8mb4_unicode_520_ci;
+- --------------------------------------------------------
 
 --
 -- Structure de la table `category`
@@ -58,7 +70,7 @@ INSERT INTO `article` (`id_art`, `name_art`, `content_art`, `date_art`, `id_cate
 
 DROP TABLE IF EXISTS `category`;
 CREATE TABLE IF NOT EXISTS `category` (
-  `id_category` int NOT NULL AUTO_INCREMENT,
+  id_category` int NOT NULL AUTO_INCREMENT,
   `name_category` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_520_ci NOT NULL,
   PRIMARY KEY (`id_category`)
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
