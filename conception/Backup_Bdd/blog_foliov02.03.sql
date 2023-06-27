@@ -21,13 +21,14 @@ SET time_zone = "+00:00";
 -- Base de données : `blog_folio`
 --
 
--- --------------------------------------------------------
-
---
--- Structure de la table `article`
---
-
+DROP TABLE IF EXISTS `comment`;
 DROP TABLE IF EXISTS `article`;
+DROP TABLE IF EXISTS `project`;
+DROP TABLE IF EXISTS `category`;
+DROP TABLE IF EXISTS `user`;
+DROP TABLE IF EXISTS `role`;
+
+
 CREATE TABLE IF NOT EXISTS `article` (
   `id_art` int NOT NULL AUTO_INCREMENT,
   `name_art` varchar(50) COLLATE utf8mb4_unicode_520_ci NOT NULL,
@@ -51,7 +52,6 @@ INSERT INTO `article` (`id_art`, `name_art`, `content_art`, `date_art`, `id_cate
 (4, 'Doctype', '                                Le doctype permet de spécifier au navigateur le type de document que vous allez lui transmettre.\r\nC\'est une information importantes pour le navigateur.\r\n\r\n<!DOCTYPE html>          \r\n\r\nET voila simple et efficace  azdzvzzag               azd                ', '2022-07-20', 3, 'html_type.jpg', 1);
 
 
-DROP TABLE IF EXISTS `project`;
 CREATE TABLE IF NOT EXISTS `project` (
   `id_project` int NOT NULL AUTO_INCREMENT,
   `name_project` varchar(200) COLLATE utf8mb4_unicode_520_ci NOT NULL,
@@ -61,16 +61,11 @@ CREATE TABLE IF NOT EXISTS `project` (
   `id_user` int NOT NULL,
   PRIMARY KEY (`id_project`),
   KEY `project_type_FK` (`id_user`)
-) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8mb4_unicode_520_ci;
-- --------------------------------------------------------
+) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 
---
--- Structure de la table `category`
---
 
-DROP TABLE IF EXISTS `category`;
 CREATE TABLE IF NOT EXISTS `category` (
-  id_category` int NOT NULL AUTO_INCREMENT,
+  `id_category` int NOT NULL AUTO_INCREMENT,
   `name_category` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_520_ci NOT NULL,
   PRIMARY KEY (`id_category`)
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
@@ -85,13 +80,8 @@ INSERT INTO `category` (`id_category`, `name_category`) VALUES
 (3, 'HTML/CSS'),
 (4, 'Autre');
 
--- --------------------------------------------------------
 
---
--- Structure de la table `comment`
---
 
-DROP TABLE IF EXISTS `comment`;
 CREATE TABLE IF NOT EXISTS `comment` (
   `id_art` int NOT NULL,
   `id_user` int NOT NULL,
@@ -107,15 +97,10 @@ CREATE TABLE IF NOT EXISTS `comment` (
 
 INSERT INTO `comment` (`id_art`, `id_user`, `date_comment`, `comment`) VALUES
 (2, 1, '2022-09-23 11:09:04', '      '),
-(2, 1, '2022-09-27 08:09:15', '      blablablablabla');
+(2, 1, '2022-09-27 08:09:15', '      blablablablabla'),
+(2, 2, '2022-04-24 08:09:45', 'Glad to see you again my friend');
 
--- --------------------------------------------------------
 
---
--- Structure de la table `role`
---
-
-DROP TABLE IF EXISTS `role`;
 CREATE TABLE IF NOT EXISTS `role` (
   `id_role` int NOT NULL AUTO_INCREMENT,
   `name_role` varchar(50) COLLATE utf8mb4_unicode_520_ci NOT NULL,
@@ -130,13 +115,6 @@ INSERT INTO `role` (`id_role`, `name_role`) VALUES
 (1, 'Admin'),
 (2, 'Utilisateur');
 
--- --------------------------------------------------------
-
---
--- Structure de la table `user`
---
-
-DROP TABLE IF EXISTS `user`;
 CREATE TABLE IF NOT EXISTS `user` (
   `id_user` int NOT NULL AUTO_INCREMENT,
   `name_user` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_520_ci NOT NULL,
@@ -155,8 +133,8 @@ CREATE TABLE IF NOT EXISTS `user` (
 --
 
 INSERT INTO `user` (`id_user`, `name_user`, `first_name_user`, `mail_user`, `password_user`, `img_user`, `statut_user`, `id_role`) VALUES
-(1, 'Ruben', 'Navone', 'navone_ruben@msn.com', '0cc175b9c0f1b6a831c399e269772661', 'default.jpg', 0, 1),
-(17, 'a', 'a', 'james@gd.com', '$2y$10$yjzl4F0wkpJXWWb5uZsz8OBtOb56SYCfNHlNudyFXhCLzO8hf7jPy', 'default.jpg', 0, 1);
+(1, 'Ruben', 'Navone', 'navone_ruben@msn.com', '$2y$10$jBmCP.dkyDckXBcY5A4hf.PIY9E9BEkO.2MAabkNVkTiXfv6Uuy4q', 'default.jpg', 1, 1),
+(2, 'a', 'a', 'james@gd.com', '$2y$10$yjzl4F0wkpJXWWb5uZsz8OBtOb56SYCfNHlNudyFXhCLzO8hf7jPy', 'default.jpg', 0, 1);
 
 --
 -- Contraintes pour les tables déchargées
@@ -173,8 +151,8 @@ ALTER TABLE `article`
 -- Contraintes pour la table `comment`
 --
 ALTER TABLE `comment`
-  ADD CONSTRAINT `fk_article` FOREIGN KEY (`id_art`) REFERENCES `article` (`id_art`),
-  ADD CONSTRAINT `fk_utilisateur` FOREIGN KEY (`id_user`) REFERENCES `user` (`id_user`);
+  ADD CONSTRAINT `fk_article` FOREIGN KEY (`id_art`) REFERENCES `article` (`id_art`) ON DELETE CASCADE,
+  ADD CONSTRAINT `fk_utilisateur` FOREIGN KEY (`id_user`) REFERENCES `user` (`id_user`) ON DELETE CASCADE;
 
 --
 -- Contraintes pour la table `user`
@@ -186,3 +164,4 @@ COMMIT;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+

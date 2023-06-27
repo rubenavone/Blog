@@ -13,13 +13,12 @@ class Utils_controller
             $name = $_FILES[$posted_img]["name"];
             $size = $_FILES[$posted_img]["size"];
             $error = $_FILES[$posted_img]["error"];
-            
-            
+             
             $path = explode("." , $name)[0]; 
             move_uploaded_file($temp_name, "./dist/img/$path");
-            $path = Utils_controller::convert_to_avif("./dist/img/$path");
+            $new_path = Utils_controller::convert_to_avif("./dist/img/$path");
             unlink("./dist/img/$path");
-            return $path;
+            return $new_path;
         } else {
             return "";
         }
@@ -44,7 +43,8 @@ class Utils_controller
             "image/png",
             "image/webp",
             "image/avif",
-            "image/jpeg"
+            "image/jpeg",
+            "",
         ];
         if(in_array($type, $type_allowed)){
             return true;
