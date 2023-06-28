@@ -6,12 +6,12 @@ let pictures = [
     {
         "title": "Comprendre les enjeux du numérique",
         "content": "Les entreprises doivent s'adapter à l'ère numérique pour réussir, mais cela peut être difficile sans les compétences techniques nécessaires. En tant que développeur, j'ai une connaissance approfondie des enjeux du numérique et je suis capable de créer des sites web et des applications personnalisées qui répondent aux besoins de votre entreprise.",
-        "url": "./dist/img/firmbee-com-gcsNOsPEXfs-unsplash.jpg",
+        "url": "./dist/img/firmbee-com-gcsNOsPEXfs-unsplash.avif",
     },
     {
         "title": "Mettre en place une stratégie",
         "content": "Pour réussir dans l'univers numérique, il est essentiel de mettre en place une stratégie de développement qui prend en compte les besoins de votre entreprise et de vos clients. Je suis expert dans l'élaboration de stratégies de développement personnalisées qui tiennent compte de vos objectifs à long terme. Que vous cherchiez à créer un site web, une application mobile ou une plateforme SaaS, je suis là pour vous aider à réaliser votre vision",
-        "url": `./dist/img/arjan-de-jong-Sb8_i3Kz_JE-unsplash.jpg`,
+        "url": `./dist/img/arjan-de-jong-Sb8_i3Kz_JE-unsplash.avif`,
     },
 {
     "title": "Améliorez votre présence en ligne",

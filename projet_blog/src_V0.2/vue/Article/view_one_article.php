@@ -2,10 +2,10 @@
 ob_start();
 ?>
 <header>
-    <img class="w-full h-40 object-contain" src="./dist/img/<?= $article_wanted->image_art ?>" alt="">
+    <img class="w-full h-40 object-contain" src="./dist/img/upload/<?= $article_wanted->image_art ?>" alt="">
 </header>
 <section class="flex flex-col text-left items-center w-4/5 mx-auto mt-20">
-    <article class="columns-2">
+    <article class="mx-auto w-2/3">
         <?php foreach ($lines as $line) { ?>
             <p> <?= $line ?> </p>
         <?php } ?>
@@ -35,9 +35,9 @@ ob_start();
         $id_user = $comment->id_user;
         $actual_user = $this->manage_user->user_by_id($id_user);
         ?>
-        <div class="p-6 w-1/3 lg:w-2/3  bg-white rounded-xl shadow-lg flex lg:flex-col lg:items-center lg:text-white space-x-4 mb-14 break-all ">
+        <div class="p-6 w-1/3 lg:w-2/3 bg-white rounded-xl shadow-lg flex lg:flex-col lg:items-center lg:text-white space-x-4 mb-14 break-all ">
             <div class="shrink-0">
-                <img class="h-12 w-12" src="./dist/img/<?= $actual_user->img_user ?>" alt="image de profil de <?= $actual_user->name_user ?>">
+                <img class="h-12 w-12" src="./dist/img/upload/pp<?= $actual_user->img_user ?>" alt="image de profil de <?= $actual_user->name_user ?>">
             </div>
             <div>
                 <div class="text-xl font-medium text-black"> <?= $actual_user->name_user ?> <?= $actual_user->first_name_user ?></div>

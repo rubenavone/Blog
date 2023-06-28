@@ -178,7 +178,13 @@ class Article_controller
 
             if ($article_wanted) {
                 $title = $article_wanted->name_art;
-                $lines = explode(".", $article_wanted->content_art);
+                $lines = explode(".", $article_wanted->content_art); 
+                
+                foreach($lines as $key => $line){
+                    array_push($lines, $line . ".");
+                    unset($lines[$key]);
+                }
+                
                 $content_title = "";
             } else {
                 header("location: ./404");

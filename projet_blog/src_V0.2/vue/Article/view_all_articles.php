@@ -12,7 +12,7 @@
                     <section class="absolute">
                          <p class="text-xl"><?= $this->show_preview($article->id_art) ?></p>
                     </section>
-                    <img src="./dist/img/<?= $article->image_art ?>" alt="" class="relative w-[600px] max-h-[240px] object-cover object-center bg-slate-100 opacity-100 hover:opacity-10 ">
+                    <img src="./dist/img/upload/<?= $article->image_art ?>" alt="" class="relative w-[600px] max-h-[240px] object-cover object-center bg-slate-100 opacity-100 hover:opacity-10 ">
                </a>
           </article>
      <?php }

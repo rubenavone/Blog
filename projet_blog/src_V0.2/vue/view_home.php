@@ -17,7 +17,7 @@ ob_start();
 </div>
 
 <section class="flex flex-col w-full lg:flex-row lg:h-section-home">
-    <img src="./dist/img/campaign-creators-gMsnXqILjp4-unsplash.jpg" alt="" class="lg:w-2/4 w-4/4 object-cover">
+    <img src="./dist/img/campaign-creators-gMsnXqILjp4-unsplash.avif" alt="" class="lg:w-2/4 w-4/4 object-cover">
 
     <article class="lg:w-2/4 w-4/4 pt-5 flex flex-col justify-center items-center">
         <h2 class="text-center text-3xl">Obtenir un expertises ?</h2>
@@ -30,7 +30,7 @@ ob_start();
         <h2 class="text-center text-3xl">Améliorer, entretenir vos services</h2>
         <p class="w-2/4 self-center text-center pt-5">Les services numériques sont essentiels pour les entreprises de la tech, mais leur maintenance peut être complexe et chronophage. Je suis là pour vous aider à améliorer et entretenir vos services numériques pour vous permettre de vous concentrer sur votre cœur de métier. Avec mes compétences en développement et en maintenance de sites web et d'applications, je suis capable de fournir des services de haute qualité pour votre entreprise.</p>
     </article>
-    <img src="./dist/img/Frame 2.jpg" alt="" class="lg:w-2/4 w-4/4 object-cover">
+    <img src="./dist/img/Frame-2.avif" alt="" class="lg:w-2/4 w-4/4 object-cover">
 </section>
 
 <section class="lg:h-[96vh] overflow-hidden">
@@ -45,7 +45,7 @@ ob_start();
     </div>
 
     <div class="flex flex-col lg:flex-row mt-12 mb-5 lg:mb-[0px] lg:h-70vh  ">
-        <img src="./dist/img/diego-ph-fIq0tET6llw-unsplash.jpg" alt="" class="h-[50rem] lg:w-9/12 w-4/4 object-cover object-center">
+        <img src="./dist/img/diego-ph-fIq0tET6llw-unsplash.avif" alt="" class="h-[50rem] lg:w-9/12 w-4/4 object-cover object-center">
         <form action="" class="ml-20 lg:w-3/12 w-4/4 flex flex-col ">
             <h3 class="text-3xl text-center">Contactez-moi</h3>
             <label for="cusomer-name" class="block">
